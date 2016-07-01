@@ -30,7 +30,7 @@
 		<!-- Adding Page Script -->
 			<?php
 			foreach($page_js as $js):
-				echo '<script src="'.base_url().'assets/'.$js.'"></script>';
+				echo '<script src="'.base_url().'assets/'.$js.'"></script>'."\n";
 			endforeach;
 			?>
 		<!-- Custom Theme Scripts -->

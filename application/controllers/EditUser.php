@@ -1,11 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-    class Adduser extends MY_Controller {
+    class Edituser extends MY_Controller {
         public function index() {
 			$this->data = array(
-							'title' => 'Add User',
-							'box_title_1' => 'User Data',
+							'title' => 'Edit User',
+							'box_title_1' => 'Edit Data',
 							'sub_box_title_1' => 'Information about user',
-							'position' => 'create'
+                            'position' => 'edit'
 						);
 			$this->page_css  = array(
 							'vendors/iCheck/skins/flat/green.css',

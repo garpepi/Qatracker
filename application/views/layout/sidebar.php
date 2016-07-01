@@ -34,10 +34,9 @@
 		  </li>
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="#">Add Project</a></li>
-			  <li><a href="#">Manage Project</a></li>
 			  <li><a href="#">Manage Team Leads</a></li>
 			  <li><a href="#">Manage Applications</a></li>
+			  <li><a href="#">Manage Project</a></li>
 			</ul>
 		  </li>
 		</ul>
