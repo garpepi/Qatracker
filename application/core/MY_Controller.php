@@ -15,12 +15,14 @@
         }
 		
 		public function is_login(){
+			$this->data['usr_type'] = !empty($this->input->get('admin')) ? $this->input->get('admin') : NULL;
 			
 		}
 		
         /*Front Page Layout*/
         public function layout() {
             // making template and send data to view.
+			$this->is_login();
 			$this->data['page_css'] = $this->page_css;
 			$this->data['page_js'] = $this->page_js;
             $this->template['header'] = $this->load->view('layout/header', $this->data, true);

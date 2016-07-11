@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-    class ManageProjects extends MY_Controller {
+    class AddReport extends MY_Controller {
         public function index() {
 			$this->data = array(
-							'title' => 'Manage Projects',
-							'box_title_1' => 'Add Project',
-							'sub_box_title_1' => 'Adding new projects',
+							'title' => 'Reports',
+							'box_title_1' => 'Add Report',
+							'sub_box_title_1' => 'Adding new report',
 							'box_title_2' => 'Projects List',
 							'sub_box_title_2' => 'List of projects',
 							'box_title_3' => 'Finished Projects List',
@@ -42,9 +42,9 @@
 							'vendors/select2/dist/js/select2.full.min.js',
 							'vendors/moment/moment.min.js',
 							'vendors/datepicker/daterangepicker.js',
-							'page/projects/manageprojects.js'
+							'page/reports/addreport.js'
 						);
-            $this->contents = 'projects/manageprojects'; // its your view name, change for as per requirement.
+            $this->contents = 'reports/addreport'; // its your view name, change for as per requirement.
             $this->layout();
         }
     }

@@ -5,17 +5,6 @@
 	  <div class="title_left">
 		<h3><?php echo $title;?> </h3>
 	  </div>
-
-	  <div class="title_right">
-		<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-		  <div class="input-group">
-			<input type="text" class="form-control" placeholder="Search for...">
-			<span class="input-group-btn">
-			  <button class="btn btn-default" type="button">Go!</button>
-			</span>
-		  </div>
-		</div>
-	  </div>
 	</div>
 
 	<div class="clearfix"></div>
@@ -36,24 +25,17 @@
 			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Team Leader Name <span class="required">*</span>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Application Name <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-email">Email <span class="required">*</span>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-email" name='email' required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-phone-number">Phone Number <span class="required">*</span>
-				</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-phone-number" name='phone_number' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -97,10 +79,9 @@
 			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Team Leader Id </th>
-				  <th>Team Leader Name </th>
-				  <th>Email </th>
-				  <th>Phone Number </th>
+				  <th>Applications Id </th>
+				  <th>Applications Name </th>
+				  <th>TRF </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -108,16 +89,14 @@
 				<tr>
 				  <td>1</td>
 				  <td>Firstname Middlename Lastname </td>
-				  <td>first.mid.last@email.com</td>
-				  <td>+628111111111</td>
+				  <td>111</td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				  </td>
 				</tr>
 				<tr>
 				  <td>2</td>
 				  <td>John Doe</td>
-				  <td>John.Doe@email.com</td>
-				  <td>+628222222222</td>
+				  <td>222</td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				</td>
 			  </tr>
@@ -144,27 +123,24 @@
 			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Team Leader Id </th>
-				  <th>Team Leader Name </th>
-				  <th>Email </th>
-				  <th>Phone Number </th>
+				  <th>Applications Id </th>
+				  <th>Applications Name </th>
+				  <th>TRF </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
 				  <tr>
-					<td>1</td>
+					<td>3</td>
 					<td>Firstname Middlename Lastname </td>
-					<td>first.mid.last@email.com</td>
-					<td>+628111111111</td>
+					<td>333</td>
 					<td class=" last"><a href="#">Activate</a>
 					</td>
 				  </tr>
 				  <tr>
-					<td>2</td>
+					<td>4</td>
 					<td>John Doe</td>
-					<td>John.Doe@email.com</td>
-					<td>+628222222222</td>
+					<td>444</td>
 					<td class=" last"><a href="#">Activate</a>
 					</td>
 				  </tr>
