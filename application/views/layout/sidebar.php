@@ -28,15 +28,20 @@
 		<ul class="nav side-menu">
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>index.php/adduser?admin=1">Add User</a></li>
-			  <li><a href="<?php echo base_url();?>index.php/manageuser?admin=1">Manage User</a></li>
+			  <li><a href="<?php echo base_url();?>adduser?admin=1">Add User</a></li>
+			  <li><a href="<?php echo base_url();?>manageuser?admin=1">Manage User</a></li>
 			</ul>
 		  </li>
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>index.php/manageteamleads?admin=1">Manage Team Leads</a></li>
-			  <li><a href="<?php echo base_url();?>index.php/manageapplications?admin=1">Manage Applications</a></li>
-			  <li><a href="<?php echo base_url();?>index.php/manageprojects?admin=1">Manage Projects</a></li>
+			  <li><a href="<?php echo base_url();?>manageprojects?admin=1">Manage Projects</a></li>
+			</ul>
+		  </li>
+		  <li><a><i class="fa fa-tasks"></i> Contents <span class="fa fa-chevron-down"></span></a>
+			<ul class="nav child_menu">
+			  <li><a href="<?php echo base_url();?>manageteamleads?admin=1">Manage Team Leads</a></li>
+			  <li><a href="<?php echo base_url();?>manageapplications?admin=1">Manage Applications</a></li>
+			  <li><a href="<?php echo base_url();?>managetypeofchanges?admin=1">Type Of Changes</a></li>
 			</ul>
 		  </li>
 		</ul>
@@ -47,7 +52,7 @@
 		  </li>
 		  <li><a><i class="fa fa-file-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="#">Add Report</a></li>
+			  <li><a href="<?php echo base_url();?>addreport">Add Report</a></li>
 			  <li><a href="#">Manage Reports</a></li>
 			</ul>
 		  </li>

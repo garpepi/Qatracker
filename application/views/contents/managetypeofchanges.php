@@ -25,14 +25,7 @@
 			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Application Name <span class="required">*</span>
-				</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF <span class="required">*</span>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Type of Change <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
@@ -79,9 +72,8 @@
 			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Applications Id </th>
-				  <th>Applications Name </th>
-				  <th>TRF </th>
+				  <th>Type of Changes Id </th>
+				  <th>Type of Changes Name </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -89,14 +81,12 @@
 				<tr>
 				  <td>1</td>
 				  <td>Firstname Middlename Lastname </td>
-				  <td>111</td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				  </td>
 				</tr>
 				<tr>
 				  <td>2</td>
 				  <td>John Doe</td>
-				  <td>222</td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				</td>
 			  </tr>
@@ -123,9 +113,8 @@
 			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Applications Id </th>
-				  <th>Applications Name </th>
-				  <th>TRF </th>
+				  <th>Type of Changes Id </th>
+				  <th>Type of Changes Name </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -133,14 +122,12 @@
 				  <tr>
 					<td>3</td>
 					<td>Firstname Middlename Lastname </td>
-					<td>333</td>
 					<td class=" last"><a href="#">Activate</a>
 					</td>
 				  </tr>
 				  <tr>
 					<td>4</td>
 					<td>John Doe</td>
-					<td>444</td>
 					<td class=" last"><a href="#">Activate</a>
 					</td>
 				  </tr>

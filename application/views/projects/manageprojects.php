@@ -23,16 +23,33 @@
 		  <div class="x_content">
 			<br />
 			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-				
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Project Type <span class="required">*</span></label>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="form-control" name='type'>
+				  <select class="select2_single_application form-control" tabindex="-1" name='application' required="required">
+					<option></option>
+					<option value="Ika">Mobit</option>
+					<option value="Valen">SMS Ketik</option>
+					<option value="Bani">SMS Blast</option>
+				  </select>
+				</div>
+			  </div>	
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Phase Type <span class="required">*</span></label>
+				<div class="col-md-9 col-sm-9 col-xs-12">
+				  <select class="form-control" name='phase_type'>
 					<option>Choose option</option>
 					<option>SIT</option>
 					<option>UAT</option>
 					<option>VIT</option>
 				  </select>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF <span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -43,17 +60,6 @@
 					<option value="Ika">Ika</option>
 					<option value="Valen">Valen</option>
 					<option value="Bani">Bani</option>
-				  </select>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
-				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_single_application form-control" tabindex="-1" name='application' required="required">
-					<option></option>
-					<option value="Ika">Mobit</option>
-					<option value="Valen">SMS Ketik</option>
-					<option value="Bani">SMS Blast</option>
 				  </select>
 				</div>
 			  </div>

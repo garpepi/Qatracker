@@ -36,9 +36,9 @@
 							'vendors/jszip/dist/jszip.min.js',
 							'vendors/pdfmake/build/pdfmake.min.js',
 							'vendors/pdfmake/build/vfs_fonts.js',
-							'page/projects/manageteamleads.js'
+							'page/contents/manageteamleads.js'
 						);
-            $this->contents = 'projects/manageteamleads'; // its your view name, change for as per requirement.
+            $this->contents = 'contents/manageteamleads'; // its your view name, change for as per requirement.
             $this->layout();
         }
     }
