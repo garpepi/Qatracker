@@ -113,13 +113,24 @@ $(document).ready(function() {
 	  placeholder: "Select Tester Name",
 	  allowClear: true
 	});
-	$(".select2_single_projects").select2({
+	$(".select2_single_application").select2({
 	  placeholder: "Select Application Name",
+	  allowClear: true
+	});
+	$(".select2_multiple_tester").select2({
+	  maximumSelectionLength: 10,
+	  placeholder: "With Max Selection limit 10",
 	  allowClear: true
 	});
 });
 $(document).ready(function() {
-	$('#actual_start_date').daterangepicker({
+	$('#plan_start_date').daterangepicker({
+	  singleDatePicker: true,
+	  calender_style: "picker_4"
+	}, function(start, end, label) {
+	  console.log(start.toISOString(), end.toISOString(), label);
+	});
+	$('#plan_end_date').daterangepicker({
 	  singleDatePicker: true,
 	  calender_style: "picker_4"
 	}, function(start, end, label) {

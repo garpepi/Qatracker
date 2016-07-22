@@ -24,7 +24,7 @@
 			<br />
 			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  
-			  <div class="form-group">
+			   <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tester-name">Tester Name </span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
@@ -32,9 +32,9 @@
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Project <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_single_application form-control" tabindex="-1" name='application' required="required">
+				  <select class="select2_single_projects form-control" tabindex="-1" name='application' required="required">
 					<option></option>
 					<option value="Ika">Mobit</option>
 					<option value="Valen">SMS Ketik</option>
@@ -43,35 +43,31 @@
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Change <span class="required">*</span></label>
-				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="form-control" name='type_of_change'>
-					<option>Choose option</option>
-					<option>CR # Change Request</option>
-					<option>PI # Production Issue</option>
-				  </select>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tester-name">Application Name </span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="tester_name" name='tester_name' required="required" class="form-control col-md-7 col-xs-12" value='Mobit' disabled>
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Project Type <span class="required">*</span></label>
-				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="form-control" name='type'>
-					<option>Choose option</option>
-					<option>SIT</option>
-					<option>UAT</option>
-					<option>VIT</option>
-				  </select>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tester-name">Type of Change </span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="tester_name" name='tester_name' required="required" class="form-control col-md-7 col-xs-12" value='CR # Change Request' disabled>
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Test Team Leader <span class="required">*</span></label>
-				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_single_teamleader form-control" tabindex="-1" name='team_leader' required="required">
-					<option></option>
-					<option value="Ika">Ika</option>
-					<option value="Valen">Valen</option>
-					<option value="Bani">Bani</option>
-				  </select>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tester-name">Project Type </span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="tester_name" name='tester_name' required="required" class="form-control col-md-7 col-xs-12" value='SIT' disabled>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tester-name">Test Team Leader </span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="tester_name" name='tester_name' required="required" class="form-control col-md-7 col-xs-12" value='Ika' disabled>
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -128,6 +124,23 @@
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <input id="actual_doc_start_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='actual_doc_start_date'  value='10/29/2015' >
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
+				<div class="col-md-9 col-sm-9 col-xs-12">
+				  <select class="form-control" name='downtimes'>
+					<option>Choose option</option>
+					<option>SIT START</option>
+					<option>UAT START</option>
+				  </select>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="test-case-executed-today">Test Case Executed Today </span><span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="test_case_executed" name='test_case_executed' required="required" class="form-control col-md-7 col-xs-12" value=''>
 				</div>
 			  </div>
 			  <div class="form-group">

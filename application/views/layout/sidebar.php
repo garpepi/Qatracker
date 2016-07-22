@@ -35,6 +35,8 @@
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>manageprojects?admin=1">Manage Projects</a></li>
+			  <li><a href="<?php echo base_url();?>managephases?admin=1">Manage Phases</a></li>
+			  <li><a href="<?php echo base_url();?>assigntesters?admin=1">Assign Testers</a></li>
 			</ul>
 		  </li>
 		  <li><a><i class="fa fa-tasks"></i> Contents <span class="fa fa-chevron-down"></span></a>
@@ -42,6 +44,8 @@
 			  <li><a href="<?php echo base_url();?>manageteamleads?admin=1">Manage Team Leads</a></li>
 			  <li><a href="<?php echo base_url();?>manageapplications?admin=1">Manage Applications</a></li>
 			  <li><a href="<?php echo base_url();?>managetypeofchanges?admin=1">Type Of Changes</a></li>
+			  <li><a href="<?php echo base_url();?>managephasetypes?admin=1">Manage Phase Type</a></li>
+			  <li><a href="<?php echo base_url();?>managestatusreport?admin=1">Manage Status Report</a></li>
 			</ul>
 		  </li>
 		</ul>

@@ -24,76 +24,27 @@
 			<br />
 			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Project Phase <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_single_application form-control" tabindex="-1" name='application' required="required">
+				  <select class="select2_single_application form-control" tabindex="-1" name='project' required="required">
 					<option></option>
-					<option value="Ika">Mobit</option>
-					<option value="Valen">SMS Ketik</option>
-					<option value="Bani">SMS Blast</option>
+					<option value="Ika"> {phases} - {project id} - Mobit - {desc} </option>
+					<option value="Valen"> {phases} - {project id} -  SMS Ketik - {desc} </option>
+					<option value="Bani"> {phases} - {project id} -  SMS Blast - {desc} </option>
 				  </select>
 				</div>
-			  </div>	
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Description Project  <span class="required">*</span>
-				</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="project-desc" name='desc' required="required" class="form-control col-md-7 col-xs-12">
-				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF 
-				</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Phase Type <span class="required">*</span></label>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Select Testers <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="form-control" name='phase_type'>
-					<option>Choose option</option>
-					<option>SIT</option>
-					<option>UAT</option>
-					<option>VIT</option>
+				  <select class="select2_multiple_tester form-control" multiple="multiple">
+					<option>Tester one</option>
+					<option>Tester two</option>
+					<option>Tester three</option>
+					<option>Tester four</option>
+					<option>Tester five</option>
+					<option>Tester six</option>
 				  </select>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Change <span class="required">*</span></label>
-				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="form-control" name='type_of_change'>
-					<option>Choose option</option>
-					<option>CR # Change Request</option>
-					<option>PI # Production Issue</option>
-				  </select>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan Start Date <span class="required">*</span>
-				</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="plan_start_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_start_date'>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan End Date <span class="required">*</span>
-				</label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="plan_end_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_end_date'>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
-				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <div class="radio">
-					<label>
-					  <input type="radio" class="flat" name="gender" checked value='Active'> Active
-					</label>
-					<label>
-					  <input type="radio" class="flat" name="gender" value='Drop'> Drop
-					</label>
-				  </div>
 				</div>
 			  </div>
 			  <div class="ln_solid"></div>
@@ -125,26 +76,24 @@
 			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Project ID </th>
-				  <th>Applications Name </th>
-				  <th>TRF </th>
+				  <th>Project Phases</th>
+				  <th>Testers </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
 				<tr>
-				  <td>1</td>
-				  <td>Firstname Middlename Lastname </td>
-				  <td>111</td>
+				  <td>{phases} - {project id} -  Mobit - {desc}</td>
+				  <td>Tester one, tester two, tester three </td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				  </td>
 				</tr>
 				<tr>
-				  <td>2</td>
-				  <td>John Doe</td>
-				  <td>222</td>
+				  <td>{phases} - {project id} -  Mobit - {desc}</td>
+				  <td>Tester one, tester two, tester three </td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				</td>
+				  </td>
+				</tr>
 			  </tr>
 			  </tbody>
 			</table>
@@ -169,24 +118,21 @@
 			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Project ID </th>
-				  <th>Applications Name </th>
-				  <th>TRF </th>
+				  <th>Project Phases</th>
+				  <th>Testers </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
 				<tr>
-				  <td>1</td>
-				  <td>Firstname Middlename Lastname </td>
-				  <td>111</td>
+				  <td>{phases} - {project id} -  Mobit - {desc}</td>
+				  <td>Tester one, tester two, tester three </td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				  </td>
 				</tr>
 				<tr>
-				  <td>2</td>
-				  <td>John Doe</td>
-				  <td>222</td>
+				  <td>{phases} - {project id} -  Mobit - {desc}</td>
+				  <td>Tester one, tester two, tester three </td>
 				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
 				</td>
 			  </tr>
@@ -213,24 +159,21 @@
 			<table id="table3" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Project ID </th>
-				  <th>Applications Name </th>
-				  <th>TRF </th>
+				  <th>Project Phases</th>
+				  <th>Testers </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
 				  <tr>
-					<td>3</td>
-					<td>Firstname Middlename Lastname </td>
-					<td>333</td>
+					<td>{phases} - {project id} -  Mobit - {desc}</td>
+				  <td>Tester one, tester two, tester three </td>
 					<td class=" last"><a href="#">Activate</a>
 					</td>
 				  </tr>
 				  <tr>
-					<td>4</td>
-					<td>John Doe</td>
-					<td>444</td>
+					<td>{phases} - {project id} -  Mobit - {desc}</td>
+				  <td>Tester one, tester two, tester three </td>
 					<td class=" last"><a href="#">Activate</a>
 					</td>
 				  </tr>
