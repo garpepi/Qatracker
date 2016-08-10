@@ -24,16 +24,16 @@
 			<br />
 			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_single_application form-control" tabindex="-1" name='application' required="required">
-					<option></option>
-					<option value="Ika">Mobit</option>
-					<option value="Valen">SMS Ketik</option>
-					<option value="Bani">SMS Blast</option>
+				  <select class="select2_multiple form-control" name='application' multiple="multiple">
+					<option>Choose option</option>
+					<option value="Mobit">Mobit</option>
+					<option value="SMS Ketik">SMS Ketik</option>
+					<option value="SMS Blast">SMS Blast</option>
 				  </select>
 				</div>
-			  </div>	
+			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Description Project  <span class="required">*</span>
 				</label>
@@ -45,17 +45,24 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="TRF" name='trf' required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12">Phase Type <span class="required">*</span></label>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Summary TRF 
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="trf-sum" name='sumtrf' required="required" class="form-control col-md-7 col-xs-12">
+				</div>
+			  </div>
+			  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tester Name <span class="required">*</span></label> 
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="form-control" name='phase_type'>
+				  <select class="select2_multiple form-control" name='application' multiple="multiple">
 					<option>Choose option</option>
-					<option>SIT</option>
-					<option>UAT</option>
-					<option>VIT</option>
+					<option value="Ika">Ikas</option>
+					<option value="SMS Ketik">Samuel</option>
+					<option value="SMS Blast">Budi</option>
 				  </select>
 				</div>
 			  </div>
@@ -81,6 +88,20 @@
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <input id="plan_end_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_end_date'>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan Start Doc Date <span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input id="plan_start_doc_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_start_doc_date'>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan End Doc Date <span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input id="plan_end_doc_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_end_doc_date'>
 				</div>
 			  </div>
 			  <div class="form-group">

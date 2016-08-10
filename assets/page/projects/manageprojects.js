@@ -131,4 +131,25 @@ $(document).ready(function() {
 	}, function(start, end, label) {
 	  console.log(start.toISOString(), end.toISOString(), label);
 	});
+	$('#plan_start_doc_date').daterangepicker({
+	  singleDatePicker: true,
+	  calender_style: "picker_4"
+	}, function(start, end, label) {
+	  console.log(start.toISOString(), end.toISOString(), label);
+	});
+	$('#plan_end_doc_date').daterangepicker({
+	  singleDatePicker: true,
+	  calender_style: "picker_4"
+	}, function(start, end, label) {
+	  console.log(start.toISOString(), end.toISOString(), label);
+	});
 });
+//<!-- Select2 -->
+      $(document).ready(function() {
+        $(".select2_multiple").select2({
+          maximumSelectionLength: 10,
+          placeholder: "With Max Selection limit 10",
+          allowClear: true
+        });
+      });
+//<!-- /Select2 -->
