@@ -38,7 +38,7 @@
 							'vendors/pdfmake/build/vfs_fonts.js',
 							'page/contents/manageapplications.js'
 						);
-            $this->contents = 'contents/manageApplications'; // its your view name, change for as per requirement.
+            $this->contents = 'contents/manageapplication/index'; // its your view name, change for as per requirement.
             $this->layout();
         }
     }

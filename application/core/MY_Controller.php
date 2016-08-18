@@ -3,9 +3,10 @@
     { 
         //set the class variable.
         public $template  = array();
-        public $data      = array();
+        public $data      = array(); // all things that will be pass throug to view
 		public $page_css  = array();
 		public $page_js  = array();
+		public $usr_desc = array();
 		
         /*Loading the default libraries, helper, language */
         public function __construct(){
@@ -15,8 +16,53 @@
         }
 		
 		public function is_login(){
-			$this->data['usr_type'] = !empty($this->input->get('admin')) ? $this->input->get('admin') : NULL;
+			// check login or not
+				// if not login
+					// go to login
+				// else login
+			$this->usr_desc['user_id'] = !empty($this->input->get('admin')) ? 1 : 0; 
 			
+			// check admin or regular or guess
+			if($this->is_admin($this->usr_desc['user_id'])){
+				$this->data['usr_type'] = 'admin';
+			}else{
+				$this->data['usr_type'] = NULL;
+			}
+			
+			// check page allowed
+			if(!$this->page_access()){
+				redirect('/welcome', 'refresh');
+			} 
+			
+		}
+		
+		/* Check status admin*/
+		protected function is_admin($user_id){
+				//querry if user admin or not
+				$user_status = ($user_id != 1 ? 'nonmin' : 'admin') ;
+				
+				if($user_status == 'admin')
+				{
+					return 1;
+				}else{
+					return 0;
+				}
+		}
+		
+		/* Page management*/
+		private function page_access(){
+			 $admin_list = array('manageapplications');
+			 $tester_list = array();
+			 $guess_list = array();
+
+			 if($this->is_admin($this->usr_desc['user_id']) && in_array($this->uri->segment(1),$admin_list))
+			 {
+				 return 1;
+			 }else{
+				 return 0;
+			 }
+			 
+			 // write to log "USER <ID> <USER> NOT ALLOW TO ENTER PAGE <PAGE>"
 		}
 		
         /*Front Page Layout*/
