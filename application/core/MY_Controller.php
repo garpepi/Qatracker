@@ -3,7 +3,7 @@
     { 
         //set the class variable.
         public $template  = array();
-        public $data      = array(); // all things that will be pass throug to view
+        public $data      = array('content' => array()); // all things that will be pass throug to view
 		public $page_css  = array();
 		public $page_js  = array();
 		public $usr_desc = array();
@@ -11,6 +11,7 @@
         /*Loading the default libraries, helper, language */
         public function __construct(){
             parent::__construct();
+			$this->is_login();
          //   $this->load->helper(array('form','language','url'));
           //  $this->lang->load('english');
         }
@@ -20,7 +21,8 @@
 				// if not login
 					// go to login
 				// else login
-			$this->usr_desc['user_id'] = !empty($this->input->get('admin')) ? 1 : 0; 
+			//$this->usr_desc['user_id'] = !empty($this->input->get('admin')) ? 1 : 0;
+			$this->usr_desc['user_id'] = 1; //1 admin, 0 tester			
 			
 			// check admin or regular or guess
 			if($this->is_admin($this->usr_desc['user_id'])){
@@ -68,7 +70,6 @@
         /*Front Page Layout*/
         public function layout() {
             // making template and send data to view.
-			$this->is_login();
 			$this->data['page_css'] = $this->page_css;
 			$this->data['page_js'] = $this->page_js;
             $this->template['header'] = $this->load->view('layout/header', $this->data, true);

@@ -1,5 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     class ManageApplications extends MY_Controller {
+		
+		public function __construct(){
+			parent::__construct();
+			$this->load->model('application_model');
+		}
         public function index() {
 			$this->data = array(
 							'title' => 'Manage Application',
@@ -39,6 +44,73 @@
 							'page/contents/manageapplications.js'
 						);
             $this->contents = 'contents/manageapplication/index'; // its your view name, change for as per requirement.
+			
+			// Table Active
+			$this->data['contents'] = array(
+							'table_active' => $this->fetch_application('active'),
+							'table_inactive' => $this->fetch_application('inactive'),
+							);
+			// Table Incactive
+			
             $this->layout();
         }
+		
+		public function add (){
+			if ($this->input->server('REQUEST_METHOD') != 'POST'){
+				redirect('/manageapplications');
+			}
+			
+			$data = $this->input->post();
+			$this->form_validation->set_rules('name', 'Name', 'required');
+			$this->form_validation->set_rules('status', 'Status', 'required');
+			
+			
+			
+			if($this->application_model->add_application($data) && $this->form_validation->run()){
+				$this->session->set_flashdata('form_msg', 'Success Add New Application Name');
+			}else{
+				if($this->form_validation->run()){
+					$this->session->set_flashdata('form_msg', validation_errors());
+				}else{
+					$this->session->set_flashdata('form_msg', 'Data Already Exist');
+				}
+			}
+			redirect('/manageapplications');
+		}
+		
+		public function edit ($id = 0){			
+			/*
+			if ($this->input->server('REQUEST_METHOD') == 'POST'){
+				// post data
+				
+			}else if($this->input->server('REQUEST_METHOD') == 'GET' ){
+				// get data
+				$this->edit($this->input->get('id'));
+			}else{
+				// normal condition with data
+				if($id == 0)
+				{
+					redirect('/manageapplications');
+				}else{
+					$this->data['contents'] = array(
+								'form' => $this->get_application(array('id'=>$id))
+							);
+					$this->index();					
+				}
+			}
+			*/
+			if($id == 0)
+			{
+				redirect('/manageapplications');
+			}else{
+				$this->data['contents'] = array(
+							'form' => $this->application_model->get_application(array('id'=>$id))
+						);
+				$this->index();					
+			}
+		}
+		
+		private function fetch_application($status = 'active'){
+			return $this->application_model->get_application(array('status'=>$status));
+		}
     }
