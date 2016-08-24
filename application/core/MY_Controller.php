@@ -6,7 +6,7 @@
         public $data      = array('content' => array()); // all things that will be pass throug to view
 		public $page_css  = array();
 		public $page_js  = array();
-		public $usr_desc = array();
+		public $usr_desc = array(); // for sidebar
 		
         /*Loading the default libraries, helper, language */
         public function __construct(){
@@ -27,8 +27,10 @@
 			// check admin or regular or guess
 			if($this->is_admin($this->usr_desc['user_id'])){
 				$this->data['usr_type'] = 'admin';
+				$this->usr_desc['status'] = 'admin'; // for sidebar
 			}else{
 				$this->data['usr_type'] = NULL;
+				$this->usr_desc['status'] = NULL; // for sidebar
 			}
 			
 			// check page allowed
@@ -70,10 +72,11 @@
         /*Front Page Layout*/
         public function layout() {
             // making template and send data to view.
+			print_r($this->data);
 			$this->data['page_css'] = $this->page_css;
 			$this->data['page_js'] = $this->page_js;
             $this->template['header'] = $this->load->view('layout/header', $this->data, true);
-            $this->template['sidebar'] = $this->load->view('layout/sidebar', $this->data, true);
+            $this->template['sidebar'] = $this->load->view('layout/sidebar', $this->usr_desc, true);
 			$this->template['top_nav'] = $this->load->view('layout/top_nav', $this->data, true);
             $this->template['contents'] = $this->load->view($this->contents, $this->data, true);
             $this->template['footer'] = $this->load->view('layout/footer', $this->data, true);

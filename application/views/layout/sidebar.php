@@ -19,11 +19,11 @@
 	<!-- /menu profile quick info -->
 
 	<br />
-
+	
 	<!-- sidebar menu -->
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
-		<?php if(!empty($usr_type)) :?>
+		<?php if(!empty($status)) :?>
 		<h3>Admin</h3>
 		<ul class="nav side-menu">
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
