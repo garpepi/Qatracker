@@ -30,13 +30,26 @@ class Application_model extends CI_Model {
 	
 	public function edit_application($data = array())
     {
-        $empty = $this->get_application(array('id' => $data['id']));
-        if(!empty($empty)){
-            $this->db->insert('application',$data);
-            if( $this->db->affected_rows() > 0)
-            {
-                return $this->db->insert_id();
-            }
+        $empty = $this->get_application(array('name' => $data['name'], 'id !=' => $data['id']));
+		if(empty($empty)){            
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id', $id);
+			$this->db->update('application', $data); 
+            return $this->db->affected_rows();
+        }else{
+            return false;
+        }
+    }
+	
+	public function update_application($data = array())
+    {
+        $nempty = $this->get_application(array('id' => $data['id']));
+		if(!empty($nempty)){
+			$id = $data['id'];
+			unset($data['id']);
+			$this->db->where('id', $id);
+			$this->db->update('application', $data);
         }else{
             return false;
         }

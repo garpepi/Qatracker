@@ -5,7 +5,8 @@
 			parent::__construct();
 			$this->load->model('application_model');
 		}
-        public function index() {
+		
+		private function front_stuff(){
 			$this->data = array(
 							'title' => 'Manage Application',
 							'box_title_1' => 'Adding Application',
@@ -43,6 +44,9 @@
 							'vendors/pdfmake/build/vfs_fonts.js',
 							'page/contents/manageapplications.js'
 						);
+		}
+        public function index() {
+			$this->front_stuff();
             $this->contents = 'contents/manageapplication/index'; // its your view name, change for as per requirement.
 			
 			// Table Active
@@ -64,12 +68,10 @@
 			$this->form_validation->set_rules('name', 'Name', 'required');
 			$this->form_validation->set_rules('status', 'Status', 'required');
 			
-			
-			
-			if($this->application_model->add_application($data) && $this->form_validation->run()){
+			if($this->form_validation->run() && $this->application_model->add_application($data) ){
 				$this->session->set_flashdata('form_msg', 'Success Add New Application Name');
 			}else{
-				if($this->form_validation->run()){
+				if(!$this->form_validation->run()){
 					$this->session->set_flashdata('form_msg', validation_errors());
 				}else{
 					$this->session->set_flashdata('form_msg', 'Data Already Exist');
@@ -79,38 +81,47 @@
 		}
 		
 		public function edit ($id = 0){			
-			/*
-			if ($this->input->server('REQUEST_METHOD') == 'POST'){
-				// post data
-				
-			}else if($this->input->server('REQUEST_METHOD') == 'GET' ){
-				// get data
-				$this->edit($this->input->get('id'));
-			}else{
-				// normal condition with data
-				if($id == 0)
-				{
-					redirect('/manageapplications');
-				}else{
-					$this->data['contents'] = array(
-								'form' => $this->get_application(array('id'=>$id))
-							);
-					$this->index();					
-				}
-			}
-			*/
-			if($id == 0)
+			if($id == 0 && $this->input->server('REQUEST_METHOD') != 'POST')
 			{
 				redirect('/manageapplications');
 			}else{
-				$this->data['contents'] = array(
-							'form' => $this->application_model->get_application(array('id'=>$id))
-						);
-				$this->index();					
+				if ($this->input->server('REQUEST_METHOD') == 'POST'){
+				// post data
+					$data = $this->input->post();
+					$this->form_validation->set_rules('name', 'Name', 'required');
+					$this->form_validation->set_rules('status', 'Status', 'required');
+					$data['id'] = $id;
+					if($this->form_validation->run() && $this->application_model->edit_application($data)){
+						$this->session->set_flashdata('form_msg', 'Success Change Application Data');
+						redirect('/manageapplications');
+					}else{
+						if(!$this->form_validation->run()){							
+							$this->session->set_flashdata('form_msg', validation_errors());
+						}else{
+							$this->session->set_flashdata('form_msg', 'Data You Change to Already Exist');
+						}
+						redirect('/manageapplications/edit/'.$id);
+					}
+				}else{
+					$this->front_stuff();
+					$this->contents = 'contents/manageapplication/index'; // its your view name, change for as per requirement.
+					$this->data['contents'] = array(
+								'form' => $this->application_model->get_application(array('id'=>$id))[0]
+							);
+					$this->layout();
+				}
 			}
 		}
 		
 		private function fetch_application($status = 'active'){
 			return $this->application_model->get_application(array('status'=>$status));
+		}
+		
+		public function reactivate($id = 0){
+			if($id != 0){
+				$data = array('id' => $id, 'status' => 'active');
+				return $this->application_model->update_application($data);				
+			}
+			redirect('/manageapplications');
 		}
     }

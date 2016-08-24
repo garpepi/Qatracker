@@ -25,12 +25,12 @@
 		  <?php 
 			echo $this->session->flashdata('form_msg'); 
 		  ?>
-			<form action='/manageapplications/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			<form action='/manageapplications/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Application Name <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">				  
+				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'edit') :?> value='<?php echo $contents['form']['name'];?>'  <?php endif;?> >				  
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -88,7 +88,7 @@
 					  <td><?php echo $active_record['name'] ; ?> </td>
 					  <td>
 							<!--<a href="/manageapplications/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
-							<a href="/manageapplications/edit?id=<?php echo $active_record['id'] ; ?>">Edit</a>  
+							<a href="/manageapplications/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
 							<a href="/manageapplications/revoke?id=<?php echo $active_record['id'] ; ?>">Disable</a>
 					  </td>
 					</tr>
@@ -118,9 +118,7 @@
 			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Applications Id </th>
 				  <th>Applications Name </th>
-				  <th>TRF </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -131,7 +129,7 @@
 					<tr>
 					  <td><?php echo $incactive_record['name'] ; ?> </td>
 					  <td>
-						<a href="/manageapplications/reactivate?id=<?php echo $active_record['id'] ; ?>" target='_blank'>Reactivate</a>
+						<a href="/manageapplications/reactivate/<?php echo $incactive_record['id'] ; ?>">Reactivate</a>
 					  </td>
 					</tr>
 					<?php
