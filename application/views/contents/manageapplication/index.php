@@ -89,7 +89,7 @@
 					  <td>
 							<!--<a href="/manageapplications/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
 							<a href="/manageapplications/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
-							<a href="/manageapplications/revoke?id=<?php echo $active_record['id'] ; ?>">Disable</a>
+							<a href="/manageapplications/revoke/<?php echo $active_record['id'] ; ?>" class='confirmation'>Disable</a>
 					  </td>
 					</tr>
 					<?php
@@ -129,7 +129,7 @@
 					<tr>
 					  <td><?php echo $incactive_record['name'] ; ?> </td>
 					  <td>
-						<a href="/manageapplications/reactivate/<?php echo $incactive_record['id'] ; ?>">Reactivate</a>
+						<a href="/manageapplications/reactivate/<?php echo $incactive_record['id'] ; ?>" class='confirmation'>Reactivate</a>
 					  </td>
 					</tr>
 					<?php

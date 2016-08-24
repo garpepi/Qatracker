@@ -4,6 +4,7 @@
 		public function __construct(){
 			parent::__construct();
 			$this->load->model('application_model');
+			
 		}
 		
 		private function front_stuff(){
@@ -120,7 +121,15 @@
 		public function reactivate($id = 0){
 			if($id != 0){
 				$data = array('id' => $id, 'status' => 'active');
-				return $this->application_model->update_application($data);				
+				$this->application_model->update_application($data);				
+			}
+			redirect('/manageapplications');
+		}
+		
+		public function revoke($id = 0){
+			if($id != 0){
+				$data = array('id' => $id, 'status' => 'inactive');
+				$this->application_model->update_application($data);				
 			}
 			redirect('/manageapplications');
 		}
