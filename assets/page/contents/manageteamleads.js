@@ -80,3 +80,9 @@ var table = $('#datatable-fixed-header').DataTable({
 
 TableManageButtons.init();
 });
+
+
+//operational
+$('.confirmation').on('click', function () {
+	return confirm('Are you sure?');
+});
