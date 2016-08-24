@@ -55,7 +55,7 @@
 		
 		/* Page management*/
 		private function page_access(){
-			 $admin_list = array('manageapplications');
+			 $admin_list = array('manageapplications','manageenvironment');
 			 $tester_list = array();
 			 $guess_list = array();
 
@@ -72,7 +72,6 @@
         /*Front Page Layout*/
         public function layout() {
             // making template and send data to view.
-			print_r($this->data);
 			$this->data['page_css'] = $this->page_css;
 			$this->data['page_js'] = $this->page_js;
             $this->template['header'] = $this->load->view('layout/header', $this->data, true);
