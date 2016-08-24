@@ -22,13 +22,15 @@
 		  </div>
 		  <div class="x_content">
 			<br />
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-
+		  <?php 
+			echo $this->session->flashdata('form_msg'); 
+		  ?>
+			<form action='/managephases/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Type of Change <span class="required">*</span>
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name"><?php echo $title;?> <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="team-leader-name" name='name' required="required" class="form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'edit') :?> value='<?php echo $contents['form']['name'];?>'  <?php endif;?> >				  
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -36,10 +38,10 @@
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
 					<label>
-					  <input type="radio" class="flat" name="gender" checked value='Active'> Active
+					  <input type="radio" class="flat" name="status" checked value='Active'> Active
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="gender" value='Inactive'> Inactive
+					  <input type="radio" class="flat" name="status" value='Inactive'> Inactive
 					</label>
 				  </div>
 				</div>
@@ -47,8 +49,8 @@
 			  <div class="ln_solid"></div>
 			  <div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-				  <button type="submit" class="btn btn-primary">Cancel</button>
-				  <button type="submit" class="btn btn-success">Submit</button>
+				  <button type="reset" class="btn btn-primary">Cancel</button>
+				  <input type="submit" class="btn btn-success"></button>
 				</div>
 			  </div>
 
@@ -56,6 +58,8 @@
 		  </div>
 		</div>
 	  </div>
+	  
+	  <?php if ($this->uri->segment(2) != 'edit'): ?>
 	  <div class="col-md-6 col-sm-6 col-xs-12">
 		<div class="x_panel">
 		  <div class="x_title">
@@ -72,24 +76,25 @@
 			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Type of Changes Id </th>
-				  <th>Type of Changes Name </th>
+				  <th><?php echo $title;?> </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
-				<tr>
-				  <td>1</td>
-				  <td>Firstname Middlename Lastname </td>
-				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				  </td>
-				</tr>
-				<tr>
-				  <td>2</td>
-				  <td>John Doe</td>
-				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				</td>
-			  </tr>
+			  <?php
+				foreach($contents['table_active'] as $active_record){
+					?>
+					<tr>
+					  <td><?php echo $active_record['name'] ; ?> </td>
+					  <td>
+							<!--<a href="/managephases/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
+							<a href="/managephases/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
+							<a href="/managephases/revoke/<?php echo $active_record['id'] ; ?>" class='confirmation'>Disable</a>
+					  </td>
+					</tr>
+					<?php
+				}
+			  ?>
 			  </tbody>
 			</table>
 
@@ -113,31 +118,30 @@
 			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
-				  <th>Type of Changes Id </th>
-				  <th>Type of Changes Name </th>
+				  <th><?php echo $title;?> </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
-				  <tr>
-					<td>3</td>
-					<td>Firstname Middlename Lastname </td>
-					<td class=" last"><a href="#">Activate</a>
-					</td>
-				  </tr>
-				  <tr>
-					<td>4</td>
-					<td>John Doe</td>
-					<td class=" last"><a href="#">Activate</a>
-					</td>
-				  </tr>
+			  <?php
+				foreach($contents['table_inactive'] as $incactive_record){
+					?>
+					<tr>
+					  <td><?php echo $incactive_record['name'] ; ?> </td>
+					  <td>
+						<a href="/managephases/reactivate/<?php echo $incactive_record['id'] ; ?>" class='confirmation'>Reactivate</a>
+					  </td>
+					</tr>
+					<?php
+				}
+			  ?>
 			  </tbody>
 			</table>
 
 		  </div>
 		</div>
 	  </div>
-	  
+	  <?php endif;?>
 	  <div class="clearfix"></div>
 
 	  

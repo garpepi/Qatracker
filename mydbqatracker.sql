@@ -50,6 +50,30 @@ CREATE TABLE IF NOT EXISTS `typeofchanges` (
   `status` enum('active','inactive') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_progres`
+--
+
+CREATE TABLE IF NOT EXISTS `master_progres` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phases`
+--
+
+CREATE TABLE IF NOT EXISTS `phases` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
+
 --
 -- Indexes for table `application`
 --
@@ -69,6 +93,18 @@ ALTER TABLE `typeofchanges`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `master_progres`
+--
+ALTER TABLE `master_progres`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `phases`
+--
+ALTER TABLE `phases`
+  ADD PRIMARY KEY (`id`);
+  
+--
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
@@ -82,4 +118,14 @@ ALTER TABLE `environment`
 -- AUTO_INCREMENT for table `typeofchanges`
 --
 ALTER TABLE `typeofchanges`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `master_progres`
+--
+ALTER TABLE `master_progres`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;  
+--
+-- AUTO_INCREMENT for table `phases`
+--
+ALTER TABLE `phases`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;

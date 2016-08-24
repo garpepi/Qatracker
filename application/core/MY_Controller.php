@@ -55,7 +55,7 @@
 		
 		/* Page management*/
 		private function page_access(){
-			 $admin_list = array('manageapplications','manageenvironment','managetypeofchanges');
+			 $admin_list = array('manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases');
 			 $tester_list = array();
 			 $guess_list = array();
 

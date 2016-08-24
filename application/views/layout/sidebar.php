@@ -35,7 +35,7 @@
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>manageprojects">Manage Projects</a></li>
-			 <!-- <li><a href="<?php echo base_url();?>managephases">Manage Phases</a></li> 
+			 <!-- 
 			  <li><a href="<?php echo base_url();?>assigntesters">Assign Testers</a></li>-->
 			</ul>
 		  </li>
@@ -45,7 +45,8 @@
 			  <li><a href="<?php echo base_url();?>manageapplications">Manage Applications</a></li>
 			  <li><a href="<?php echo base_url();?>managetypeofchanges">Type Of Changes</a></li>
 			  <li><a href="<?php echo base_url();?>manageenvironment">Manage Environment</a></li>
-			  <li><a href="<?php echo base_url();?>managestatusreport">Manage Status Report</a></li>
+			  <li><a href="<?php echo base_url();?>manageprogres">Manage Progres</a></li>
+			  <li><a href="<?php echo base_url();?>managephases">Manage Phases</a></li> 
 			</ul>
 		  </li>
 		</ul>
