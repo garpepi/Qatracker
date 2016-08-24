@@ -4,26 +4,7 @@ var handleDataTableButtons = function() {
     $("#table1").DataTable({
         dom: "Bfrtip",
         buttons: [
-        {
-            extend: "copy",
-            className: "btn-sm"
-        },
-        {
-            extend: "csv",
-            className: "btn-sm"
-        },
-        {
-            extend: "excel",
-            className: "btn-sm"
-        },
-        {
-            extend: "pdfHtml5",
-            className: "btn-sm"
-        },
-        {
-            extend: "print",
-            className: "btn-sm"
-        },
+      
         ],
         responsive: true
     });
@@ -32,26 +13,7 @@ var handleDataTableButtons = function() {
     $("#table2").DataTable({
         dom: "Bfrtip",
         buttons: [
-        {
-            extend: "copy",
-            className: "btn-sm"
-        },
-        {
-            extend: "csv",
-            className: "btn-sm"
-        },
-        {
-            extend: "excel",
-            className: "btn-sm"
-        },
-        {
-            extend: "pdfHtml5",
-            className: "btn-sm"
-        },
-        {
-            extend: "print",
-            className: "btn-sm"
-        },
+        
         ],
         responsive: true
     });
@@ -79,4 +41,9 @@ var table = $('#datatable-fixed-header').DataTable({
 });
 
 TableManageButtons.init();
+});
+
+//operational
+$('.confirmation').on('click', function () {
+	return confirm('Are you sure?');
 });

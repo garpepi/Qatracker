@@ -28,24 +28,24 @@
 		<ul class="nav side-menu">
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>adduser?admin=1">Add User</a></li>
-			  <li><a href="<?php echo base_url();?>manageuser?admin=1">Manage User</a></li>
+			  <li><a href="<?php echo base_url();?>adduser">Add User</a></li>
+			  <li><a href="<?php echo base_url();?>manageuser">Manage User</a></li>
 			</ul>
 		  </li>
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>manageprojects?admin=1">Manage Projects</a></li>
-			 <!-- <li><a href="<?php echo base_url();?>managephases?admin=1">Manage Phases</a></li> 
-			  <li><a href="<?php echo base_url();?>assigntesters?admin=1">Assign Testers</a></li>-->
+			  <li><a href="<?php echo base_url();?>manageprojects">Manage Projects</a></li>
+			 <!-- <li><a href="<?php echo base_url();?>managephases">Manage Phases</a></li> 
+			  <li><a href="<?php echo base_url();?>assigntesters">Assign Testers</a></li>-->
 			</ul>
 		  </li>
 		  <li><a><i class="fa fa-tasks"></i> Masters <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>manageteamleads?admin=1">Manage Team Leads</a></li>
-			  <li><a href="<?php echo base_url();?>manageapplications?admin=1">Manage Applications</a></li>
-			  <li><a href="<?php echo base_url();?>managetypeofchanges?admin=1">Type Of Changes</a></li>
-			  <li><a href="<?php echo base_url();?>managephasetypes?admin=1">Manage Environment</a></li>
-			  <li><a href="<?php echo base_url();?>managestatusreport?admin=1">Manage Status Report</a></li>
+			  <li><a href="<?php echo base_url();?>manageteamleads">Manage Team Leads</a></li>
+			  <li><a href="<?php echo base_url();?>manageapplications">Manage Applications</a></li>
+			  <li><a href="<?php echo base_url();?>managetypeofchanges">Type Of Changes</a></li>
+			  <li><a href="<?php echo base_url();?>manageenvironment">Manage Environment</a></li>
+			  <li><a href="<?php echo base_url();?>managestatusreport">Manage Status Report</a></li>
 			</ul>
 		  </li>
 		</ul>

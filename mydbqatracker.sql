@@ -38,6 +38,18 @@ CREATE TABLE IF NOT EXISTS `environment` (
   `status` enum('active','inactive') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `environment`
+--
+
+CREATE TABLE IF NOT EXISTS `typeofchanges` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
+
 --
 -- Indexes for table `application`
 --
@@ -48,6 +60,12 @@ ALTER TABLE `application`
 -- Indexes for table `environment`
 --
 ALTER TABLE `environment`
+  ADD PRIMARY KEY (`id`);
+ 
+--
+-- Indexes for table `typeofchanges`
+--
+ALTER TABLE `typeofchanges`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -60,3 +78,8 @@ ALTER TABLE `application`
 --
 ALTER TABLE `environment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `typeofchanges`
+--
+ALTER TABLE `typeofchanges`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
