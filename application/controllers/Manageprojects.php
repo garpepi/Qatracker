@@ -1,6 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     class ManageProjects extends MY_Controller {
-        public function index() {
+		public function __construct(){
+			parent::__construct();
+			$this->load->model('projects_model');
+			$this->load->model('application_impact_model');
+			$this->load->model('tester_on_projects_model');
+			
+			//content used
+			$this->load->model('application_model');
+			$this->load->model('users_model');
+			$this->load->model('typeofchange_model');
+			
+		}
+		
+		private function front_stuff(){
 			$this->data = array(
 							'title' => 'Manage Projects',
 							'box_title_1' => 'Add Project',
@@ -44,7 +57,121 @@
 							'vendors/datepicker/daterangepicker.js',
 							'page/projects/manageprojects.js'
 						);
-            $this->contents = 'projects/manageprojects'; // its your view name, change for as per requirement.
+		}
+        public function index() {
+			$this->front_stuff();
+            $this->contents = 'projects/manageprojects/index'; // its your view name, change for as per requirement.
+			
+			// Table Active
+			$this->data['contents'] = array(
+							'table_active' => $this->fetch_typeofchange('active'),
+							'table_inactive' => $this->fetch_typeofchange('inactive'),
+							'applications' => $this->application_model->get_application(array('status' => 'active')),
+							'tester' => $this->users_model->get_users(array('status' => 0)),
+							'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active'))
+							);
+			// Table Incactive
+			
             $this->layout();
         }
+		
+		public function add (){
+						
+			if ($this->input->server('REQUEST_METHOD') != 'POST'){
+				redirect('/manageprojects');
+			}
+			$data = $this->input->post();
+			
+			$this->form_validation->set_rules('applications[]', 'Application Impact', 'required');
+			$this->form_validation->set_rules('desc', 'Desc', 'required');
+			$this->form_validation->set_rules('sum_TRF', 'Summary TRF', 'required');
+			$this->form_validation->set_rules('testers[]', 'Tester', 'required');
+			$this->form_validation->set_rules('type_of_change', 'Type Of Change', 'required');
+			$this->form_validation->set_rules('plan_start_date', 'Plan Start Date', 'required');
+			$this->form_validation->set_rules('plan_end_date', 'Plan End Date', 'required');
+			$this->form_validation->set_rules('plan_start_doc_date', 'Plan Doc Start Date', 'required');
+			$this->form_validation->set_rules('plan_end_doc_date', 'Plan Doc Start Date', 'required');
+			$this->form_validation->set_rules('status', 'Status', 'required');
+			
+			$projects_data = array(
+						'desc' => $data['desc'],
+						'TRF' => $data['TRF'],
+						'sum_TRF' => $data['sum_TRF'],
+						'type_of_change' => $data['type_of_change'],
+						'plan_start_date' => $data['plan_start_date'],
+						'plan_end_date' => $data['plan_end_date'],
+						'plan_start_doc_date' => $data['plan_start_doc_date'],
+						'plan_end_doc_date' => $data['plan_end_doc_date'],
+						'status' => $data['status']
+						);
+			$project_id = $this->projects_model->add_manageprojects($projects_data);
+			if($this->form_validation->run() && $project_id){
+				// add list application impact
+				$this->application_impact_model->add_application_impact($project_id,$data['applications']);
+				// add list tester involve
+				$this->tester_on_projects_model->add_tester_on_projects($project_id,$data['testers']);
+				$this->session->set_flashdata('form_msg', 'Success Add New Application Name');
+				
+			}else{
+				if(!$this->form_validation->run()){
+					$this->session->set_flashdata('form_msg', validation_errors());
+				}else{
+					$this->session->set_flashdata('form_msg', 'TRF Already Exist');
+				}
+			}		
+			redirect('/manageprojects');
+		}
+		
+		public function edit ($id = 0){			
+			if($id == 0 && $this->input->server('REQUEST_METHOD') != 'POST')
+			{
+				redirect('/manageprojects');
+			}else{
+				if ($this->input->server('REQUEST_METHOD') == 'POST'){
+				// post data
+					$data = $this->input->post();
+					$this->form_validation->set_rules('name', 'Name', 'required');
+					$this->form_validation->set_rules('status', 'Status', 'required');
+					$data['id'] = $id;
+					if($this->form_validation->run() && $this->typeofchange_model->edit_typeofchange($data)){
+						$this->session->set_flashdata('form_msg', 'Success Change Application Data');
+						redirect('/manageprojects');
+					}else{
+						if(!$this->form_validation->run()){							
+							$this->session->set_flashdata('form_msg', validation_errors());
+						}else{
+							$this->session->set_flashdata('form_msg', 'Data You Change to Already Exist');
+						}
+						redirect('/manageprojects/edit/'.$id);
+					}
+				}else{
+					$this->front_stuff();
+					$this->contents = 'contents/manageprojects/index'; // its your view name, change for as per requirement.
+					$this->data['contents'] = array(
+								'form' => $this->typeofchange_model->get_typeofchange(array('id'=>$id))[0]
+							);
+					$this->layout();
+				}
+			}
+		}
+		
+		private function fetch_typeofchange($status = 'active'){
+			return $this->typeofchange_model->get_typeofchange(array('status'=>$status));
+		}
+		
+		public function reactivate($id = 0){
+			if($id != 0){
+				$data = array('id' => $id, 'status' => 'active');
+				$this->typeofchange_model->update_typeofchange($data);				
+			}
+			redirect('/manageprojects');
+		}
+		
+		public function revoke($id = 0){
+			if($id != 0){
+				$data = array('id' => $id, 'status' => 'inactive');
+				$this->typeofchange_model->update_typeofchange($data);				
+			}
+			redirect('/manageprojects');
+		}
     }

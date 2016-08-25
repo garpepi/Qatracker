@@ -8,7 +8,6 @@
 	</div>
 
 	<div class="clearfix"></div>
-
 	<div class="row">
 	  <div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
@@ -22,15 +21,22 @@
 		  </div>
 		  <div class="x_content">
 			<br />
-			<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-			  <div class="form-group">
+		<?php 
+			echo $this->session->flashdata('form_msg'); 
+		?>
+			<form action='/manageprojects/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_multiple form-control" name='application' multiple="multiple">
+				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple">
 					<option>Choose option</option>
-					<option value="Mobit">Mobit</option>
-					<option value="SMS Ketik">SMS Ketik</option>
-					<option value="SMS Blast">SMS Blast</option>
+					<?php
+					foreach ($contents['applications'] as $application):
+					?>
+						<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
+					<?php
+					endforeach;
+					?>
 				  </select>
 				</div>
 			  </div>
@@ -45,24 +51,28 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="TRF" name='trf' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="TRF" name='TRF' class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Summary TRF 
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Summary TRF <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="trf-sum" name='sumtrf' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="trf-sum" name='sum_TRF' required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tester Name <span class="required">*</span></label> 
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_multiple form-control" name='application' multiple="multiple">
+				  <select class="select2_multiple form-control" required="required"  name='testers[]' multiple="multiple">
 					<option>Choose option</option>
-					<option value="Ika">Ikas</option>
-					<option value="SMS Ketik">Samuel</option>
-					<option value="SMS Blast">Budi</option>
+					<?php
+					foreach ($contents['tester'] as $tester):
+					?>
+						<option value="<?php echo $tester['id'];?>"><?php echo $tester['name'];?></option>
+					<?php
+					endforeach;
+					?>
 				  </select>
 				</div>
 			  </div>
@@ -71,8 +81,13 @@
 				<div class="col-md-9 col-sm-9 col-xs-12">
 				  <select class="form-control" name='type_of_change'>
 					<option>Choose option</option>
-					<option>CR # Change Request</option>
-					<option>PI # Production Issue</option>
+					<?php
+					foreach ($contents['type_of_changes'] as $toc):
+					?>
+						<option value="<?php echo $toc['id'];?>"><?php echo $toc['name'];?></option>
+					<?php
+					endforeach;
+					?>
 				  </select>
 				</div>
 			  </div>
@@ -109,10 +124,10 @@
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
 					<label>
-					  <input type="radio" class="flat" name="gender" checked value='Active'> Active
+					  <input type="radio" class="flat" name="status" checked value='Active'> Active
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="gender" value='Drop'> Drop
+					  <input type="radio" class="flat" name="status" value='Drop'> Drop
 					</label>
 				  </div>
 				</div>

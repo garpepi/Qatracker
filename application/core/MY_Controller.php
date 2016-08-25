@@ -62,7 +62,7 @@
 		
 		/* Page management*/
 		private function page_access(){
-			 $admin_list = array('home','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads');
+			 $admin_list = array('home','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads','manageprojects');
 			 $tester_list = array('home');
 			 $guess_list = array('home');
 
@@ -88,4 +88,10 @@
             $this->template['footer'] = $this->load->view('layout/footer', $this->data, true);
             $this->load->view('layout/wrapper', $this->template);
         }
+		
+		public function fancy_print($data){
+			echo '<pre>';
+				print_r($data);
+			echo '</pre>';
+		}
     }
