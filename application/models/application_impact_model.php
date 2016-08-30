@@ -8,9 +8,11 @@ class Application_impact_model extends CI_Model {
 
     public function get_application_impact($where = array())
     {    
-        $this->db->select('*');
+        $this->db->select('application_impact.*,application.name as name');
+		$this->db->from('application_impact');
         $this->db->where($where);
-        $query = $this->db->get('application_impact');
+		$this->db->join('application', 'application.id = application_impact.application_id');
+        $query = $this->db->get();
         return $query->result_array();
     }
 

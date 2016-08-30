@@ -64,8 +64,9 @@
 			
 			// Table Active
 			$this->data['contents'] = array(
-							'table_active' => $this->fetch_typeofchange('active'),
-							'table_inactive' => $this->fetch_typeofchange('inactive'),
+							'table_active' => $this->fetch_project('active'),
+							'table_drop' => $this->fetch_project('drop'),
+							'table_finish' => $this->fetch_project_done(),
 							'applications' => $this->application_model->get_application(array('status' => 'active')),
 							'tester' => $this->users_model->get_users(array('status' => 0)),
 							'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active'))
@@ -81,7 +82,11 @@
 				redirect('/manageprojects');
 			}
 			$data = $this->input->post();
-			
+			$data['plan_start_date'] = date('Y-m-d',strtotime($data['plan_start_date']));
+			$data['plan_end_date'] = date('Y-m-d',strtotime($data['plan_end_date']));
+			$data['plan_start_doc_date'] = date('Y-m-d',strtotime($data['plan_start_doc_date']));
+			$data['plan_end_doc_date'] = date('Y-m-d',strtotime($data['plan_end_doc_date']));
+
 			$this->form_validation->set_rules('applications[]', 'Application Impact', 'required');
 			$this->form_validation->set_rules('desc', 'Desc', 'required');
 			$this->form_validation->set_rules('sum_TRF', 'Summary TRF', 'required');
@@ -155,8 +160,12 @@
 			}
 		}
 		
-		private function fetch_typeofchange($status = 'active'){
-			return $this->typeofchange_model->get_typeofchange(array('status'=>$status));
+		private function fetch_project($status = 'active'){
+			return $this->projects_model->get_manageprojects(array('projects.status'=>$status));
+		}
+		
+		private function fetch_project_done(){
+			return $this->projects_model->get_manageprojects();
 		}
 		
 		public function reactivate($id = 0){

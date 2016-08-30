@@ -8,9 +8,12 @@ class Tester_on_projects_model extends CI_Model {
 
     public function get_tester_on_projects($where = array())
     {    
-        $this->db->select('*');
+		$this->db->select('tester_on_projects.*,users.name as name');
+		$this->db->from('tester_on_projects');
         $this->db->where($where);
-        $query = $this->db->get('tester_on_projects');
+		$this->db->join('users', 'users.id = tester_on_projects.tester_id');
+        $query = $this->db->get();
+
         return $query->result_array();
     }
 	

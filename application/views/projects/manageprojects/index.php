@@ -155,84 +155,125 @@
 			</ul>
 			<div class="clearfix"></div>
 		  </div>
-
 		  <div class="x_content">
 		  
 			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
 				  <th>Project ID </th>
-				  <th>Applications Name </th>
+				  <th>Applications Impact </th>
 				  <th>TRF </th>
+				  <th>Testers </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
-				<tr>
-				  <td>1</td>
-				  <td>Firstname Middlename Lastname </td>
-				  <td>111</td>
-				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				  </td>
-				</tr>
-				<tr>
-				  <td>2</td>
-				  <td>John Doe</td>
-				  <td>222</td>
-				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				</td>
-			  </tr>
+			  <?php
+				foreach($contents['table_active'] as $active_data){
+					?>
+						<tr>
+						  <td><?php echo $active_data['id'];?></td>
+						  <td><?php foreach ($active_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
+						  <td><?php if(empty($active_data['TRF'])): echo 'UPCOMING TRF'; else: echo $active_data['TRF']; endif;  ?></td>
+						  <td><?php foreach ($active_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
+						  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
+						  </td>
+						</tr>
+					<?php
+				}
+			  ?>
 			  </tbody>
 			</table>
-
 		  </div>
 		</div>
 	  </div>
 	  
-	  <div class="col-md-6 col-sm-6 col-xs-12">
+	  <div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
 		  <div class="x_title">
-			<h2><?php echo $box_title_2; ?> <small><?php echo $sub_box_title_2; ?></small></h2>
+			<h2><?php echo $box_title_4; ?> <small><?php echo $sub_box_title_4; ?></small></h2>
 			<ul class="nav navbar-right panel_toolbox">
 			  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 			  </li>
 			</ul>
 			<div class="clearfix"></div>
 		  </div>
-
 		  <div class="x_content">
 		  
-			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
 				  <th>Project ID </th>
-				  <th>Applications Name </th>
+				  <th>Applications Impact </th>
 				  <th>TRF </th>
+				  <th>Testers </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
 			  <tbody>
-				<tr>
-				  <td>1</td>
-				  <td>Firstname Middlename Lastname </td>
-				  <td>111</td>
-				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				  </td>
-				</tr>
-				<tr>
-				  <td>2</td>
-				  <td>John Doe</td>
-				  <td>222</td>
-				  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
-				</td>
-			  </tr>
+			  <?php
+				foreach($contents['table_drop'] as $drop_data){
+					?>
+						<tr>
+						  <td><?php echo $drop_data['id'];?></td>
+						  <td><?php foreach ($drop_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
+						  <td><?php if(empty($drop_data['TRF'])): echo 'UPCOMING TRF'; else: echo $drop_data['TRF']; endif;  ?></td>
+						  <td><?php foreach ($drop_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
+						  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
+						  </td>
+						</tr>
+					<?php
+				}
+			  ?>
 			  </tbody>
 			</table>
-
 		  </div>
 		</div>
 	  </div>
 	  
+	  <div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+		  <div class="x_title">
+			<h2><?php echo $box_title_3; ?> <small><?php echo $sub_box_title_3; ?></small></h2>
+			<ul class="nav navbar-right panel_toolbox">
+			  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+			  </li>
+			</ul>
+			<div class="clearfix"></div>
+		  </div>
+		  <div class="x_content">
+		  
+			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+			  <thead>
+				<tr>
+				  <th>Project ID </th>
+				  <th>Applications Impact </th>
+				  <th>TRF </th>
+				  <th>Testers </th>
+				  <th><span class="nobr">Action</span>
+				</tr>
+			  </thead>
+			  <tbody>
+			  <?php
+				foreach($contents['table_finish'] as $finish_data){
+					?>
+						<tr>
+						  <td><?php echo $finish_data['id'];?></td>
+						  <td><?php foreach ($finish_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
+						  <td><?php if(empty($finish_data['TRF'])): echo 'UPCOMING TRF'; else: echo $finish_data['TRF']; endif;  ?></td>
+						  <td><?php foreach ($finish_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
+						  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
+						  </td>
+						</tr>
+					<?php
+				}
+			  ?>
+			  </tbody>
+			</table>
+		  </div>
+		</div>
+	  </div>
+	 	  
 	  <div class="col-md-6 col-sm-6 col-xs-12">
 		<div class="x_panel">
 		  <div class="x_title">
