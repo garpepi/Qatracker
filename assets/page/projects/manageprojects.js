@@ -117,6 +117,8 @@ $(document).ready(function() {
 	  placeholder: "Select Application Name",
 	  allowClear: true
 	});
+	
+	
 });
 $(document).ready(function() {
 	$('#plan_start_date').daterangepicker({
@@ -151,5 +153,6 @@ $(document).ready(function() {
           placeholder: "With Max Selection limit 10",
           allowClear: true
         });
+
       });
 //<!-- /Select2 -->

@@ -76,6 +76,24 @@
             $this->layout();
         }
 		
+		public function view($id) {
+			$this->front_stuff();
+            $this->contents = 'projects/manageprojects/index'; // its your view name, change for as per requirement.
+			
+			// Table Active
+			$this->data['contents'] = array(
+							'table_active' => $this->fetch_project('active'),
+							'table_drop' => $this->fetch_project('drop'),
+							'table_finish' => $this->fetch_project_done(),
+							'applications' => $this->application_model->get_application(array('status' => 'active')),
+							'tester' => $this->users_model->get_users(array('status' => 0)),
+							'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active'))
+							);
+			// Table Incactive
+			
+            $this->layout();
+        }
+		
 		public function add (){
 						
 			if ($this->input->server('REQUEST_METHOD') != 'POST'){

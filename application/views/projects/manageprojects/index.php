@@ -24,11 +24,15 @@
 		<?php 
 			echo $this->session->flashdata('form_msg'); 
 		?>
-			<form action='/manageprojects/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/manageprojects/
+				<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' 
+				method='post' 
+			<?php endif;?>
+			id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple">
+				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple" >
 					<option>Choose option</option>
 					<?php
 					foreach ($contents['applications'] as $application):
@@ -135,8 +139,12 @@
 			  <div class="ln_solid"></div>
 			  <div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-				  <button type="submit" class="btn btn-primary">Cancel</button>
-				  <button type="submit" class="btn btn-success">Submit</button>
+				  <?php if($this->uri->segment(2) != 'view') : ?>
+					  <button type="submit" class="btn btn-primary">Cancel</button>
+					  <button type="submit" class="btn btn-success">Submit</button>
+				  <?php else:?>
+					  <button type="submit" class="btn btn-primary" onclick="self.close()">Close</button>
+				  <?php endif;?>
 				</div>
 			  </div>
 
@@ -145,6 +153,7 @@
 		</div>
 	  </div>
 	  
+<?php if(empty($this->uri->segment(2))):?>
 	  <div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="x_panel">
 		  <div class="x_title">
@@ -176,7 +185,10 @@
 						  <td><?php foreach ($active_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
 						  <td><?php if(empty($active_data['TRF'])): echo 'UPCOMING TRF'; else: echo $active_data['TRF']; endif;  ?></td>
 						  <td><?php foreach ($active_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
-						  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
+						  <td>
+								<a href="/manageprojects/view/<?php echo $active_data['id'] ; ?>" target='_blank'>View</a>
+								<a href="/manageprojects/edit/<?php echo $active_data['id'] ; ?>">Edit</a>  
+								<a href="/manageprojects/drop/<?php echo $active_data['id'] ; ?>" class='confirmation'> Drop</a>
 						  </td>
 						</tr>
 					<?php
@@ -200,7 +212,7 @@
 		  </div>
 		  <div class="x_content">
 		  
-			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+			<table id="table2" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
 				  <th>Project ID </th>
@@ -219,7 +231,9 @@
 						  <td><?php foreach ($drop_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
 						  <td><?php if(empty($drop_data['TRF'])): echo 'UPCOMING TRF'; else: echo $drop_data['TRF']; endif;  ?></td>
 						  <td><?php foreach ($drop_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
-						  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
+						  <td>
+								<a href="/manageprojects/view/<?php echo $drop_data['id'] ; ?>" target='_blank'>View</a>
+						  </td>
 						  </td>
 						</tr>
 					<?php
@@ -243,7 +257,7 @@
 		  </div>
 		  <div class="x_content">
 		  
-			<table id="table1" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+			<table id="table3" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
 			  <thead>
 				<tr>
 				  <th>Project ID </th>
@@ -262,7 +276,8 @@
 						  <td><?php foreach ($finish_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
 						  <td><?php if(empty($finish_data['TRF'])): echo 'UPCOMING TRF'; else: echo $finish_data['TRF']; endif;  ?></td>
 						  <td><?php foreach ($finish_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
-						  <td class=" last"><a href="#">View</a>  <a href="#">Edit</a>  <a href="#">Disable</a>
+						  <td>
+								<a href="/manageprojects/view/<?php echo $finish_data['id'] ; ?>" target='_blank'>View</a>
 						  </td>
 						</tr>
 					<?php
@@ -274,49 +289,7 @@
 		</div>
 	  </div>
 	 	  
-	  <div class="col-md-6 col-sm-6 col-xs-12">
-		<div class="x_panel">
-		  <div class="x_title">
-			<h2><?php echo $box_title_3; ?> <small><?php echo $sub_box_title_3; ?></small></h2>
-			<ul class="nav navbar-right panel_toolbox">
-			  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-			  </li>
-			</ul>
-			<div class="clearfix"></div>
-		  </div>
-
-		  <div class="x_content">
-		  
-			<table id="table3" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
-			  <thead>
-				<tr>
-				  <th>Project ID </th>
-				  <th>Applications Name </th>
-				  <th>TRF </th>
-				  <th><span class="nobr">Action</span>
-				</tr>
-			  </thead>
-			  <tbody>
-				  <tr>
-					<td>3</td>
-					<td>Firstname Middlename Lastname </td>
-					<td>333</td>
-					<td class=" last"><a href="#">Activate</a>
-					</td>
-				  </tr>
-				  <tr>
-					<td>4</td>
-					<td>John Doe</td>
-					<td>444</td>
-					<td class=" last"><a href="#">Activate</a>
-					</td>
-				  </tr>
-			  </tbody>
-			</table>
-
-		  </div>
-		</div>
-	  </div>
+<?php endif;?>  
 	  
 	  <div class="clearfix"></div>
 
@@ -325,3 +298,7 @@
   </div>
 </div>
 <!-- /page content -->
+
+<script>
+	var stats = '<?php if(!empty($this->uri->segment(2))): ?><?php echo $this->uri->segment(2); ?><?php endif;?>';
+</script>

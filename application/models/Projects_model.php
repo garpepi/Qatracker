@@ -29,7 +29,7 @@ class Projects_model extends CI_Model {
 
     public function add_manageprojects($data = array())
     {
-        $empty = $this->get_manageprojects(array('TRF' => $data['TRF'], 'TRF !=' => ''));
+        $empty = $this->get_manageprojects(array('TRF' => $data['TRF'], 'TRF !=' => '','projects.status' => 'active'));
         if(empty($empty)){
 			$data['user_c'] = $this->session->userdata('logged_in_data')['id'];
             $this->db->insert('projects',$data);
