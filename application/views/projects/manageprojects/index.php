@@ -79,7 +79,7 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="TRF" name='TRF' <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit' && !empty($contents['form']['TRF'])):	?> value='<?php echo $contents['form']['TRF']; ?>' <?php else: ?> value='UPCOMING TRF' <?php endif; ?> class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="TRF" name='TRF' <?php if(($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit') && !empty($contents['form']['TRF'])):?> value='<?php echo $contents['form']['TRF']; ?>' <?php else: ?> placeholder='UPCOMING TRF' <?php endif; ?> class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -191,7 +191,7 @@
 					  <button type="submit" class="btn btn-primary">Cancel</button>
 					  <button type="submit" class="btn btn-success">Submit</button>
 				  <?php else:?>
-					  <button type="submit" class="btn btn-primary" onclick="self.close()">Close</button>
+					  <button class="btn btn-primary" onclick="self.close()">Close</button>
 				  <?php endif;?>
 				</div>
 			  </div>
