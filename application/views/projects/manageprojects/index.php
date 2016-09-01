@@ -22,7 +22,8 @@
 		  <div class="x_content">
 			<br />
 		<?php 
-			echo $this->session->flashdata('form_msg'); 
+			echo $this->session->flashdata('form_msg');
+			print_r($contents['form']);
 		?>
 			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/manageprojects/
 				<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' 
@@ -35,11 +36,34 @@
 				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple" >
 					<option>Choose option</option>
 					<?php
-					foreach ($contents['applications'] as $application):
-					?>
-						<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
-					<?php
-					endforeach;
+					if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):
+						foreach ($contents['applications'] as $application):
+							$flag = 0;
+							foreach ($contents['form']['application_impact'] as $key => $value):
+								if($application['id'] == $value['application_id']):
+									$flag = 1;
+								endif;
+						?>
+						<?php 
+							endforeach;
+								if($flag):
+									?>
+										<option value="<?php echo $application['id'];?>" selected><?php echo $application['name'];?></option>
+									<?php
+									else:
+									?>
+										<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
+									<?php
+								endif;
+						endforeach;
+					else:
+						// NON EDIT / VIEW
+						foreach ($contents['applications'] as $application): echo $this->uri->segment(2)
+						?>
+							<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
+						<?php
+						endforeach;
+					endif;
 					?>
 				  </select>
 				</div>
@@ -48,21 +72,21 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Description Project  <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="project-desc" name='desc' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="project-desc" name='desc' <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['desc']; ?>' <?php endif; ?>  required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="TRF" name='TRF' class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="TRF" name='TRF' <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit' && !empty($contents['form']['TRF'])):	?> value='<?php echo $contents['form']['TRF']; ?>' <?php else: ?> value='UPCOMING TRF' <?php endif; ?> class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Summary TRF <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="text" id="trf-sum" name='sum_TRF' required="required" class="form-control col-md-7 col-xs-12">
+				  <input type="text" id="trf-sum" name='sum_TRF' <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['sum_TRF']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -71,12 +95,36 @@
 				  <select class="select2_multiple form-control" required="required"  name='testers[]' multiple="multiple">
 					<option>Choose option</option>
 					<?php
-					foreach ($contents['tester'] as $tester):
+					if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):
+						foreach ($contents['tester'] as $tester):
+							$flag = 0;
+							foreach ($contents['form']['tester_on_projects'] as $key => $value):
+								if($tester['id'] == $value['tester_id']):
+									$flag = 1;
+								endif;
+						?>
+						<?php 
+							endforeach;
+								if($flag):
+									?>
+										<option value="<?php echo $tester['id'];?>" selected><?php echo $tester['name'];?></option>
+									<?php
+									else:
+									?>
+										<option value="<?php echo $tester['id'];?>"><?php echo $tester['name'];?></option>
+									<?php
+								endif;
+						endforeach;
+					else:
+						// NON EDIT / VIEW
+						foreach ($contents['tester'] as $tester): echo $this->uri->segment(2)
+						?>
+							<option value="<?php echo $tester['id'];?>"><?php echo $tester['name'];?></option>
+						<?php
+						endforeach;
+					endif;
 					?>
-						<option value="<?php echo $tester['id'];?>"><?php echo $tester['name'];?></option>
-					<?php
-					endforeach;
-					?>
+					
 				  </select>
 				</div>
 			  </div>
@@ -88,7 +136,7 @@
 					<?php
 					foreach ($contents['type_of_changes'] as $toc):
 					?>
-						<option value="<?php echo $toc['id'];?>"><?php echo $toc['name'];?></option>
+						<option value="<?php echo $toc['id'];?>" <?php if($toc['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $toc['name'];?></option>
 					<?php
 					endforeach;
 					?>
@@ -99,28 +147,28 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan Start Date <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="plan_start_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_start_date'>
+				  <input id="plan_start_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_start_date'])); ?>' <?php endif; ?> required="required" type="text" name='plan_start_date'>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan End Date <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="plan_end_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_end_date'>
+				  <input id="plan_end_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_end_date'])); ?>' <?php endif; ?>  required="required" type="text" name='plan_end_date'>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan Start Doc Date <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="plan_start_doc_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_start_doc_date'>
+				  <input id="plan_start_doc_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_start_doc_date'])); ?>' <?php endif; ?> required="required" type="text" name='plan_start_doc_date'>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Plan End Doc Date <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="plan_end_doc_date" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" name='plan_end_doc_date'>
+				  <input id="plan_end_doc_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_end_doc_date'])); ?>' <?php endif; ?> required="required" type="text" name='plan_end_doc_date'>
 				</div>
 			  </div>
 			  <div class="form-group">
