@@ -132,7 +132,7 @@
 					<?php
 					foreach ($contents['type_of_changes'] as $toc):
 					?>
-						<option value="<?php echo $toc['id'];?>" <?php if($toc['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $toc['name'];?></option>
+						<option value="<?php echo $toc['id'];?>" <?php if(!empty($this->uri->segment(2)) && $toc['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $toc['name'];?></option>
 					<?php
 					endforeach;
 					?>

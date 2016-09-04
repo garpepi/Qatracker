@@ -9,7 +9,7 @@ class Users_model extends CI_Model {
     public function login($email, $password)
     {    
 		$password = $password.$this->config->item('mysalt_psw');
-		$this->db->select('id, email, password');
+		$this->db->select('id, email, password, name');
 		$this->db->from('users');
 		$this->db->where('email', $email);
 		$this->db->where('password', hash("sha256", $password));

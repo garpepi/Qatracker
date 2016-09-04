@@ -25,7 +25,7 @@ class Projects_model extends CI_Model {
 		
 		
 		return $data;
-    }
+    }	
 
     public function add_manageprojects($data = array())
     {
