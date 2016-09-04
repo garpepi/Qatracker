@@ -63,10 +63,10 @@
 		/* Page management*/
 		private function page_access(){
 			 $admin_list = array('home','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads','manageprojects');
-			 $tester_list = array('home');
+			 $tester_list = array('home','reports');
 			 $guess_list = array('home');
 
-			 if($this->is_admin($this->usr_desc['user_id']) && in_array($this->uri->segment(1),$admin_list))
+			 if(($this->is_admin($this->usr_desc['user_id']) && in_array($this->uri->segment(1),$admin_list)) || in_array($this->uri->segment(1),$tester_list))
 			 {
 				 return 1;
 			 }else{

@@ -14,7 +14,6 @@ class Login extends CI_Controller {
 		{
 			redirect('/home', 'refresh');
 		}
-		echo 'aaa';
 		print_r($this->session->userdata('logged_in'));
 		$this->load->view('login/login');
 	}
@@ -34,7 +33,8 @@ class Login extends CI_Controller {
 			$query = $this->users_model->login($data['email'],$data['password']);
 
 			$sess_array = array(
-			 'id' => $query[0]->id
+			 'id' => $query[0]->id,
+			 'name' => $query[0]->name
 			);
 			$this->session->set_userdata('logged_in_data', $sess_array);
 			redirect('/home');

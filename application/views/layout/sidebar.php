@@ -57,7 +57,7 @@
 		  </li>
 		  <li><a><i class="fa fa-file-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>addreport">Add Report</a></li>
+			  <li><a href="<?php echo base_url();?>reports/add">Add Report</a></li>
 			  <li><a href="#">Manage Reports</a></li>
 			</ul>
 		  </li>
