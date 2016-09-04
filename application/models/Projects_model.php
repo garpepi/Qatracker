@@ -19,8 +19,8 @@ class Projects_model extends CI_Model {
         $data = $projects_data->result_array();
 		
 		foreach($data as $key => $value){
-			$data[$key]['application_impact'] = $this->aim->get_application_impact( array('application_impact.project_id' => $value['id']) );
-			$data[$key]['tester_on_projects'] = $this->topm->get_tester_on_projects( array('project_id' => $value['id']) );
+			$data[$key]['application_impact'] = $this->aim->get_application_impact( array('application_impact.project_id' => $value['id'],'application_impact.status' => 'active') );
+			$data[$key]['tester_on_projects'] = $this->topm->get_tester_on_projects( array('project_id' => $value['id'],'tester_on_projects.status' => 'active') );
 		}
 		
 		
@@ -44,10 +44,11 @@ class Projects_model extends CI_Model {
 	
 	public function edit_manageprojects($data = array())
     {
-        $empty = $this->get_manageprojects(array('name' => $data['name'], 'id !=' => $data['id']));
+        $empty = $this->get_manageprojects(array('TRF' => $data['TRF'], 'projects.id !=' => $data['id'], 'projects.status' => 'active', 'TRF !=' => ''));
 		if(empty($empty)){            
 			$id = $data['id'];
 			unset($data['id']);
+			$data['user_m'] = $this->session->userdata('logged_in_data')['id'];
 			$this->db->where('id', $id);
 			$this->db->update('projects', $data); 
             return $this->db->affected_rows();

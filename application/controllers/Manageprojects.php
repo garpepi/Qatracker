@@ -125,6 +125,7 @@
 						'plan_end_doc_date' => $data['plan_end_doc_date'],
 						'status' => $data['status']
 						);
+						
 			$project_id = $this->projects_model->add_manageprojects($projects_data);
 			if($this->form_validation->run() && $project_id){
 				// add list application impact
@@ -149,28 +150,65 @@
 				redirect('/manageprojects');
 			}else{
 				if ($this->input->server('REQUEST_METHOD') == 'POST'){
+
 				// post data
 					$data = $this->input->post();
-					$this->form_validation->set_rules('name', 'Name', 'required');
-					$this->form_validation->set_rules('status', 'Status', 'required');
+					$data['plan_start_date'] = date('Y-m-d',strtotime($data['plan_start_date']));
+					$data['plan_end_date'] = date('Y-m-d',strtotime($data['plan_end_date']));
+					$data['plan_start_doc_date'] = date('Y-m-d',strtotime($data['plan_start_doc_date']));
+					$data['plan_end_doc_date'] = date('Y-m-d',strtotime($data['plan_end_doc_date']));
 					$data['id'] = $id;
-					if($this->form_validation->run() && $this->typeofchange_model->edit_typeofchange($data)){
+					
+					$this->form_validation->set_rules('applications[]', 'Application Impact', 'required');
+					$this->form_validation->set_rules('desc', 'Desc', 'required');
+					$this->form_validation->set_rules('sum_TRF', 'Summary TRF', 'required');
+					$this->form_validation->set_rules('testers[]', 'Tester', 'required');
+					$this->form_validation->set_rules('type_of_change', 'Type Of Change', 'required');
+					$this->form_validation->set_rules('plan_start_date', 'Plan Start Date', 'required');
+					$this->form_validation->set_rules('plan_end_date', 'Plan End Date', 'required');
+					$this->form_validation->set_rules('plan_start_doc_date', 'Plan Doc Start Date', 'required');
+					$this->form_validation->set_rules('plan_end_doc_date', 'Plan Doc Start Date', 'required');
+					$this->form_validation->set_rules('status', 'Status', 'required');
+					
+					$projects_data = array(
+						'id' => $id,
+						'desc' => $data['desc'],
+						'TRF' => $data['TRF'],
+						'sum_TRF' => $data['sum_TRF'],
+						'type_of_change' => $data['type_of_change'],
+						'plan_start_date' => $data['plan_start_date'],
+						'plan_end_date' => $data['plan_end_date'],
+						'plan_start_doc_date' => $data['plan_start_doc_date'],
+						'plan_end_doc_date' => $data['plan_end_doc_date'],
+						'status' => $data['status']
+						);
+
+					if($this->form_validation->run()){
+						$this->projects_model->edit_manageprojects($projects_data);
+						$this->application_impact_model->edit_application_impact($id,$data['applications']);
+						$this->tester_on_projects_model->edit_tester_on_projects($id,$data['testers']);
+						
 						$this->session->set_flashdata('form_msg', 'Success Change Application Data');
 						redirect('/manageprojects');
-					}else{
+						
+					}else{						
 						if(!$this->form_validation->run()){							
 							$this->session->set_flashdata('form_msg', validation_errors());
-						}else{
+						}else{							
 							$this->session->set_flashdata('form_msg', 'Data You Change to Already Exist');
 						}
-						redirect('/manageprojects/edit/'.$id);
+					//	redirect('/manageprojects/edit/'.$id);
 					}
 				}else{
 					$this->front_stuff();
-					$this->contents = 'contents/manageprojects/index'; // its your view name, change for as per requirement.
+					$this->contents = 'projects/manageprojects/index'; // its your view name, change for as per requirement.
+					
 					$this->data['contents'] = array(
-								'form' => $this->typeofchange_model->get_typeofchange(array('id'=>$id))[0]
-							);
+										'applications' => $this->application_model->get_application(array('status' => 'active')),
+										'tester' => $this->users_model->get_users(array('status' => 0)),
+										'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active')),
+										'form' => $this->projects_model->get_manageprojects(array('projects.id'=>$id))[0]
+									);
 					$this->layout();
 				}
 			}

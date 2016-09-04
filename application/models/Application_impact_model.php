@@ -21,7 +21,7 @@ class Application_impact_model extends CI_Model {
 		$batch_data = array();
 		if(!empty($data)){
 			foreach($data as $application_id){
-				$empty = $this->get_application_impact(array('project_id' => $project_id,'application_id' => $application_id));
+				$empty = $this->get_application_impact(array('project_id' => $project_id,'application_id' => $application_id,'application_impact.status' => 'active'));
 				if(!empty($empty)){
 					return false;
 				}else{
@@ -38,6 +38,39 @@ class Application_impact_model extends CI_Model {
 			return true;
 		}
 		return false;
+    }
+	
+	public function edit_application_impact($project_id , $data)
+    {
+		$now_data = array();
+		$fetch_now_data = $this->get_application_impact(array('project_id' => $project_id,'application_impact.status' => 'active'));
+		
+		foreach($fetch_now_data as $tmp_now_data){
+			array_push($now_data, $tmp_now_data['application_id']);
+		}
+		
+		if(($now_data != $data) && !empty($data)){
+			$this->update_application_impact($project_id);
+			$this->add_application_impact($project_id, $data);
+			return true;
+		}
+		return false;
+    }
+	
+	public function update_application_impact($project_id)
+    {
+        $nempty = $this->get_application_impact(array('project_id' => $project_id,'application_impact.status' => 'active'));
+		if(!empty($nempty)){
+			$data = array(
+				'status' => 'inactive',
+				'user_m' => $this->session->userdata('logged_in_data')['id']
+				);
+			$this->db->where('application_impact.project_id', $project_id);
+			$this->db->update('application_impact', $data);
+			return true;
+        }else{
+            return false;
+        }
     }
 	
 	

@@ -23,13 +23,9 @@
 			<br />
 		<?php 
 			echo $this->session->flashdata('form_msg');
-			print_r($contents['form']);
+		//	print_r($contents['form']);
 		?>
-			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/manageprojects/
-				<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' 
-				method='post' 
-			<?php endif;?>
-			id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/manageprojects/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
