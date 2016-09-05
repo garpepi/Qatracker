@@ -118,14 +118,6 @@ $(document).ready(function() {
 	  allowClear: true
 	});
 });
-$(document).ready(function() {
-	$('#actual_start_date').daterangepicker({
-	  singleDatePicker: true,
-	  calender_style: "picker_4"
-	}, function(start, end, label) {
-	  console.log(start.toISOString(), end.toISOString(), label);
-	});
-});
 
 $(document).ready(function() {
 	$('#actual_start_date').daterangepicker({
@@ -177,24 +169,54 @@ $(document).ready(function() {
 				$("#plan_start_doc_date").val(obj.plan_start_doc_date);
 				$("#plan_end_doc_date").val(obj.plan_end_doc_date);
 				
-				if(obj.actual_start_date == 'false'){
+				if(obj.actual_start_date != false){
 					$("#actual_start_date").val(obj.actual_start_date);
+					$("#actual_start_date").data('daterangepicker').remove();
 					$("#actual_start_date").prop('readonly', true);
 				}
-				if(obj.actual_start_doc_date == 'false'){
-					$("#actual_start_doc_date").val(obj.actual_start_doc_date);					
+				if(obj.actual_start_doc_date != false){
+					$("#actual_start_doc_date").val(obj.actual_start_doc_date);		
+					$("#actual_start_doc_date").data('daterangepicker').remove();					
 					$("#actual_start_doc_date").prop('readonly', true);
 				}
 
 			}
 		});
 	}
+	function daterangepicker_enabler(){
+		$('#actual_start_date').daterangepicker({
+		  singleDatePicker: true,
+		  calender_style: "picker_4"
+		}, function(start, end, label) {
+		  console.log(start.toISOString(), end.toISOString(), label);
+		});
+		$('#actual_start_doc_date').daterangepicker({
+		  singleDatePicker: true,
+		  calender_style: "picker_4"
+		}, function(start, end, label) {
+		  console.log(start.toISOString(), end.toISOString(), label);
+		});
+	}
 	$('#project').on('change', function() {
+	  $("#actual_start_date").val('');
+	  $("#actual_start_doc_date").val('');
 	  $("#actual_start_date").prop('readonly', false);
 	  $("#actual_start_doc_date").prop('readonly', false);
-	  $("#actual_start_date").val();
-	  $("#actual_start_doc_date").val();
+	  daterangepicker_enabler();
 	  select_project(this.value);
+	});
+	
+	$('#total_test_case_assign').on('change', function() {
+	  var tc_assign = $("#total_test_case_assign").val();
+	  var tc_executed = $("#total_test_case_executed").val();
+	  var tc_outstanding = tc_assign - tc_executed;
+	  $("#total_test_case_outstanding").val(tc_outstanding);
+	});
+	$('#total_test_case_executed').on('change', function() {
+	  var tc_assign = $("#total_test_case_assign").val();
+	  var tc_executed = $("#total_test_case_executed").val();
+	  var tc_outstanding = tc_assign - tc_executed;
+	  $("#total_test_case_outstanding").val(tc_outstanding);
 	});
 
 });

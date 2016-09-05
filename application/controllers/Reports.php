@@ -2,18 +2,15 @@
     class Reports extends MY_Controller {
 		public function __construct(){
 			parent::__construct();	
+			$this->load->model('projects_model');	
+			$this->load->model('daily_reports_model');	
+			
+			//content used
 			$this->load->model('environment_model');
 			$this->load->model('teamleads_model');
 			$this->load->model('progres_model');
 			$this->load->model('phase_model');			
 			$this->load->model('tester_on_projects_model');	
-			$this->load->model('projects_model');	
-			
-			//content used
-			$this->load->model('application_model');
-			$this->load->model('users_model');
-			$this->load->model('typeofchange_model');
-			
 		}
 		
 		private function front_stuff(){
@@ -64,29 +61,109 @@
 		}
 		
         public function add() {
-			$this->front_stuff();
-            $this->contents = 'reports/addreport/index'; // its your view name, change for as per requirement.
-			
-			// get list project based on tester
-			$project_lists = array();
-			$tester_project_lists = $this->tester_on_projects_model->get_tester_on_projects(array('tester_on_projects.tester_id' => $this->session->userdata('logged_in_data')['id'],'tester_on_projects.status' => 'active')) ; 
-			foreach($tester_project_lists as $key => $value){
-				array_push($project_lists, $this->projects_model->get_manageprojects(array('projects.id' => $value['project_id'], 'projects.status' => 'active'))[0] );
+			$data_project = array();
+			if ($this->input->server('REQUEST_METHOD') != 'POST'){
+				$this->front_stuff();
+				$this->contents = 'reports/addreport/index'; // its your view name, change for as per requirement.
+				
+				// get list project based on tester
+				$project_lists = array();
+				$tester_project_lists = $this->tester_on_projects_model->get_tester_on_projects(array('tester_on_projects.tester_id' => $this->session->userdata('logged_in_data')['id'],'tester_on_projects.status' => 'active')) ; 
+				foreach($tester_project_lists as $key => $value){
+					array_push($project_lists, $this->projects_model->get_manageprojects(array('projects.id' => $value['project_id'], 'projects.status' => 'active'))[0] );
+				}
+				// Table Active
+				$this->data['contents'] = array(
+								'project_lists' => $project_lists,
+								'environment' => $this->environment_model->get_environment(array('status' => 'active')),
+								'team_leads' => $this->teamleads_model->get_teamleads(array('status' => 'active')),
+								'progress' => $this->progres_model->get_progres(array('status' => 'active')),
+								'phase' => $this->phase_model->get_phase(array('status' => 'active'))
+								);
+				// Table Incactive
+				
+				$this->layout();
+			}else{
+				
+				$this->form_validation->set_rules('project_id', 'Project', 'required');
+				$this->form_validation->set_rules('environment_id', 'Environment', 'required');
+				$this->form_validation->set_rules('team_lead_id', 'Team Leader', 'required');
+				$this->form_validation->set_rules('progress_id', 'Progress', 'required');
+				$this->form_validation->set_rules('phase_id', 'Phase', 'required');
+				$this->form_validation->set_rules('total_test_case', 'Total Tase case', 'required|min_length[0]');
+				$this->form_validation->set_rules('test_case_per_user', 'Total Tase case assign', 'required|min_length[0]');
+				$this->form_validation->set_rules('test_case_executed', 'Total Tase case executed', 'required|min_length[0]');
+				$this->form_validation->set_rules('downtimes_day', 'Day', 'required|min_length[0]');
+				$this->form_validation->set_rules('downtimes_hour', 'Hour', 'required|min_length[0]');
+				$this->form_validation->set_rules('downtimes_minute', 'Minute', 'required|min_length[0]');
+				$this->form_validation->set_rules('actual_end_date', 'Actual End Date', 'required');
+				$this->form_validation->set_rules('actual_end_doc_date', 'Actual Doc End Date', 'required');
+				
+				if($this->form_validation->run()){
+					
+					$data = $this->input->post();
+						if(!empty($data['actual_start_date'])){
+							$data_project['actual_start_date'] = date('Y-m-d',strtotime($data['actual_start_date']));						
+						}
+						if(!empty($data['actual_start_doc_date'])){
+							$data_project['actual_start_doc_date'] = date('Y-m-d',strtotime($data['actual_start_doc_date']));
+						}
+						if(!empty($data['actual_end_date'])){
+							$data_project['actual_end_date'] = date('Y-m-d');						
+						}
+						if(!empty($data['actual_end_doc_date'])){
+							$data_project['actual_end_doc_date'] = date('Y-m-d');
+						}
+					$data['downtimes'] = ($data['downtimes_day'] * 1440) + ($data['downtimes_hour'] * 60) + ($data['downtimes_minute'] * 1);
+					unset($data['actual_start_date']);
+					unset($data['actual_start_doc_date']);
+					unset($data['actual_end_date']);
+					unset($data['actual_end_doc_date']);
+					unset($data['downtimes_day']);
+					unset($data['downtimes_hour']);
+					unset($data['downtimes_minute']);
+					
+					$data['test_case_outstanding'] = $data['test_case_per_user'] - $data['test_case_executed'] ;
+					$data['user_id'] = $this->session->userdata('logged_in_data')['id'];
+					
+					if(!$this->daily_reports_model->add_reports($data)){
+						$this->session->set_flashdata('form_msg', 'Error insert Report');	
+					}else{
+						//check need to update project or not
+						$flag = 0;
+						if(isset($data_project['actual_start_date']) && count($this->projects_model->get_manageprojects(array('projects.id' => $data['project_id'], 'projects.status' => 'active', 'projects.actual_start_date' => null)))>0 ){
+							$flag = 1;
+						}
+						if(isset($data_project['actual_start_doc_date']) && $this->projects_model->get_manageprojects(array('projects.id' => $data['project_id'], 'projects.status' => 'active', 'projects.actual_start_doc_date' => null))){
+							$flag = 1;
+						}
+						if(isset($data_project['actual_end_date']) && $this->projects_model->get_manageprojects(array('projects.id' => $data['project_id'], 'projects.status' => 'active', 'projects.actual_end_date' => null))){
+							$flag = 1;				
+						}
+						if(isset($data_project['actual_end_doc_date']) && $this->projects_model->get_manageprojects(array('projects.id' => $data['project_id'], 'projects.status' => 'active', 'projects.actual_end_doc_date' => null))){
+							$flag = 1;
+						}
+						
+						if($flag){
+							// update project
+							$data_project['id'] = $data['project_id'];
+							$this->projects_model->update_manageprojects($data_project);
+						}
+						$this->session->set_flashdata('form_msg', 'Success');
+						redirect('/reports/add');
+					}
+										
+					
+				}else{
+					if(!$this->form_validation->run()){
+						$this->session->set_flashdata('form_msg', validation_errors());
+					}else{
+						$this->session->set_flashdata('form_msg', 'Please Contact Administrator');
+					}
+				}
+				
 			}
-			// Table Active
-			$this->data['contents'] = array(
-							'project_lists' => $project_lists,
-							'environment' => $this->environment_model->get_environment(array('status' => 'active')),
-							'team_leads' => $this->teamleads_model->get_teamleads(array('status' => 'active')),
-							'progress' => $this->progres_model->get_progres(array('status' => 'active')),
-							'phase' => $this->phase_model->get_phase(array('status' => 'active')),
-							'applications' => $this->application_model->get_application(array('status' => 'active')),
-							'tester' => $this->users_model->get_users(array('status' => 0)),
-							'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active'))
-							);
-			// Table Incactive
 			
-            $this->layout();
         }
 		
 		public function get_projects(){

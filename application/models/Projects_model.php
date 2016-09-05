@@ -59,12 +59,13 @@ class Projects_model extends CI_Model {
 	
 	public function update_manageprojects($data = array())
     {
-        $nempty = $this->get_manageprojects(array('id' => $data['id']));
+        $nempty = $this->get_manageprojects(array('projects.id' => $data['id']));
 		if(!empty($nempty)){
 			$id = $data['id'];
 			unset($data['id']);
 			$this->db->where('id', $id);
 			$this->db->update('projects', $data);
+			return $this->db->affected_rows();
         }else{
             return false;
         }
