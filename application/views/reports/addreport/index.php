@@ -54,35 +54,35 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Description Project  <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="project-desc" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['desc']; ?>' <?php endif; ?>  required="required" class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="project-desc" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['desc']; ?>' <?php endif; ?>  required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">TRF 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="TRF" <?php if(($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit') && !empty($contents['form']['TRF'])):?> value='<?php echo $contents['form']['TRF']; ?>' <?php else: ?> placeholder='UPCOMING TRF' <?php endif; ?> class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="TRF" <?php if(($this->uri->segment(2) == 'view' ) && !empty($contents['form']['TRF'])):?> value='<?php echo $contents['form']['TRF']; ?>' <?php else: ?> placeholder='UPCOMING TRF' <?php endif; ?> class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Summary TRF <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled  type="text" id="trf-sum" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['sum_TRF']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input disabled  type="text" id="trf-sum" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['sum_TRF']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Impact App <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled  type="text" id="impact-app" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['sum_TRF']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input disabled  type="text" id="impact-app" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['application_impacts']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Type of Change <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled  type="text" id="type_of_change" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['sum_TRF']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input disabled  type="text" id="type_of_change" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['type_of_change']; ?>' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div> 
 			  <div class="form-group">
@@ -93,7 +93,7 @@
 					<?php
 					foreach ($contents['environment'] as $env):
 					?>
-						<option value="<?php echo $env['id'];?>" <?php if( ($this->uri->segment(2) == 'view') && ($env['id'] == $contents['form']['type_of_change'])):?> selected <?php endif;?> ><?php echo $env['name'];?></option>
+						<option value="<?php echo $env['id'];?>" <?php if( ($this->uri->segment(2) == 'view') && ($env['id'] == $contents['form']['environment_id'])):?> selected <?php endif;?> ><?php echo $env['name'];?></option>
 					<?php
 					endforeach;
 					?>
@@ -108,7 +108,7 @@
 					<?php
 					foreach ($contents['team_leads'] as $team_lead):
 					?>
-						<option value="<?php echo $team_lead['id'];?>" <?php if(($this->uri->segment(2) == 'view') &&  $team_lead['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $team_lead['name'];?></option>
+						<option value="<?php echo $team_lead['id'];?>" <?php if(($this->uri->segment(2) == 'view') &&  $team_lead['id'] == $contents['form']['team_lead_id']):?> selected <?php endif;?> ><?php echo $team_lead['name'];?></option>
 					<?php
 					endforeach;
 					?>
@@ -123,7 +123,7 @@
 					<?php
 					foreach ($contents['progress'] as $progress):
 					?>
-						<option value="<?php echo $progress['id'];?>" <?php if( ($this->uri->segment(2) == 'view') &&  $progress['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $progress['name'];?></option>
+						<option value="<?php echo $progress['id'];?>" <?php if( ($this->uri->segment(2) == 'view') &&  $progress['id'] == $contents['form']['progress_id']):?> selected <?php endif;?> ><?php echo $progress['name'];?></option>
 					<?php
 					endforeach;
 					?>
@@ -138,7 +138,7 @@
 					<?php
 					foreach ($contents['phase'] as $phase):
 					?>
-						<option value="<?php echo $phase['id'];?>" <?php if(($this->uri->segment(2) == 'view') &&  $phase['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $phase['name'];?></option>
+						<option value="<?php echo $phase['id'];?>" <?php if(($this->uri->segment(2) == 'view') &&  $phase['id'] == $contents['form']['phase_id']):?> selected <?php endif;?> ><?php echo $phase['name'];?></option>
 					<?php
 					endforeach;
 					?>
@@ -148,90 +148,92 @@
 			  <div class="form-group">
 				  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Remark (255 max) :</label>
 				  <div class="col-md-6 col-sm-6 col-xs-12">
-						<textarea id="message" class="form-control" name="remarks" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-maxlength-message="Max 255 caracters long info description" data-parsley-validation-threshold="50"></textarea>	
+						<textarea id="message" class="form-control" name="remarks" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-maxlength-message="Max 255 caracters long info description" data-parsley-validation-threshold="50">
+						<?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['remarks']; ?>' disabled  <?php endif; ?> 
+						</textarea>	
 				   </div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Total Test case <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input name='total_test_case' min='1' value=0 type="number" id="total_test_case" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input name='total_test_case' min='1' value=0 type="number" id="total_test_case" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['total_test_case']; ?>' disabled  <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Total Test case Assign <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input name='test_case_per_user' min='1' value=0 type="number" id="total_test_case_assign" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input name='test_case_per_user' min='1' value=0 type="number" id="total_test_case_assign" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['total_test_case_assign']; ?>' disabled  <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Total Test case Executed <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input name='test_case_executed' min='1' value=0 type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input name='test_case_executed' min='1' value=0 type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['total_test_case_executed']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Total Test case Outstanding <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input readonly type="number" value=0 id="total_test_case_outstanding" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input readonly type="number" value=0 id="total_test_case_outstanding" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['total_test_case_outstanding']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Downtimes <span class="required">*</span>
 				</label>
 				<div class="col-md-2 col-sm-2 col-xs-2">
-				  <input placeholder='Day' name='downtimes_day' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
+				  <input placeholder='Day' name='downtimes_day' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value= '<?php echo $contents['form']['total_test_case_executed']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-2">
-				  <input placeholder='Hour' name='downtimes_hour' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
+				  <input placeholder='Hour' name='downtimes_hour' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['total_test_case_executed']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-2">
-				  <input placeholder='Minute' name='downtimes_minute' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='' <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
+				  <input placeholder='Minute' name='downtimes_minute' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['total_test_case_executed']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="plan_start_date">Plan Start Date 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="plan_start_date"  class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="plan_start_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_start_date'])); ?>' disabled <?php endif; ?>  class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="plan_end_date">Plan End Date 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="plan_end_date"  class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="plan_end_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_end_date'])); ?>' disabled <?php endif; ?>  class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="plan_start_doc_date">Plan Start Doc Date 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="plan_start_doc_date"  class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="plan_start_doc_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_start_doc_date'])); ?>' disabled <?php endif; ?>  class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="plan_end_doc_date">Plan End Doc Date 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="plan_end_doc_date"  class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="plan_end_doc_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_end_doc_date'])); ?>' disabled <?php endif; ?>  class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Actual Start Date 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="actual_start_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_start_date'])); ?>' <?php endif; ?> type="text" name='actual_start_date'>
+				  <input id="actual_start_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['actual_start_date'])); ?>'  disabled <?php endif; ?> type="text" name='actual_start_date'>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Actual Start Doc Date 
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input id="actual_start_doc_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['plan_start_date'])); ?>' <?php endif; ?> type="text" name='actual_start_doc_date'>
+				  <input id="actual_start_doc_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['actual_start_doc_date'])); ?>' disabled <?php endif; ?> type="text" name='actual_start_doc_date'>
 				</div>
 			  </div>
 			  <div class="form-group">
