@@ -52,7 +52,22 @@
 				$this->load->model('users_model');
 				$user_status = $this->users_model->get_users(array('id' => $user_id));				
 
-				if($user_status[0]['id'] == 1)
+				if($user_status[0]['type'] == 1)
+				{
+					return 1;
+				}else{
+					return 0;
+				}
+		}
+		
+		/* Check status tester*/
+		protected function is_tester($user_id){
+				//querry if user admin or not
+				//$user_status = ($user_id != 1 ? 'nonmin' : 'admin') ;
+				$this->load->model('users_model');
+				$user_status = $this->users_model->get_users(array('id' => $user_id));				
+
+				if($user_status[0]['type'] == 0)
 				{
 					return 1;
 				}else{
@@ -65,14 +80,24 @@
 			 $admin_list = array('home','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads','manageprojects');
 			 $tester_list = array('home','reports');
 			 $guess_list = array('home');
+			 $flag_admin = 0;
+			 $flag_tester = 0;
 
-			 if(($this->is_admin($this->usr_desc['user_id']) && in_array($this->uri->segment(1),$admin_list)) || in_array($this->uri->segment(1),$tester_list))
+			 if(($this->is_admin($this->usr_desc['user_id']) && in_array($this->uri->segment(1),$admin_list)) )
 			 {
+				 $flag_admin = 1;
+			 }
+			 
+			 if(($this->is_tester($this->usr_desc['user_id']) && in_array($this->uri->segment(1),$tester_list)) )
+			 {
+				 $flag_tester = 1;
+			 }
+			 
+			 if($flag_admin || $flag_tester){
 				 return 1;
 			 }else{
 				 return 0;
 			 }
-			 
 			 // write to log "USER <ID> <USER> NOT ALLOW TO ENTER PAGE <PAGE>"
 		}
 		

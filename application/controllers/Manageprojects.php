@@ -68,7 +68,7 @@
 							'table_drop' => $this->fetch_project('drop'),
 							'table_finish' => $this->fetch_project_done(),
 							'applications' => $this->application_model->get_application(array('status' => 'active')),
-							'tester' => $this->users_model->get_users(array('status' => 0)),
+							'tester' => $this->users_model->get_users(array('type' => 0,'status' => 'active')),
 							'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active'))
 							);
 			// Table Incactive
@@ -83,7 +83,7 @@
 			// Table Active
 			$this->data['contents'] = array(
 								'applications' => $this->application_model->get_application(array('status' => 'active')),
-								'tester' => $this->users_model->get_users(array('status' => 0)),
+								'tester' => $this->users_model->get_users(array('type' => 0,'status' => 'active')),
 								'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active')),
 								'form' => $this->projects_model->get_manageprojects(array('projects.id'=>$id))[0]
 							);
@@ -205,7 +205,7 @@
 					
 					$this->data['contents'] = array(
 										'applications' => $this->application_model->get_application(array('status' => 'active')),
-										'tester' => $this->users_model->get_users(array('status' => 0)),
+										'tester' => $this->users_model->get_users(array('type' => 0, 'status' => 'active')),
 										'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active')),
 										'form' => $this->projects_model->get_manageprojects(array('projects.id'=>$id))[0]
 									);

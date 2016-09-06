@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2016 at 11:18 AM
+-- Generation Time: Sep 06, 2016 at 11:16 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -65,6 +65,32 @@ CREATE TABLE IF NOT EXISTS `ci_sessions_data` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `daily_reports`
+--
+
+CREATE TABLE IF NOT EXISTS `daily_reports` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `project_id` bigint(20) NOT NULL,
+  `environment_id` int(11) NOT NULL,
+  `team_lead_id` int(11) NOT NULL,
+  `progress_id` int(11) NOT NULL,
+  `phase_id` int(11) NOT NULL,
+  `total_test_case` int(11) NOT NULL,
+  `test_case_per_user` int(11) NOT NULL,
+  `test_case_executed` int(11) NOT NULL,
+  `test_case_outstanding` int(11) NOT NULL,
+  `downtimes` int(11) NOT NULL,
+  `remarks` varchar(255) CHARACTER SET utf32 COLLATE utf32_unicode_ci DEFAULT NULL,
+  `user_c` bigint(20) NOT NULL,
+  `user_m` bigint(20) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `environment`
 --
 
@@ -114,6 +140,10 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `plan_end_date` datetime NOT NULL,
   `plan_start_doc_date` datetime DEFAULT NULL,
   `plan_end_doc_date` datetime DEFAULT NULL,
+  `actual_start_date` datetime DEFAULT NULL,
+  `actual_end_date` datetime DEFAULT NULL,
+  `actual_start_doc_date` datetime DEFAULT NULL,
+  `actual_end_doc_date` datetime DEFAULT NULL,
   `status` enum('active','inactive') COLLATE utf32_unicode_ci NOT NULL DEFAULT 'active',
   `user_c` int(11) NOT NULL,
   `user_m` int(11) DEFAULT NULL,
@@ -176,7 +206,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
   `emp_id` bigint(20) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
+  `type` int(11) NOT NULL DEFAULT '0',
+  `status` enum('active','inactive') COLLATE utf32_unicode_ci NOT NULL DEFAULT 'active',
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
@@ -202,6 +233,12 @@ ALTER TABLE `application_impact`
 --
 ALTER TABLE `ci_sessions_data`
   ADD PRIMARY KEY (`id`), ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `daily_reports`
+--
+ALTER TABLE `daily_reports`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `environment`
@@ -264,6 +301,11 @@ ALTER TABLE `application`
 -- AUTO_INCREMENT for table `application_impact`
 --
 ALTER TABLE `application_impact`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `daily_reports`
+--
+ALTER TABLE `daily_reports`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `environment`

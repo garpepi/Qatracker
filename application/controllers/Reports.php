@@ -56,15 +56,72 @@
 							'vendors/moment/moment.min.js',
 							'vendors/datepicker/daterangepicker.js',
 							'vendors/jquery/jquery.cookie.js',
-							'page/reports/addreport.js'
+							'page/reports/formreport.js'
 						);
+		}
+		
+		public function index(){
+			$this->page_js  = array(
+							'vendors/iCheck/icheck.min.js',
+							'vendors/datatables.net/js/jquery.dataTables.min.js',
+							'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js',
+							'vendors/datatables.net-buttons/js/dataTables.buttons.min.js',
+							'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js',
+							'vendors/datatables.net-buttons/js/buttons.flash.min.js',
+							'vendors/datatables.net-buttons/js/buttons.html5.min.js',
+							'vendors/datatables.net-buttons/js/buttons.print.min.js',
+							'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js',
+							'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js',
+							'vendors/datatables.net-responsive/js/dataTables.responsive.min.js',
+							'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js',
+							'vendors/datatables.net-scroller/js/datatables.scroller.min.js',
+							'vendors/jszip/dist/jszip.min.js',
+							'vendors/pdfmake/build/pdfmake.min.js',
+							'vendors/pdfmake/build/vfs_fonts.js',
+							'vendors/select2/dist/js/select2.full.min.js',
+							'vendors/moment/moment.min.js',
+							'vendors/datepicker/daterangepicker.js',
+							'vendors/jquery/jquery.cookie.js',
+							'page/reports/reportlists.js'
+						);
+			$this->front_stuff();
+			$this->contents = 'reports/list/index'; // its your view name, change for as per requirement.
+			
+			// Table
+			$this->data['contents'] = array(
+							'daily_reports' => $this->daily_reports_model->get_reports(array('daily_reports.user_id' => $this->session->userdata('logged_in_data')['id']))
+			);
+			//$this->fancy_print($this->data['contents']);
+			$this->layout();
+		}
+		
+		public function view($id=0){
+			if($id != 0){
+				$this->front_stuff();
+				$this->contents = 'reports/form/index'; // its your view name, change for as per requirement.
+				
+				// get list project based on tester
+				$project = $this->_get_projects($id);
+				//$this->fancy_print($project);
+				// Table Active
+				$this->data['contents'] = array(
+								'form' => $project,
+								'environment' => $this->environment_model->get_environment(array('status' => 'active')),
+								'team_leads' => $this->teamleads_model->get_teamleads(array('status' => 'active')),
+								'progress' => $this->progres_model->get_progres(array('status' => 'active')),
+								'phase' => $this->phase_model->get_phase(array('status' => 'active'))
+								);
+				// Table Incactive
+				
+				$this->layout();
+			}
 		}
 		
         public function add() {
 			$data_project = array();
 			if ($this->input->server('REQUEST_METHOD') != 'POST'){
 				$this->front_stuff();
-				$this->contents = 'reports/addreport/index'; // its your view name, change for as per requirement.
+				$this->contents = 'reports/form/index'; // its your view name, change for as per requirement.
 				
 				// get list project based on tester
 				$project_lists = array();
@@ -166,10 +223,8 @@
 			
         }
 		
-		public function get_projects(){
-			
-			if(is_ajax() && $this->input->post('id')){
-				$project_data = $this->projects_model->get_manageprojects(array('projects.id' => $this->input->post('id'), 'projects.status' => 'active'))[0];
+		private function _get_projects($id){
+			$project_data = $this->projects_model->get_manageprojects(array('projects.id' => $id, 'projects.status' => 'active'))[0];
 				$application_impacts = '';
 				foreach($project_data['application_impact'] as $application_name){
 					if(empty($application_impacts)){
@@ -179,6 +234,7 @@
 					}
 				}
 				$data = array(
+						'id' => $project_data['id'],
 						'project_desc' => $project_data['desc'],
 						'TRF' => $project_data['TRF'],
 						'sum_TRF' => $project_data['sum_TRF'],
@@ -190,7 +246,14 @@
 						'plan_end_doc_date' => site_show_date_format($project_data['plan_end_doc_date']),
 						'actual_start_date' => site_show_date_format($project_data['actual_start_date']),
 						'actual_start_doc_date' => site_show_date_format($project_data['actual_start_doc_date'])
-						);
+					);
+				return $data;
+		}
+		
+		public function get_projects(){			
+			if(is_ajax() && $this->input->post('id')){
+				$data = $this->_get_projects($this->input->post('id'));
+				unset($data['id']);
 				return_json($data);
 			}else{
 				redirect('/home');

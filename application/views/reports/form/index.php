@@ -36,25 +36,36 @@
 			   <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Project <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
+				<?php
+					if($this->uri->segment(2) != 'view' && isset($contents['project_lists'])):
+				?>
 				  <select class="select2_single_project form-control" id='project' required="required" name='project_id' required=required>
-					<option value=''>Choose option</option>
 					<?php
-					if($this->uri->segment(2) != 'view' && count($contents['project_lists']) > 0):
+					
+						?>
+						<option value=''>Choose option</option>
+						<?php
 						foreach($contents['project_lists'] as $key => $value){
 							?>
 								<option value="<?php echo $value['id'];?>"><?php echo $value['id'].'-'.((!empty($value['TRF']))? $value['TRF'] : 'UPCOMING TRF').'-'.$value['sum_TRF'];?></option>
 							<?php
 						}
-					endif;
 					?>
 				  </select>
+				<?php
+					else:
+				?>
+					<input type="text" required="required" class="form-control col-md-7 col-xs-12" value='<?php echo $contents['form']['id'].'-'.((!empty($contents['form']['TRF']))? $contents['form']['TRF'] : 'UPCOMING TRF').'-'.$contents['form']['sum_TRF'];?>' disabled>
+				<?php
+					endif;
+				?>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Description Project  <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input disabled type="text" id="project-desc" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['desc']; ?>' <?php endif; ?>  required="required" class="form-control col-md-7 col-xs-12">
+				  <input disabled type="text" id="project-desc" <?php if($this->uri->segment(2) == 'view' ): ?> value='<?php echo $contents['form']['project_desc']; ?>' <?php endif; ?>  required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
