@@ -48,7 +48,7 @@
 							'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js',
 							'vendors/datatables.net-responsive/js/dataTables.responsive.min.js',
 							'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js',
-							'vendors/datatables.net-scroller/js/datatables.scroller.min.js',
+							'vendors/datatables.net-scroller/js/dataTables.scroller.min.js',
 							'vendors/jszip/dist/jszip.min.js',
 							'vendors/pdfmake/build/pdfmake.min.js',
 							'vendors/pdfmake/build/vfs_fonts.js',
