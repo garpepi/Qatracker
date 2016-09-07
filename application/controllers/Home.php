@@ -9,13 +9,9 @@
 		
 		private function front_stuff(){
 			$this->data = array(
-							'title' => 'Manage Application',
-							'box_title_1' => 'Adding Application',
-							'sub_box_title_1' => 'List of Applications',
-							'box_title_2' => 'Applications List',
-							'sub_box_title_2' => 'List of Applications',
-							'box_title_3' => 'Inactive Applications List',
-							'sub_box_title_3' => 'List of Inactive Applications'
+							'title' => 'Home',
+							'box_title_1' => 'Home',
+							'sub_box_title_1' => 'Home'
 						);
 			$this->page_css  = array(
 							'vendors/iCheck/skins/flat/green.css',
@@ -48,7 +44,7 @@
 		}
         public function index() {
 			$this->front_stuff();
-            $this->contents = 'contents/manageapplication/index'; // its your view name, change for as per requirement.
+            $this->contents = 'home/index'; // its your view name, change for as per requirement.
 			
             $this->layout();
         }

@@ -102,10 +102,14 @@
 				
 				// get list project based on tester
 				$project = $this->_get_projects($id);
-				//$this->fancy_print($project);
+				$form_data = $this->daily_reports_model->get_reports(array('daily_reports.id' => $id))[0];
+				$form_data['downtimes_cut'] = $this->minuteToTime($form_data ['downtimes']);
+				//$this->fancy_print($this->daily_reports_model->get_reports(array('daily_reports.id' => $id))[0]);
+				//$this->fancy_print($form_data);
 				// Table Active
 				$this->data['contents'] = array(
-								'form' => $project,
+								'project' => $project,
+								'form' => $form_data,
 								'environment' => $this->environment_model->get_environment(array('status' => 'active')),
 								'team_leads' => $this->teamleads_model->get_teamleads(array('status' => 'active')),
 								'progress' => $this->progres_model->get_progres(array('status' => 'active')),
@@ -245,7 +249,9 @@
 						'plan_start_doc_date' => site_show_date_format($project_data['plan_start_doc_date']),
 						'plan_end_doc_date' => site_show_date_format($project_data['plan_end_doc_date']),
 						'actual_start_date' => site_show_date_format($project_data['actual_start_date']),
-						'actual_start_doc_date' => site_show_date_format($project_data['actual_start_doc_date'])
+						'actual_start_doc_date' => site_show_date_format($project_data['actual_start_doc_date']),
+						'actual_end_date' => site_show_date_format($project_data['actual_end_date']),
+						'actual_end_doc_date' => site_show_date_format($project_data['actual_end_doc_date'])
 					);
 				return $data;
 		}
@@ -268,4 +274,18 @@
 		private function fetch_project_done(){
 			return $this->projects_model->get_manageprojects();
 		}
+		
+		private function minuteToTime($minute) {
+			$seconds = $minute * 60;
+			$dtF = new \DateTime('@0');
+			$dtT = new \DateTime("@$seconds");
+			$array = array(
+					'day' => $dtF->diff($dtT)->format('%a'),
+					'hour' => $dtF->diff($dtT)->format('%h'),
+					'minute' => $dtF->diff($dtT)->format('%i')
+					);
+			//return $dtF->diff($dtT)->format('%a days, %h hours, %i minutes and %s seconds');
+			return $array;
+		}
+
     }

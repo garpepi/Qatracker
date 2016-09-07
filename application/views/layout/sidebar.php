@@ -26,6 +26,7 @@
 		<?php if(!empty($status)) :?>
 		<h3>Admin</h3>
 		<ul class="nav side-menu">
+  		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>adduser">Add User</a></li>
@@ -53,17 +54,18 @@
 		<?php else:?>
 		<h3>Tester</h3>
 		<ul class="nav side-menu">
-		  <li><a><i class="fa fa-dashboard"></i> Dashboards </a>
+		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
 		  </li>
 		  <li><a><i class="fa fa-file-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
+			  <li><a href="<?php echo base_url();?>/reports">Manage Reports</a></li>
 			  <li><a href="<?php echo base_url();?>reports/add">Add Report</a></li>
-			  <li><a href="#">Manage Reports</a></li>
 			</ul>
 		  </li>
 		</ul>
 		<?php endif;?>
 	  </div>
+	  <!--
 	  <div class="menu_section">
 		<h3> MY Management </h3>
 		<ul class="nav side-menu">
@@ -71,6 +73,7 @@
 		  <li><a><i class="fa fa-key"></i> Change Password </a>
 		</ul>
 	  </div>
+	  -->
 
 	</div>
 	<!-- /sidebar menu -->
