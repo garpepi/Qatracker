@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 06, 2016 at 11:16 AM
+-- Generation Time: Sep 07, 2016 at 01:32 PM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -162,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `team_leads` (
   `name` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf32_unicode_ci NOT NULL,
   `phone` varchar(20) COLLATE utf32_unicode_ci DEFAULT NULL,
+  `environment` varchar(255) COLLATE utf32_unicode_ci DEFAULT NULL,
   `status` enum('active','inactive') COLLATE utf32_unicode_ci NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
 

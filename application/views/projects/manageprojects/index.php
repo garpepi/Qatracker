@@ -26,44 +26,19 @@
 		//	print_r($contents['form']);
 		?>
 			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/manageprojects/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-			   <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
-				<div class="col-md-9 col-sm-9 col-xs-12">
-				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple" >
-					<option>Choose option</option>
-					<?php
-					if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):
-						foreach ($contents['applications'] as $application):
-							$flag = 0;
-							foreach ($contents['form']['application_impact'] as $key => $value):
-								if($application['id'] == $value['application_id']):
-									$flag = 1;
-								endif;
-						?>
-						<?php 
-							endforeach;
-								if($flag):
-									?>
-										<option value="<?php echo $application['id'];?>" selected><?php echo $application['name'];?></option>
-									<?php
-									else:
-									?>
-										<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
-									<?php
-								endif;
-						endforeach;
-					else:
-						// NON EDIT / VIEW
-						foreach ($contents['applications'] as $application): echo $this->uri->segment(2)
-						?>
-							<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
-						<?php
-						endforeach;
-					endif;
-					?>
-				  </select>
-				</div>
-			  </div>
+			  <?php
+				if($this->uri->segment(2)) :
+			  ?>
+				 <div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Project ID  <span class="required">*</span>
+					</label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+					  <input type="text" value='<?php echo $contents['form']['id']; ?>' required="required" disabled class="form-control col-md-7 col-xs-12">
+					</div>
+				  </div>
+			  <?php
+				endif;
+			  ?>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Description Project  <span class="required">*</span>
 				</label>
@@ -135,6 +110,44 @@
 						<option value="<?php echo $toc['id'];?>" <?php if(!empty($this->uri->segment(2)) && $toc['id'] == $contents['form']['type_of_change']):?> selected <?php endif;?> ><?php echo $toc['name'];?></option>
 					<?php
 					endforeach;
+					?>
+				  </select>
+				</div>
+			  </div>
+			  <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
+				<div class="col-md-9 col-sm-9 col-xs-12">
+				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple" >
+					<option>Choose option</option>
+					<?php
+					if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):
+						foreach ($contents['applications'] as $application):
+							$flag = 0;
+							foreach ($contents['form']['application_impact'] as $key => $value):
+								if($application['id'] == $value['application_id']):
+									$flag = 1;
+								endif;
+						?>
+						<?php 
+							endforeach;
+								if($flag):
+									?>
+										<option value="<?php echo $application['id'];?>" selected><?php echo $application['name'];?></option>
+									<?php
+									else:
+									?>
+										<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
+									<?php
+								endif;
+						endforeach;
+					else:
+						// NON EDIT / VIEW
+						foreach ($contents['applications'] as $application): echo $this->uri->segment(2)
+						?>
+							<option value="<?php echo $application['id'];?>"><?php echo $application['name'];?></option>
+						<?php
+						endforeach;
+					endif;
 					?>
 				  </select>
 				</div>

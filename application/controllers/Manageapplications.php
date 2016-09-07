@@ -81,7 +81,7 @@
 			redirect('/manageapplications');
 		}
 		
-		public function edit ($id = 0){			
+		private function edit ($id = 0){			
 			if($id == 0 && $this->input->server('REQUEST_METHOD') != 'POST')
 			{
 				redirect('/manageapplications');

@@ -25,7 +25,7 @@
 		  <?php 
 			echo $this->session->flashdata('form_msg'); 
 		  ?>
-			<form action='/manageapplications/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			<form action='/manageapplications/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="form1" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Application Name <span class="required">*</span>
 				</label>
@@ -50,7 +50,7 @@
 			  <div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 				  <button type="reset" class="btn btn-primary">Cancel</button>
-				  <input type="submit" class="btn btn-success"></button>
+				  <button type="button" class="btn btn-success" onclick="submited();">Submit</button>
 				</div>
 			  </div>
 
@@ -88,7 +88,7 @@
 					  <td><?php echo $active_record['name'] ; ?> </td>
 					  <td>
 							<!--<a href="/manageapplications/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
-							<a href="/manageapplications/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
+							<!--<a href="/manageapplications/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  -->
 							<a href="/manageapplications/revoke/<?php echo $active_record['id'] ; ?>" class='confirmation'>Disable</a>
 					  </td>
 					</tr>

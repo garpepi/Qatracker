@@ -45,3 +45,12 @@ TableManageButtons.init();
 $('.confirmation').on('click', function () {
 	return confirm('Are you sure?');
 });
+
+function submited() {
+   if (confirm('Warning: Application name cannot be changed after submit! Do you want to submit?')) {
+	  $('#form1').submit();
+   } else {
+	   return false;
+   }
+}
+	

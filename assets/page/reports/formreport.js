@@ -206,12 +206,23 @@ $(document).ready(function() {
 	  select_project(this.value);
 	});
 	
+	
+	$('#total_test_case').on('change', function() {
+	  $("#total_test_case_assign").attr("max", $('#total_test_case').val());
+	});
+	
+	$('#total_test_case_assign').on('change', function() {
+	  $("#total_test_case_executed").attr("max", $('#total_test_case_assign').val());
+	});
+	
+	
 	$('#total_test_case_assign').on('change', function() {
 	  var tc_assign = $("#total_test_case_assign").val();
 	  var tc_executed = $("#total_test_case_executed").val();
 	  var tc_outstanding = tc_assign - tc_executed;
 	  $("#total_test_case_outstanding").val(tc_outstanding);
 	});
+	
 	$('#total_test_case_executed').on('change', function() {
 	  var tc_assign = $("#total_test_case_assign").val();
 	  var tc_executed = $("#total_test_case_executed").val();

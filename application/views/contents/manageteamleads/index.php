@@ -48,6 +48,13 @@
 				</div>
 			  </div>
 			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Environment
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text" id="team-leader-environment" name='environment' class="form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'edit') :?> value='<?php echo $contents['form']['environment'];?>'  <?php endif;?> >				  
+				</div>
+			  </div>
+			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Status <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
@@ -93,6 +100,7 @@
 				  <th><?php echo $title;?> Name </th>
 				  <th>Email </th>
 				  <th>Phone </th>
+				  <th>Environment </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -104,6 +112,7 @@
 					  <td><?php echo $active_record['name'] ; ?> </td>
 					  <td><?php echo $active_record['email'] ; ?> </td>
 					  <td><?php echo $active_record['phone'] ; ?> </td>
+					  <td><?php echo $active_record['environment'] ; ?> </td>
 					  <td>
 							<!--<a href="/manageteamleads/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
 							<a href="/manageteamleads/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
@@ -139,6 +148,7 @@
 				  <th><?php echo $title;?> Name </th>
 				  <th>Email </th>
 				  <th>Phone </th>
+				  <th>Environment </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -150,6 +160,7 @@
 					  <td><?php echo $incactive_record['name'] ; ?> </td>
 					  <td><?php echo $incactive_record['email'] ; ?> </td>
 					  <td><?php echo $incactive_record['phone'] ; ?> </td>
+					  <td><?php echo $incactive_record['environment'] ; ?> </td>
 					  <td>
 						<a href="/manageteamleads/reactivate/<?php echo $incactive_record['id'] ; ?>" class='confirmation'>Reactivate</a>
 					  </td>
