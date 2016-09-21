@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `projects` (
   `actual_end_date` datetime DEFAULT NULL,
   `actual_start_doc_date` datetime DEFAULT NULL,
   `actual_end_doc_date` datetime DEFAULT NULL,
-  `status` enum('active','inactive') COLLATE utf32_unicode_ci NOT NULL DEFAULT 'active',
+  `status` enum('active','drop','finish') COLLATE utf32_unicode_ci NOT NULL DEFAULT 'active',
   `user_c` int(11) NOT NULL,
   `user_m` int(11) DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

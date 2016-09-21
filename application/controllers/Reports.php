@@ -131,7 +131,10 @@
 				$project_lists = array();
 				$tester_project_lists = $this->tester_on_projects_model->get_tester_on_projects(array('tester_on_projects.tester_id' => $this->session->userdata('logged_in_data')['id'],'tester_on_projects.status' => 'active')) ; 
 				foreach($tester_project_lists as $key => $value){
-					array_push($project_lists, $this->projects_model->get_manageprojects(array('projects.id' => $value['project_id'], 'projects.status' => 'active'))[0] );
+					$_get_manageprojects = $this->projects_model->get_manageprojects(array('projects.id' => $value['project_id'], 'projects.status' => 'active'));
+					if(!empty($_get_manageprojects)){
+						array_push($project_lists, $_get_manageprojects[0]);						
+					}
 				}
 				// Table Active
 				$this->data['contents'] = array(
