@@ -64,7 +64,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tester Name <span class="required">*</span></label> 
 				<div class="col-md-9 col-sm-9 col-xs-12">
 				  <select class="select2_multiple form-control" required="required"  name='testers[]' multiple="multiple">
-					<option>Choose option</option>
+					
 					<?php
 					if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):
 						foreach ($contents['tester'] as $tester):
@@ -103,7 +103,7 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Type of Change <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
 				  <select class="form-control" name='type_of_change'>
-					<option>Choose option</option>
+					
 					<?php
 					foreach ($contents['type_of_changes'] as $toc):
 					?>
@@ -118,7 +118,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Application <span class="required">*</span></label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
 				  <select class="select2_multiple form-control" required="required" name='applications[]' multiple="multiple" >
-					<option>Choose option</option>
+					
 					<?php
 					if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):
 						foreach ($contents['applications'] as $application):
@@ -185,10 +185,10 @@
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
 					<label>
-					  <input type="radio" class="flat" name="status" checked value='Active'> Active
+					  <input type="radio" class="flat" name="status" checked value='active'> Active
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="status" value='Drop'> Drop
+					  <input type="radio" class="flat" name="status" value='drop'> Drop
 					</label>
 				  </div>
 				</div>

@@ -40,21 +40,27 @@ class Application_impact_model extends CI_Model {
 		return false;
     }
 	
-	public function edit_application_impact($project_id , $data)
+	public function edit_application_impact($project_id , $data, $status)
     {
-		$now_data = array();
-		$fetch_now_data = $this->get_application_impact(array('project_id' => $project_id,'application_impact.status' => 'active'));
-		
-		foreach($fetch_now_data as $tmp_now_data){
-			array_push($now_data, $tmp_now_data['application_id']);
+		if($status != 'active'){
+			$this->db->where('application_impact.project_id', $project_id);
+			$this->db->where('application_impact.status', 'active');
+			return $this->db->update('application_impact', array('status' => $status));
+		}else{
+			$now_data = array();
+			$fetch_now_data = $this->get_application_impact(array('project_id' => $project_id,'application_impact.status' => 'active'));
+			
+			foreach($fetch_now_data as $tmp_now_data){
+				array_push($now_data, $tmp_now_data['application_id']);
+			}
+			
+			if(($now_data != $data) && !empty($data)){
+				$this->update_application_impact($project_id);
+				$this->add_application_impact($project_id, $data);				
+				return true;
+			}
 		}
-		
-		if(($now_data != $data) && !empty($data)){
-			$this->update_application_impact($project_id);
-			$this->add_application_impact($project_id, $data);
-			return true;
-		}
-		return false;
+		return false;			
     }
 	
 	public function update_application_impact($project_id)
@@ -62,7 +68,7 @@ class Application_impact_model extends CI_Model {
         $nempty = $this->get_application_impact(array('project_id' => $project_id,'application_impact.status' => 'active'));
 		if(!empty($nempty)){
 			$data = array(
-				'status' => 'inactive',
+				'status' => 'changed',
 				'user_m' => $this->session->userdata('logged_in_data')['id']
 				);
 			$this->db->where('application_impact.project_id', $project_id);

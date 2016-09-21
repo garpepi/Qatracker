@@ -171,22 +171,51 @@
 					$this->form_validation->set_rules('status', 'Status', 'required');
 					
 					$projects_data = array(
-						'id' => $id,
-						'desc' => $data['desc'],
-						'TRF' => $data['TRF'],
-						'sum_TRF' => $data['sum_TRF'],
-						'type_of_change' => $data['type_of_change'],
-						'plan_start_date' => $data['plan_start_date'],
-						'plan_end_date' => $data['plan_end_date'],
-						'plan_start_doc_date' => $data['plan_start_doc_date'],
-						'plan_end_doc_date' => $data['plan_end_doc_date'],
-						'status' => $data['status']
+							'id' => $id,
+							'desc' => $data['desc'],
+							'TRF' => $data['TRF'],
+							'sum_TRF' => $data['sum_TRF'],
+							'type_of_change' => $data['type_of_change'],
+							'plan_start_date' => $data['plan_start_date'],
+							'plan_end_date' => $data['plan_end_date'],
+							'plan_start_doc_date' => $data['plan_start_doc_date'],
+							'plan_end_doc_date' => $data['plan_end_doc_date'],
+							'status' => $data['status']
 						);
 
 					if($this->form_validation->run()){
-						$this->projects_model->edit_manageprojects($projects_data);
-						$this->application_impact_model->edit_application_impact($id,$data['applications']);
-						$this->tester_on_projects_model->edit_tester_on_projects($id,$data['testers']);
+						try { 
+							  if(!$this->projects_model->edit_manageprojects($projects_data)) {
+								throw new Exception('Error on Save Edit Project');
+							  }
+						} catch (Exception $e) {
+							print_r($projects_data);
+						  var_dump($e->getMessage());
+						  $this->db->last_query();
+						  exit();
+						}
+						
+						try { 
+							$_editapp = $this->application_impact_model->edit_application_impact($id,$data['applications'],$data['status']);
+							print_r($_editapp);
+							  if(!$_editapp) {
+								throw new Exception('Error on Save Edit APP');
+							  }
+						} catch (Exception $e) {
+						  var_dump($e->getMessage());exit();
+						}
+						try { 
+							$_testerproj = $this->tester_on_projects_model->edit_tester_on_projects($id,$data['testers'],$data['status']);
+							print_r($_testerproj);
+							 if(!$_testerproj) {
+								throw new Exception('Error on Save Edit Tester on Project');
+							  }
+						} catch (Exception $e) {
+						  var_dump($e->getMessage());exit();
+						}
+						//$this->projects_model->edit_manageprojects($projects_data);
+						//$this->application_impact_model->edit_application_impact($id,$data['applications'],$data['status']);
+						//$this->tester_on_projects_model->edit_tester_on_projects($id,$data['testers'],$data['status']);
 						
 						$this->session->set_flashdata('form_msg', 'Success Change Application Data');
 						redirect('/manageprojects');
