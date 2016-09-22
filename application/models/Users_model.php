@@ -34,5 +34,14 @@ class Users_model extends CI_Model {
         return $query->result_array();
     }
 
-   
+	public function change_password($id, $password){
+		if($id == $this->session->userdata('logged_in_data')['id'] && !empty($password) && strlen($password) > 7 ){
+			$data['password'] = hash("sha256", $password.$this->config->item('mysalt_psw'));
+			$this->db->where('id',$id);
+			return $this->db->update('users',$data);
+			print_r( $this->db->last_query() );exit();
+		}else{
+			return false;
+		}
+	}
 }

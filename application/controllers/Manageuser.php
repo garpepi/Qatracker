@@ -1,10 +1,16 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     class ManageUser extends MY_Controller {
-        public function index() {
+		public function __construct(){
+			parent::__construct();
+			$this->load->model('users_model');
+			
+		}
+		
+		private function front_stuff(){
 			$this->data = array(
-							'title' => 'Manage Users',
-							'box_title_1' => 'Users List',
-							'sub_box_title_1' => 'List of users',
+							'title' => 'Manage User',
+							'box_title_1' => 'User Profiles',
+							'sub_box_title_1' => 'User Profiles',
 							'box_title_2' => 'Disabled Users List',
 							'sub_box_title_2' => 'List of Disabled users'
 						);
@@ -34,9 +40,50 @@
 							'vendors/jszip/dist/jszip.min.js',
 							'vendors/pdfmake/build/pdfmake.min.js',
 							'vendors/pdfmake/build/vfs_fonts.js',
-							'page/user/manageuser.js'
+							'page/user/info.js'
 						);
-            $this->contents = 'user/manage'; // its your view name, change for as per requirement.
+		}
+		
+        public function index() {
+			$this->front_stuff();
+            $this->contents = 'user/info'; // its your view name, change for as per requirement.
+			
+			
+			// Form Data
+			$this->data['contents'] = array(
+							'users' => $this->users_model->get_users(array('id' => $this->usr_desc['user_id']))
+							);
+			
             $this->layout();
         }
+		public function changepas(){
+			if ($this->input->server('REQUEST_METHOD') != 'POST'){
+				redirect('/login');
+				exit();
+			}
+			
+			$this->form_validation->set_rules('password', 'Password', 'required',
+                        array('required' => 'You must provide a %s.')
+                );
+			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');			
+			if ($this->form_validation->run() == FALSE)
+			{
+					$this->session->set_flashdata('form_msg', validation_errors());
+			}
+			else
+			{
+				try { 
+					  if(!$this->users_model->change_password($this->session->userdata('logged_in_data')['id'],  $this->input->post('password'))) {
+						throw new Exception('Error on change password');
+					  }
+				} catch (Exception $e) {
+				  //alert the user.
+				  var_dump($e->getMessage());exit();
+				}
+				$this->session->set_flashdata('form_msg', 'Success Change Password!');
+			}
+			redirect('/manageuser');
+			
+		}
+		
     }
