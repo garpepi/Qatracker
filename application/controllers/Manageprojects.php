@@ -66,7 +66,7 @@
 			$this->data['contents'] = array(
 							'table_active' => $this->fetch_project('active'),
 							'table_drop' => $this->fetch_project('drop'),
-							'table_finish' => $this->fetch_project_done(),
+							'table_finish' => $this->fetch_project('finish'),
 							'applications' => $this->application_model->get_application(array('status' => 'active')),
 							'tester' => $this->users_model->get_users(array('type' => 0,'status' => 'active')),
 							'type_of_changes' => $this->typeofchange_model->get_typeofchange(array('status' => 'active'))
@@ -251,18 +251,10 @@
 			return $this->projects_model->get_manageprojects();
 		}
 		
-		public function reactivate($id = 0){
+		public function drop($id = 0){
 			if($id != 0){
-				$data = array('id' => $id, 'status' => 'active');
-				$this->typeofchange_model->update_typeofchange($data);				
-			}
-			redirect('/manageprojects');
-		}
-		
-		public function revoke($id = 0){
-			if($id != 0){
-				$data = array('id' => $id, 'status' => 'inactive');
-				$this->typeofchange_model->update_typeofchange($data);				
+				$data = array('id' => $id, 'status' => 'drop');
+				$this->projects_model->update_manageprojects($data);				
 			}
 			redirect('/manageprojects');
 		}

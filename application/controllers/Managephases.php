@@ -10,8 +10,8 @@
 		private function front_stuff(){
 			$this->data = array(
 							'title' => 'Phase',
-							'box_title_1' => 'Adding Type Of Change',
-							'sub_box_title_1' => 'List Type Of Change',
+							'box_title_1' => 'Adding Phase',
+							'sub_box_title_1' => 'List Phase',
 							'box_title_2' => 'Phase List',
 							'sub_box_title_2' => 'List of Phase',
 							'box_title_3' => 'Inactive Phase List',

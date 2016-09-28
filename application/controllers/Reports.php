@@ -101,8 +101,8 @@
 				$this->contents = 'reports/form/index'; // its your view name, change for as per requirement.
 				
 				// get list project based on tester
-				$project = $this->_get_projects($id);
 				$form_data = $this->daily_reports_model->get_reports(array('daily_reports.id' => $id))[0];
+				$project = $this->_get_projects($form_data['project_id']);
 				$form_data['downtimes_cut'] = $this->minuteToTime($form_data ['downtimes']);
 				//$this->fancy_print($this->daily_reports_model->get_reports(array('daily_reports.id' => $id))[0]);
 				//$this->fancy_print($form_data);
@@ -116,7 +116,7 @@
 								'phase' => $this->phase_model->get_phase(array('status' => 'active'))
 								);
 				// Table Incactive
-				
+				//$this->fancy_print($this->data['contents']);
 				$this->layout();
 			}
 		}
@@ -231,7 +231,7 @@
         }
 		
 		private function _get_projects($id){
-			$project_data = $this->projects_model->get_manageprojects(array('projects.id' => $id, 'projects.status' => 'active'))[0];
+			$project_data = $this->projects_model->get_manageprojects(array('projects.id' => $id))[0];
 				$application_impacts = '';
 				foreach($project_data['application_impact'] as $application_name){
 					if(empty($application_impacts)){

@@ -44,7 +44,7 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="team-leader-name">Phone
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input type="number" id="team-leader-phone" name='phone' class="form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'edit') :?> value='<?php echo $contents['form']['phone'];?>'  <?php endif;?> >				  
+				  <input onkeypress="return isNumberKey(event)" type="text" id="team-leader-phone" name='phone' class="form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'edit') :?> value='<?php echo $contents['form']['phone'];?>'  <?php endif;?> >				  
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -116,7 +116,7 @@
 					  <td>
 							<!--<a href="/manageteamleads/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
 							<a href="/manageteamleads/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
-							<a href="/manageteamleads/revoke/<?php echo $active_record['id'] ; ?>" class='confirmation'>Disable</a>
+							<a href="/manageteamleads/revoke/<?php echo $active_record['id'] ; ?>" onclick="return confirm('are you sure?')">Disable</a>
 					  </td>
 					</tr>
 					<?php
@@ -128,7 +128,6 @@
 		  </div>
 		</div>
 	  </div>
-	  
 	  <div class="col-md-6 col-sm-6 col-xs-12">
 		<div class="x_panel">
 		  <div class="x_title">
@@ -162,7 +161,7 @@
 					  <td><?php echo $incactive_record['phone'] ; ?> </td>
 					  <td><?php echo $incactive_record['environment'] ; ?> </td>
 					  <td>
-						<a href="/manageteamleads/reactivate/<?php echo $incactive_record['id'] ; ?>" class='confirmation'>Reactivate</a>
+						<a href="/manageteamleads/reactivate/<?php echo $incactive_record['id'] ; ?>" onclick="return confirm('are you sure?')">Reactivate</a>
 					  </td>
 					</tr>
 					<?php

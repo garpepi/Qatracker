@@ -89,7 +89,7 @@
 					  <td>
 							<!--<a href="/manageprogres/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
 							<a href="/manageprogres/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
-							<a href="/manageprogres/revoke/<?php echo $active_record['id'] ; ?>" class='confirmation'>Disable</a>
+							<a href="/manageprogres/revoke/<?php echo $active_record['id'] ; ?>" onclick="return confirm('are you sure?')">Disable</a>
 					  </td>
 					</tr>
 					<?php
@@ -129,7 +129,7 @@
 					<tr>
 					  <td><?php echo $incactive_record['name'] ; ?> </td>
 					  <td>
-						<a href="/manageprogres/reactivate/<?php echo $incactive_record['id'] ; ?>" class='confirmation'>Reactivate</a>
+						<a href="/manageprogres/reactivate/<?php echo $incactive_record['id'] ; ?>" onclick="return confirm('are you sure?')">Reactivate</a>
 					  </td>
 					</tr>
 					<?php

@@ -188,7 +188,7 @@
 					  <input type="radio" class="flat" name="status" checked value='active'> Active
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="status" value='drop'> Drop
+					  <input type="radio" class="flat" name="status" value='drop' onclick="return confirm('are you sure?')"> Drop
 					</label>
 				  </div>
 				</div>
@@ -245,7 +245,7 @@
 						  <td>
 								<a href="/manageprojects/view/<?php echo $active_data['id'] ; ?>" target='_blank'>View</a>
 								<a href="/manageprojects/edit/<?php echo $active_data['id'] ; ?>">Edit</a>  
-								<a href="/manageprojects/drop/<?php echo $active_data['id'] ; ?>" class='confirmation'> Drop</a>
+								<a href="/manageprojects/drop/<?php echo $active_data['id'] ; ?>" onclick="return confirm('are you sure?')"> Drop</a>
 						  </td>
 						</tr>
 					<?php

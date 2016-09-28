@@ -159,9 +159,7 @@
 			  <div class="form-group">
 				  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Remark (255 max) :</label>
 				  <div class="col-md-6 col-sm-6 col-xs-12">
-						<textarea <?php echo ($this->uri->segment(2) == 'view') ? 'disabled' : '' ; ?>  id="message" class="form-control" name="remarks" data-parsley-trigger="keyup" data-parsley-maxlength="255" data-parsley-maxlength-message="Max 255 caracters long info description" data-parsley-validation-threshold="50">
-						<?php if($this->uri->segment(2) == 'view' ):	?> <?php echo $contents['form']['remarks']; ?>  <?php endif; ?> 
-						</textarea>
+						<textarea <?php echo ($this->uri->segment(2) == 'view') ? 'disabled' : '' ; ?>  id="message" class="form-control" name="remarks"  data-parsley-maxlength="255" data-parsley-maxlength-message="Max 255 caracters long info description" data-parsley-validation-threshold="50" <?php if($this->uri->segment(2) == 'view' ):?> <?php echo $contents['form']['remarks']; ?>  <?php endif; ?> ></textarea>
 				   </div>
 			  </div>
 			  <div class="form-group">
@@ -182,7 +180,7 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Total Test case Executed <span class="required">*</span>
 				</label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <input name='test_case_executed' min='1' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['test_case_executed']; ?>' disabled <?php else: echo 'value=0 '; endif; ?> required="required" class="form-control col-md-7 col-xs-12">
+				  <input name='test_case_executed' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['test_case_executed']; ?>' disabled <?php else: echo 'value=0 '; endif; ?> required="required" class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="form-group">
@@ -196,15 +194,15 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Downtimes <span class="required">*</span>
 				</label>
 				<div class="col-md-1 col-sm-1 col-xs-1">
-				Days  <input placeholder='Day' name='downtimes_day' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value= '<?php echo $contents['form']['downtimes_cut']['day']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
+				Days  <input placeholder='Day' name='downtimes_day' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value= '<?php echo $contents['form']['downtimes_cut']['day']; ?>' disabled <?php else :?> value=0<?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-2">
 				Hour
-				 <input placeholder='Hour' name='downtimes_hour' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['downtimes_cut']['hour']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
+				 <input placeholder='Hour' name='downtimes_hour' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['downtimes_cut']['hour']; ?>' disabled <?php else :?> value=0<?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
 				<div class="col-md-2 col-sm-2 col-xs-2">
 				Minute
-				 <input placeholder='Minute' name='downtimes_minute' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['downtimes_cut']['minute']; ?>' disabled <?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
+				 <input placeholder='Minute' name='downtimes_minute' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['downtimes_cut']['minute']; ?>' disabled <?php else :?> value=0<?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
 			  </div>
 			  <div class="form-group">

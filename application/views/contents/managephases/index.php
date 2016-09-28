@@ -89,7 +89,7 @@
 					  <td>
 							<!--<a href="/managephases/view?id=<?php echo $incactive_record['id'] ; ?>" target='_blank'>View</a>  -->
 							<a href="/managephases/edit/<?php echo $active_record['id'] ; ?>">Edit</a>  
-							<a href="/managephases/revoke/<?php echo $active_record['id'] ; ?>" class='confirmation'>Disable</a>
+							<a href="/managephases/revoke/<?php echo $active_record['id'] ; ?>" onclick="return confirm('are you sure?')">Disable</a>
 					  </td>
 					</tr>
 					<?php
@@ -129,7 +129,7 @@
 					<tr>
 					  <td><?php echo $incactive_record['name'] ; ?> </td>
 					  <td>
-						<a href="/managephases/reactivate/<?php echo $incactive_record['id'] ; ?>" class='confirmation'>Reactivate</a>
+						<a href="/managephases/reactivate/<?php echo $incactive_record['id'] ; ?>" onclick="return confirm('are you sure?')">Reactivate</a>
 					  </td>
 					</tr>
 					<?php
