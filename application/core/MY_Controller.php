@@ -78,7 +78,7 @@
 		/* Page management*/
 		private function page_access(){
 			 $admin_list = array('home','manageuser','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads','manageprojects');
-			 $tester_list = array('home','manageuser','reports');
+			 $tester_list = array('home','manageuser','dailyreports');
 			 $guess_list = array('home','manageuser');
 			 $flag_admin = 0;
 			 $flag_tester = 0;

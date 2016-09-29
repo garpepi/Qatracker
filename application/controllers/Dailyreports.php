@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-    class Reports extends MY_Controller {
+    class Dailyreports extends MY_Controller {
 		public function __construct(){
 			parent::__construct();	
 			$this->load->model('projects_model');	
@@ -15,8 +15,8 @@
 		
 		private function front_stuff(){
 			$this->data = array(
-							'title' => 'Reports',
-							'box_title_1' => 'Add Report',
+							'title' => 'Daily Reports',
+							'box_title_1' => 'Add Daily Report',
 							'sub_box_title_1' => 'Adding new report',
 							'box_title_2' => 'Projects List',
 							'sub_box_title_2' => 'List of projects',
@@ -56,7 +56,7 @@
 							'vendors/moment/moment.min.js',
 							'vendors/datepicker/daterangepicker.js',
 							'vendors/jquery/jquery.cookie.js',
-							'page/reports/formreport.js'
+							'page/dailyreports/formreport.js'
 						);
 		}
 		
@@ -82,10 +82,10 @@
 							'vendors/moment/moment.min.js',
 							'vendors/datepicker/daterangepicker.js',
 							'vendors/jquery/jquery.cookie.js',
-							'page/reports/reportlists.js'
+							'page/dailyreports/reportlists.js'
 						);
 			$this->front_stuff();
-			$this->contents = 'reports/list/index'; // its your view name, change for as per requirement.
+			$this->contents = 'dailyreports/list/index'; // its your view name, change for as per requirement.
 			
 			// Table
 			$this->data['contents'] = array(
@@ -98,7 +98,7 @@
 		public function view($id=0){
 			if($id != 0){
 				$this->front_stuff();
-				$this->contents = 'reports/form/index'; // its your view name, change for as per requirement.
+				$this->contents = 'dailyreports/form/index'; // its your view name, change for as per requirement.
 				
 				// get list project based on tester
 				$form_data = $this->daily_reports_model->get_reports(array('daily_reports.id' => $id))[0];
@@ -125,7 +125,7 @@
 			$data_project = array();
 			if ($this->input->server('REQUEST_METHOD') != 'POST'){
 				$this->front_stuff();
-				$this->contents = 'reports/form/index'; // its your view name, change for as per requirement.
+				$this->contents = 'dailyreports/form/index'; // its your view name, change for as per requirement.
 				
 				// get list project based on tester
 				$project_lists = array();
@@ -214,7 +214,7 @@
 							$this->projects_model->update_manageprojects($data_project);
 						}
 						$this->session->set_flashdata('form_msg', 'Success');
-						redirect('/reports/add');
+						redirect('/dailyreports/add');
 					}
 										
 					

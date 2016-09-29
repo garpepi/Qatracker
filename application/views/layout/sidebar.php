@@ -55,10 +55,10 @@
 		<ul class="nav side-menu">
 		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
 		  </li>
-		  <li><a><i class="fa fa-file-o"></i> Reports <span class="fa fa-chevron-down"></span></a>
+		  <li><a><i class="fa fa-file-o"></i> Daily Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>/reports">Manage Reports</a></li>
-			  <li><a href="<?php echo base_url();?>reports/add">Add Report</a></li>
+			  <li><a href="<?php echo base_url();?>dailyreports">List Daily Reports</a></li>
+			  <li><a href="<?php echo base_url();?>dailyreports/add">Add Daily Report</a></li>
 			</ul>
 		  </li>
 		</ul>
