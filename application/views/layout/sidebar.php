@@ -29,7 +29,7 @@
   		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>manageuser">Manage User</a></li>
+			  <li><a href="<?php echo base_url();?>manageuser/userlist">Manage User</a></li>
 			</ul>
 		  </li>
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>

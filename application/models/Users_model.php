@@ -39,9 +39,30 @@ class Users_model extends CI_Model {
 			$data['password'] = hash("sha256", $password.$this->config->item('mysalt_psw'));
 			$this->db->where('id',$id);
 			return $this->db->update('users',$data);
-			print_r( $this->db->last_query() );exit();
 		}else{
 			return false;
 		}
 	}
+	public function reset_password($id, $password){
+		if($this->session->userdata('logged_in_data')['id'] && $this->get_users(array('id' => $this->session->userdata('logged_in_data')['id'] ))[0]['type'] == 1 && !empty($password) && strlen($password) > 7 ){
+			$data['password'] = hash("sha256", $password.$this->config->item('mysalt_psw'));
+			$this->db->where('id',$id);
+			return $this->db->update('users',$data);
+		}else{
+			return false;
+		}
+	}
+	
+	public function update_users($data = array())
+    {
+		if($this->session->userdata('logged_in_data')['id'] && $this->get_users(array('id' => $this->session->userdata('logged_in_data')['id'] ))[0]['type'] == 1){
+			$id = $data['id'];
+			unset($data['id']);
+			
+			$this->db->where('id',$id);
+			return $this->db->update('users',$data);
+		}else{
+			return false;
+		}
+    }
 }

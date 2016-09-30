@@ -87,10 +87,12 @@
 			
 		}
 		
-		private function generate_password($id){
-			try {
+		public function resetpassword($param){
+				try {
+				//$this->fancy_print($this->session->userdata('logged_in_data'));
+					$this->load->helper('string');
 					$passwordgen=random_string('alnum', 16);
-					  if(!$this->users_model->change_password($id,  $passwordgen) ) {
+					  if(!$this->users_model->reset_password($param,  $passwordgen) ) {
 						throw new Exception('Error on change password');
 					  }
 				} catch (Exception $e) {
@@ -99,9 +101,10 @@
 				}
 			
 			$data['password'] = $passwordgen;
-			$data['email'] = $this->users_model->get_users(array('id' => $id))[0]['email'];
-			
-			return $data;
+			$data['name'] = $this->users_model->get_users(array('id' => $param))[0]['name'];
+			$data['email'] = $this->users_model->get_users(array('id' => $param))[0]['email'];
+			$this->session->set_flashdata($data);
+			redirect('/resetpassword');
 		}
 		
 		public function userlist(){
@@ -134,6 +137,24 @@
 							);
 			
             $this->layout();
+		}
+		
+		public function reactivate($id = 0){
+			if($id != 0){
+				$data = array('id' => $id, 'status' => 'active');
+				$this->users_model->update_users($data);				
+			}
+			$this->session->set_flashdata('form_msg', 'Success Activate user!');
+			redirect('/manageuser/userlist');
+		}
+		
+		public function revoke($id = 0){
+			if($id != 0){
+				$data = array('id' => $id, 'status' => 'inactive');
+				$this->users_model->update_users($data);				
+			}
+			$this->session->set_flashdata('form_msg', 'Success Disable User!');
+			redirect('/manageuser/userlist');
 		}
 				
     }

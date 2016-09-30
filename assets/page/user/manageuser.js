@@ -97,7 +97,7 @@ TableManageButtons = function() {
     };
 }();
 
-$('.datatable').dataTable();
+$('#datatable').dataTable();
 $('#datatable-keytable').DataTable({
     keys: true
 });
