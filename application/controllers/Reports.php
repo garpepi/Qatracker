@@ -6,18 +6,14 @@
 			$this->load->model('daily_reports_model');	
 			
 			//content used
-			$this->load->model('environment_model');
-			$this->load->model('teamleads_model');
-			$this->load->model('progres_model');
-			$this->load->model('phase_model');			
-			$this->load->model('tester_on_projects_model');	
+			$this->load->model('users_model');
 		}
 		
 		private function front_stuff(){
 			$this->data = array(
-							'title' => 'Daily Reports',
-							'box_title_1' => 'Add Daily Report',
-							'sub_box_title_1' => 'Adding new report',
+							'title' => 'Reports',
+							'box_title_1' => 'Manual Generate Report',
+							'sub_box_title_1' => 'Manual Generate  report',
 							'box_title_2' => 'Projects List',
 							'sub_box_title_2' => 'List of projects',
 							'box_title_3' => 'Finished Projects List',
@@ -27,28 +23,12 @@
 						);
 			$this->page_css  = array(
 							'vendors/iCheck/skins/flat/green.css',
-							'vendors/datatables.net-bs/css/dataTables.bootstrap.min.css',
-							'vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css',
-							'vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css',
-							'vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css',
-							'vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css',
+							'vendors/switchery/dist/switchery.min.css',
 							'vendors/select2/dist/css/select2.min.css'
 
 						);
 			$this->page_js  = array(
 							'vendors/iCheck/icheck.min.js',
-							'vendors/datatables.net/js/jquery.dataTables.min.js',
-							'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js',
-							'vendors/datatables.net-buttons/js/dataTables.buttons.min.js',
-							'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js',
-							'vendors/datatables.net-buttons/js/buttons.flash.min.js',
-							'vendors/datatables.net-buttons/js/buttons.html5.min.js',
-							'vendors/datatables.net-buttons/js/buttons.print.min.js',
-							'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js',
-							'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js',
-							'vendors/datatables.net-responsive/js/dataTables.responsive.min.js',
-							'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js',
-							'vendors/datatables.net-scroller/js/dataTables.scroller.min.js',
 							'vendors/jszip/dist/jszip.min.js',
 							'vendors/pdfmake/build/pdfmake.min.js',
 							'vendors/pdfmake/build/vfs_fonts.js',
@@ -56,75 +36,52 @@
 							'vendors/moment/moment.min.js',
 							'vendors/datepicker/daterangepicker.js',
 							'vendors/jquery/jquery.cookie.js',
-							'page/dailyreports/formreport.js'
+							'vendors/switchery/dist/switchery.min.js',
+							'page/reports/manualreports.js'
 						);
 		}
 		
-		public function index(){
-			$this->page_js  = array(
-							'vendors/iCheck/icheck.min.js',
-							'vendors/datatables.net/js/jquery.dataTables.min.js',
-							'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js',
-							'vendors/datatables.net-buttons/js/dataTables.buttons.min.js',
-							'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js',
-							'vendors/datatables.net-buttons/js/buttons.flash.min.js',
-							'vendors/datatables.net-buttons/js/buttons.html5.min.js',
-							'vendors/datatables.net-buttons/js/buttons.print.min.js',
-							'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js',
-							'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js',
-							'vendors/datatables.net-responsive/js/dataTables.responsive.min.js',
-							'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js',
-							'vendors/datatables.net-scroller/js/dataTables.scroller.min.js',
-							'vendors/jszip/dist/jszip.min.js',
-							'vendors/pdfmake/build/pdfmake.min.js',
-							'vendors/pdfmake/build/vfs_fonts.js',
-							'vendors/select2/dist/js/select2.full.min.js',
-							'vendors/moment/moment.min.js',
-							'vendors/datepicker/daterangepicker.js',
-							'vendors/jquery/jquery.cookie.js',
-							'page/dailyreports/reportlists.js'
-						);
+		public function manualreports(){
 			$this->front_stuff();
-			$this->contents = 'dailyreports/list/index'; // its your view name, change for as per requirement.
+			$this->contents = 'reports/manualreports'; // its your view name, change for as per requirement.
 			
-			// Table
+			// Contents
 			$this->data['contents'] = array(
-							'daily_reports' => $this->daily_reports_model->get_reports(array('daily_reports.user_id' => $this->session->userdata('logged_in_data')['id']))
+							'tester' => $this->users_model->get_users(array('type' => 0,'status' => 'active'))
 			);
 			//$this->fancy_print($this->data['contents']);
 			$this->layout();
 		}
 		
-		public function generate(){
-			$fetch = $this->daily_reports_model->get_reports(array(),'tester_name asc, daily_reports.created_date asc');
-			$this->fancy_print($fetch);
+		public function generate_manual(){
+			if ($this->input->server('REQUEST_METHOD') != 'POST'){
+				redirect('/reports/manualreports');
+			}
+			$where = array();
+			
+			//validation
+				if(!$this->input->post('alluser')){
+					$this->form_validation->set_rules('users[]', 'Testers', 'required');
+				}
+				if(!$this->input->post('alldate')){
+					$this->form_validation->set_rules('daterange', 'Date Range', 'required');
+				}
+			//end validation
+			// seting up useable data
+			if(!$this->input->post('alluser')){
+				foreach($this->input->post('users') as $key => $value){
+					$where += array('daily_reports.user_id' => $value);
+				}
+			}
+			if(!$this->input->post('alldate')){
+				$where += array('daily_reports.created_date > ' => db_date_format(substr($this->input->post('daterange'),0,10)));
+				$where += array('daily_reports.created_date < ' => db_date_format(substr($this->input->post('daterange'),-10)));
+			}
+			
+			
+			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
-			$data[] = array(
-						'Timestamp',
-						'Project',
-						'Tester Name',
-						'Test Lead Name',
-						'TRF Number',
-						'Type of Changes',
-						'Application',
-						'Summary',
-						'SIT / UAT Status',
-						'Phase',
-						'Remark',
-						'Total Test Case Aplikasi',
-						'Total Assigned TC per tester',
-						'Test Case Executed',
-						'Outstanding Test Case',
-						'Plan Start Date',
-						'Plan Completion Date',
-						'Actual Start Date',
-						'Actual Completion Date',
-						'Downtime',
-						'Plan Start Date - Doc',
-						'Plan Completion Date - Doc',
-						'Actual Start Date - Doc',
-						'Actual Completion Date - Doc'
-					);
+			
 			foreach($fetch as $key=> $value)
 			{
 				// set data
@@ -173,15 +130,45 @@
 				
 				array_push($data,$temp);
 			}
-		//	$this->fancy_print($data);
-			// setdata end
+			// end formating data
+			$this->generate_report($data);
+		}
+		
+		private function generate_report($data_gen){
+			$header[] = array(
+						'Timestamp',
+						'Project',
+						'Tester Name',
+						'Test Lead Name',
+						'TRF Number',
+						'Type of Changes',
+						'Application',
+						'Summary',
+						'SIT / UAT Status',
+						'Phase',
+						'Remark',
+						'Total Test Case Aplikasi',
+						'Total Assigned TC per tester',
+						'Test Case Executed',
+						'Outstanding Test Case',
+						'Plan Start Date',
+						'Plan Completion Date',
+						'Actual Start Date',
+						'Actual Completion Date',
+						'Downtime',
+						'Plan Start Date - Doc',
+						'Plan Completion Date - Doc',
+						'Actual Start Date - Doc',
+						'Actual Completion Date - Doc'
+					);
+			$data = array_merge($header,$data_gen);
 			// start Generate Excel
 			$this->load->library('excel');
 			$this->excel->setActiveSheetIndex(0);
 			$this->excel->getActiveSheet()->setTitle('Adidata QA Daily Report'); // naming sheet
 			
 			
-			$filename='Adidata QA Daily Report.xls'; //save our workbook as this file name
+			$filename='Summary Report QA.xls'; //save our workbook as this file name
 			header('Content-Type: application/vnd.ms-excel'); //mime type
 			header('Content-Disposition: attachment;filename="'.$filename.'"'); //tell browser what's the file name
 			header('Cache-Control: max-age=0'); //no cache

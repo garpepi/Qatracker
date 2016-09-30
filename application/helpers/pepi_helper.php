@@ -42,18 +42,18 @@ if ( ! function_exists('site_show_date_format'))
 
 if ( ! function_exists('db_date_format'))
 {
-    function site_date_format($unix_ts = 0)
+    function db_date_format($unix_ts = 0)
     {
         if ($unix_ts > 0) {
             $CI =& get_instance();
-
+			
             $site_date_format = $CI->config->item('db_date_format');
             if (!empty($site_date_format)) {
                 $date_format = $site_date_format;
             } else {
                 $date_format = 'Y-m-d H:i:s';
             }
-            $date = date($date_format,$unix_ts);
+            $date = date($date_format,strtotime($unix_ts));
             return $date;
         }
         return false;
