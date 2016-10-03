@@ -49,6 +49,7 @@
 			  <li><a href="<?php echo base_url();?>managephases">Manage Phases</a></li> 
 			</ul>
 		  </li>
+		  <li><a href="<?php echo base_url();?>reports/manualreports"><i class="fa fa-download"></i> Generate Reports </a>
 		</ul>
 		<?php else:?>
 		<h3>Tester</h3>
