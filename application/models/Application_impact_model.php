@@ -4,6 +4,7 @@ class Application_impact_model extends CI_Model {
     public function __construct()
     {
         parent::__construct();
+		$this->load->library('session');
     }
 
     public function get_application_impact($where = array())
@@ -57,8 +58,8 @@ class Application_impact_model extends CI_Model {
 			if(($now_data != $data) && !empty($data)){
 				$this->update_application_impact($project_id);
 				$this->add_application_impact($project_id, $data);				
-				return true;
 			}
+			return true;
 		}
 		return false;			
     }

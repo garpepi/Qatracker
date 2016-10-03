@@ -11,6 +11,7 @@
         /*Loading the default libraries, helper, language */
         public function __construct(){
             parent::__construct();
+			$this->load->library('session');
 			$this->is_login();
          //   $this->load->helper(array('form','language','url'));
           //  $this->lang->load('english');

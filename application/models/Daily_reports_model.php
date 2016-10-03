@@ -4,6 +4,7 @@ class Daily_reports_model extends CI_Model {
     public function __construct()
     {
         parent::__construct();
+		$this->load->library('session');
     }
 
     public function get_reports($where = array(), $order_by = '')

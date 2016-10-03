@@ -4,6 +4,7 @@ class Tester_on_projects_model extends CI_Model {
     public function __construct()
     {
         parent::__construct();
+		$this->load->library('session');
     }
 
     public function get_tester_on_projects($where = array())
@@ -58,8 +59,8 @@ class Tester_on_projects_model extends CI_Model {
 			if(($now_data != $data) && !empty($data)){
 				$this->update_tester_on_projects($project_id);
 				$this->add_tester_on_projects($project_id, $data);
-				return true;
 			}
+			return true;
 		}
 		return false;			
     }
