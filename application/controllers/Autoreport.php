@@ -134,8 +134,6 @@
 		}
 		
 		private function sending_email($from_email, $from_name, $to, $cc= array(), $subject, $message, $attachment = ''){			
-			$config['smtp_host']    = '127.0.0.1';
-			$config['smtp_port']    = '25';
 			$this->load->library('email');
 		$this->email->initialize($config);
 			$this->email->from($from_email, $from_name);
