@@ -17,9 +17,9 @@ class Teamleads_model extends CI_Model {
     public function add_teamleads($data = array())
     {
         if(isset($data['phone'])){
-			$empty = $this->get_teamleads(array('email' => $data['email'], 'phone'=>$data['phone'],'id !=' => $data['id']));
+			$empty = $this->get_teamleads(array('email' => $data['email'], 'phone'=>$data['phone']));
 		}else{
-			$empty = $this->get_teamleads(array('email' => $data['email'], 'id !=' => $data['id']));
+			$empty = $this->get_teamleads(array('email' => $data['email']));
 		}
         if(empty($empty)){
             $this->db->insert('team_leads',$data);
