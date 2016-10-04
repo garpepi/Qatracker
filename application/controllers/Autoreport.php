@@ -65,7 +65,13 @@
 		
 		public function autogenerate(){
 			//validate if not 6 a clock
+			/*
 			if(date('H') != 6){
+				exit();
+			}
+			*/
+			//if cli
+			if(!$this->input->is_cli_request()){
 				exit();
 			}
 			$where = array();
@@ -135,7 +141,7 @@
 		
 		private function sending_email($from_email, $from_name, $to, $cc= array(), $subject, $message, $attachment = ''){			
 			$this->load->library('email');
-		$this->email->initialize($config);
+		//$this->email->initialize($config);
 			$this->email->from($from_email, $from_name);
 			$this->email->to($to);
 			if(!empty($cc)){
@@ -159,7 +165,12 @@
 		
 		public function autoemail(){
 			//validate if not 9 a clock
-			if(date('H') != 9){
+			/*if(date('H') != 9){
+				exit();
+			}*/
+			
+			//if cli
+			if(!$this->input->is_cli_request()){
 				exit();
 			}
 			$date = '';
