@@ -23,7 +23,14 @@
 		  <div class="x_content">
 			<br />
 		  <?php 
-			echo $this->session->flashdata('form_msg'); 
+		  if($this->session->flashdata('form_msg')):?>
+			<div class="alert <?php if(strcasecmp(substr($this->session->flashdata('form_msg'),0,7),'success') == 0): echo 'alert-success'; else: echo 'alert-danger'; endif; ?> alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+				</button>
+				<?php echo $this->session->flashdata('form_msg'); ?>
+			</div>
+			<?php
+		  endif;			 
 		  ?>
 			<form action='/manageteamleads/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">

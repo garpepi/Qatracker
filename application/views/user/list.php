@@ -9,8 +9,15 @@
 
 	<div class="clearfix"></div>
 	<br />
-		  <?php 
-			echo $this->session->flashdata('form_msg'); 
+<?php 
+		  if($this->session->flashdata('form_msg')):?>
+			<div class="alert <?php if(strcasecmp(substr($this->session->flashdata('form_msg'),0,7),'success') == 0): echo 'alert-success'; else: echo 'alert-danger'; endif; ?> alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">*</span>
+				</button>
+				<?php echo $this->session->flashdata('form_msg'); ?>
+			</div>
+			<?php
+		  endif;			 
 		  ?>
 	<div class="row">
 	  
