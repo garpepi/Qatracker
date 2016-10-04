@@ -24,7 +24,7 @@
 		<?php 
 			echo $this->session->flashdata('form_msg');
 		?>
-			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/reports/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['project']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/dailyreports/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['project']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			
 				<div class="form-group">
 					<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tester-name">Tester Name </span>
