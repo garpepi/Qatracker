@@ -102,7 +102,10 @@
 			$data['plan_end_date'] = date('Y-m-d',strtotime($data['plan_end_date']));
 			$data['plan_start_doc_date'] = date('Y-m-d',strtotime($data['plan_start_doc_date']));
 			$data['plan_end_doc_date'] = date('Y-m-d',strtotime($data['plan_end_doc_date']));
-
+			
+			if($this->input->post('TRF')){
+				$this->form_validation->set_rules('TRF', 'TRF', 'numeric');
+			}
 			$this->form_validation->set_rules('applications[]', 'Application Impact', 'required');
 			$this->form_validation->set_rules('desc', 'Desc', 'required');
 			$this->form_validation->set_rules('sum_TRF', 'Summary TRF', 'required');
@@ -159,6 +162,9 @@
 					$data['plan_end_doc_date'] = date('Y-m-d',strtotime($data['plan_end_doc_date']));
 					$data['id'] = $id;
 					
+					if($this->input->post('TRF')){
+						$this->form_validation->set_rules('TRF', 'TRF', 'numeric');
+					}
 					$this->form_validation->set_rules('applications[]', 'Application Impact', 'required');
 					$this->form_validation->set_rules('desc', 'Desc', 'required');
 					$this->form_validation->set_rules('sum_TRF', 'Summary TRF', 'required');
