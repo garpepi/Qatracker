@@ -28,3 +28,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 application/config/database.php
 application/config/config.php
 genreports/*
+application/config/qa_tracker_config.php
