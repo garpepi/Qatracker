@@ -6,7 +6,9 @@ class Login extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('users_model');
-		
+		if($this->input->is_cli_request()){
+				exit();
+		}
 	}
 	public function index()
 	{
