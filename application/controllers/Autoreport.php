@@ -71,7 +71,7 @@
 			}
 			*/
 			//if cli
-			if(!$this->input->is_cli_request()){
+			if(!is_cli()){
 				exit();
 			}
 			$where = array();
@@ -174,7 +174,7 @@
 			}*/
 			
 			//if cli
-			if(!$this->input->is_cli_request()){
+			if(!is_cli()){
 				exit();
 			}
 			$this->config->load('qa_tracker_config');
