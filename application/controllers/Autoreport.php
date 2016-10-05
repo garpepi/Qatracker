@@ -1,11 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
     class Autoreport extends CI_Controller {		
-		public function __construct() {
-		   parent::__construct();
-		   $this->load->model('projects_model');	
-			$this->load->model('daily_reports_model');	
-		}
-		
 		private function generate_report($data_gen, $date){
 			$header[] = array(
 						'Timestamp',
@@ -83,6 +77,7 @@
 				$where += array('daily_reports.created_date > ' => date('Y-m').'-01 00:00:00');
 				$where += array('daily_reports.created_date < ' => date('Y-m-d HH:mm:dd')); 
 			}
+			$this->load->model('daily_reports_model');	
 			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
 			
