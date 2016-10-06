@@ -149,7 +149,7 @@ $(document).ready(function() {
 	   var id = id;
 	   $.ajax({
 			type: "POST",
-			url:'/reports/get_projects',
+			url:'/dailyreports/get_projects',
 			data: {
 				akaridekoraskariosdekos: $.cookie('csrf_cookie_name'),
 				id: id

@@ -67,7 +67,7 @@
 					  <td><?php echo $daily_reports_datas['test_case_executed'] ; ?> </td>
 					  <td><?php echo $daily_reports_datas['test_case_outstanding'] ; ?> </td>
 					  <td>
-						  <a href="/reports/view/<?php echo $daily_reports_datas['id'] ; ?>" target='_blank'>View</a>
+						  <a href="/dailyreports/view/<?php echo $daily_reports_datas['id'] ; ?>" target='_blank'>View</a>
 					  </td>
 					</tr>
 					<?php

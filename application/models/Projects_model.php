@@ -61,6 +61,26 @@ class Projects_model extends CI_Model {
     {
         $nempty = $this->get_manageprojects(array('projects.id' => $data['id']));
 		if(!empty($nempty)){
+			// check if status need to change to finish or not
+			$check_end = 0;
+			$check_doc = 0;
+			$end_test_db = $nempty[0]['actual_start_date'];
+			$end_doc_db = $nempty[0]['actual_start_doc_date'];
+			if(isset($data['actual_end_date'])){
+				if(!empty($data['actual_end_date']) && !empty($end_test_db)){
+					$check_end = 1;
+				}
+			}
+			if(isset($data['actual_start_doc_date'])){
+				if(!empty($data['actual_start_doc_date']) && !empty($end_doc_db)){
+					$check_doc = 1;
+				}
+			}
+			if($check_end == 1 && $check_doc == 1){
+				$data['status'] = 'finish';
+			}
+			
+			//end check
 			$id = $data['id'];
 			unset($data['id']);
 			$this->db->where('id', $id);

@@ -252,10 +252,32 @@
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
 					<label>
-					  <input type="radio" class="flat" name="actual_end_date" <?php echo ($this->uri->segment(2) == 'view' && !empty($contents['project']['actual_end_date'])) ? 'disabled' : 'checked' ;?> value='0'> Not done
+					  <input type="radio" class="flat" name="actual_end_date" 
+					  <?php 
+						if($this->uri->segment(2) == 'view'){
+							if(empty($contents['project']['actual_end_date'])){
+								echo 'checked';
+							}else{
+								echo 'disabled';
+							}
+						}else{
+							echo 'checked';
+						}
+					  ?> value='0'> Not done
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="actual_end_date" <?php echo (($this->uri->segment(2) == 'view') && ( $this->uri->segment(2) == 'view' && !empty($contents['project']['actual_end_date']))) ? 'checked' : 'disabled' ;?> value='1'> Done
+					  <input type="radio" class="flat" name="actual_end_date" 
+					  <?php 
+						if($this->uri->segment(2) == 'view'){
+							if(!empty($contents['project']['actual_end_date'])){
+								echo 'checked';
+							}else{
+								echo 'disabled';
+							}
+						}else{
+							echo '';
+						}
+					  ?> value='1'> Done
 					</label>
 				  </div>
 				</div>
@@ -265,10 +287,32 @@
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
 					<label>
-					  <input type="radio" class="flat" name="actual_end_doc_date" <?php echo ($this->uri->segment(2) == 'view' && !empty($contents['project']['actual_end_doc_date'])) ? 'disabled' : 'checked' ;?> value='0'> Not done
+					  <input type="radio" class="flat" name="actual_end_doc_date" 
+					  <?php 
+						if($this->uri->segment(2) == 'view'){
+							if(empty($contents['project']['actual_end_doc_date'])){
+								echo 'checked';
+							}else{
+								echo 'disabled';
+							}
+						}else{
+							echo 'checked';
+						}
+					  ?> value='0'> Not done
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="actual_end_doc_date" <?php echo (($this->uri->segment(2) == 'view') && ( $this->uri->segment(2) == 'view' && !empty($contents['project']['actual_end_doc_date']))) ? 'checked' : 'disabled' ;?> value='1'> Done
+					  <input type="radio" class="flat" name="actual_end_doc_date" 
+					  <?php 
+						if($this->uri->segment(2) == 'view'){
+							if(!empty($contents['project']['actual_end_doc_date'])){
+								echo 'checked';
+							}else{
+								echo 'disabled';
+							}
+						}else{
+							echo '';
+						}
+					  ?> value='1'> Done
 					</label>
 				  </div>
 				</div>
