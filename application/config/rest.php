@@ -94,7 +94,7 @@ $config['enable_emulate_request'] = TRUE;
 | e.g: My Secret REST API
 |
 */
-$config['rest_realm'] = 'REST API';
+$config['rest_realm'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ $config['rest_realm'] = 'REST API';
 |           authorization key
 |
 */
-$config['rest_auth'] = 'basic';
+$config['rest_auth'] = 'digest';
 
 /*
 |--------------------------------------------------------------------------
@@ -288,7 +288,7 @@ $config['rest_database_group'] = 'default';
 | The table name in your database that stores API keys
 |
 */
-$config['rest_keys_table'] = 'keys';
+$config['rest_keys_table'] = 'keys_api';
 
 /*
 |--------------------------------------------------------------------------
@@ -300,7 +300,7 @@ $config['rest_keys_table'] = 'keys';
 | column name see 'rest_key_column'
 |
 | Default table schema:
-|   CREATE TABLE `keys` (
+|   CREATE TABLE `keys_api` (
 |       `id` INT(11) NOT NULL AUTO_INCREMENT,
 |       `user_id` INT(11) NOT NULL,
 |       `key` VARCHAR(40) NOT NULL,

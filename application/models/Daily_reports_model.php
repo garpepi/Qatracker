@@ -10,7 +10,7 @@ class Daily_reports_model extends CI_Model {
     {   
 		$this->load->model('projects_model', 'pm');
 		
-		$this->db->select('daily_reports.*,environment.name as environment, team_leads.name as team_lead, master_progres.name as progress, phases.name as phase, users.name as tester_name');
+		$this->db->select('daily_reports.*,environment.name as environment, team_leads.name as team_lead, master_progres.name as progress, phases.name as phase, users.name as tester_name, users.emp_id as emp_id');
 		$this->db->from('daily_reports');
         $this->db->where($where);
 		$this->db->join('users', 'users.id = daily_reports.user_id');
