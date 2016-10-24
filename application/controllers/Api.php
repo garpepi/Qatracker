@@ -32,8 +32,12 @@ class Api extends REST_Controller {
 	
 	public function dailyreport_post(){
 		$emp_id = $this->post('id');
-				
-		$this->set_response($this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id)), REST_Controller::HTTP_CREATED);
+		$period = $this->post('period').'-01';
+		$start = date('Y-m-d', strtotime($period));
+		$end = date('Y-m-t', strtotime($period));
+		//$this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id, 'daily_reports.created_date > ' => $start, 'daily_reports.created_date < ' => $end ));
+		//$this->set_response($this->db->last_query(), REST_Controller::HTTP_CREATED);
+		$this->set_response($this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id, 'daily_reports.created_date > ' => $start, 'daily_reports.created_date < ' => $end )), REST_Controller::HTTP_CREATED);
 	}
     public function users_get()
     {
