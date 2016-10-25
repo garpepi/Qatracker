@@ -35,6 +35,50 @@ class Api extends REST_Controller {
 				
 		$this->set_response($this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id)), REST_Controller::HTTP_CREATED);
 	}
+	
+	public function addingusers_post()
+    {
+        $this->load->model('users');	
+        $data = array(
+            'emp_id' => $this->post('emp_id'),
+            'email' => $this->post('email'),
+			'password' => '0f8ad0a7d148ba522e1ba4bfe7a4c709294c9bd889df3544e4d8183ccc33d6eb',
+            'name' => $this->post('name'),
+            'type' => $this->post('type'),
+        );
+		$message = ['status_msg' => 'User added'];
+		if($this->users->insert_users($data)){
+			$this->set_response($message, REST_Controller::HTTP_OK); // CREATED (200) being the HTTP response code			
+		}else{
+			$this->response(NULL, REST_Controller::HTTP_BAD_REQUEST);
+		}
+    }
+	
+	public function updateusers_post()
+    {
+		$message = ['status_msg' => 'User Updated'];
+        $this->load->model('users');	
+		if($this->users->update_users_api($this->post('emp_id'), $this->post('data'))){
+			$this->set_response($message, REST_Controller::HTTP_OK); // CREATED (200) being the HTTP response code			
+		}else{
+			$this->response(NULL, REST_Controller::HTTP_BAD_REQUEST);
+		}
+    }
+	
+	public function qatrackerusers_get(){
+		$this->load->model('users');	
+		$emp_id = $this->get('emp_id');
+		$users = $this->users->get_users(array('emp_id' => $emp_id));
+		if(empty($users)){
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No users were found'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}else{
+			$this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		}
+	}
+	
     public function users_get()
     {
         // Users from a data store e.g. database
