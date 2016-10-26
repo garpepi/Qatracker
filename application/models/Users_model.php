@@ -65,4 +65,21 @@ class Users_model extends CI_Model {
 			return false;
 		}
     }
+	
+	public function update_users_api($emp_id,$data = array())
+    {	
+		$this->db->where('emp_id',$emp_id);
+		return $this->db->update('users',$data);
+		
+    }
+	
+	public function insert_users($data = array())
+    {
+		if(!empty($data)){
+			$this->db->insert('users',$data);
+		}else{
+			return false;
+		}
+		return true;
+    }
 }

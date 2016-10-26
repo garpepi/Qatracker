@@ -39,6 +39,50 @@ class Api extends REST_Controller {
 		//$this->set_response($this->db->last_query(), REST_Controller::HTTP_CREATED);
 		$this->set_response($this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id, 'daily_reports.created_date > ' => $start, 'daily_reports.created_date < ' => $end )), REST_Controller::HTTP_CREATED);
 	}
+	
+	public function addingusers_post()
+    {
+        $this->load->model('users_model');	
+        $data = array(
+            'emp_id' => $this->post('emp_id'),
+            'email' => $this->post('email'),
+			'password' => '0f8ad0a7d148ba522e1ba4bfe7a4c709294c9bd889df3544e4d8183ccc33d6eb',
+            'name' => $this->post('name'),
+            'type' => $this->post('type'),
+        );
+		$message = ['status_msg' => 'User added'];
+		if($this->users_model->insert_users($data)){
+			$this->set_response($message, REST_Controller::HTTP_OK); // CREATED (200) being the HTTP response code			
+		}else{
+			$this->response(NULL, REST_Controller::HTTP_BAD_REQUEST);
+		}
+    }
+	
+	public function updateusers_post()
+    {
+		$message = ['status_msg' => 'User Updated'];
+        $this->load->model('users_model');	
+		if($this->users_model->update_users_api($this->post('emp_id'), $this->post('data'))){
+			$this->set_response($message, REST_Controller::HTTP_OK); // CREATED (200) being the HTTP response code			
+		}else{
+			$this->response(NULL, REST_Controller::HTTP_BAD_REQUEST);
+		}
+    }
+	
+	public function qatrackerusers_post(){
+		$this->load->model('users_model');	
+		$emp_id = $this->post('emp_id');
+		$users = $this->users_model->get_users(array('emp_id' => $emp_id));
+		if(empty($users)){
+			$this->response([
+				'status' => FALSE,
+				'message' => 'No users were found'
+			], REST_Controller::HTTP_NOT_FOUND); // NOT_FOUND (404) being the HTTP response code
+		}else{
+			$this->response($users, REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+		}
+	}
+	
     public function users_get()
     {
         // Users from a data store e.g. database
