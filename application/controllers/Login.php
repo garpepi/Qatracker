@@ -14,7 +14,6 @@ class Login extends CI_Controller {
 		{
 			redirect('/home', 'refresh');
 		}
-		print_r($this->session->userdata('logged_in'));
 		$this->load->view('login/login');
 	}
 	
@@ -42,8 +41,6 @@ class Login extends CI_Controller {
 			if(!$this->form_validation->run()){
 				$this->session->set_flashdata('logedin_msg', validation_errors());	
 			}else{
-				print_r($data);
-				print_r($this->users_model->login($data['email'],$data['password']));
 				$this->session->set_flashdata('logedin_msg', 'Your failed to logged in');				
 			}
 			redirect('/login');

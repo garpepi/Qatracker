@@ -46,9 +46,6 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">DEMO PURPOSES ONLY </p>
-					<a class="btn btn-default submit" href="addreport">TESTER</a>
-					<a class="btn btn-default submit" href="adduser?admin=1">ADMIN</a>
                 <div class="clearfix"></div>
                 <br />
 
