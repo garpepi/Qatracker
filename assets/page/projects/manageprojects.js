@@ -159,3 +159,38 @@ $(document).ready(function() {
 $('.confirmation').on('click', function () {
 	return confirm('Are you sure?');
 });
+
+$('.drop_proj').on('click', function () {
+	var url = $( this ).data( "url" );
+	var id= $( this ).data( "id" );
+	var reason = prompt("Please enter the Reason", "");
+	if (reason === null) {
+        return; //break out of the function early
+    }
+	if ($.trim(reason).length > 0) {
+		window.location.href = url+id+'/'+reason;
+	}else{
+		alert('Reason cannot empty !   Action terminated.');
+		
+	}
+});
+
+$(document).ready(function(){
+	var status_rad = $("input[type=radio][name='status']:checked").val();
+	if(status_rad == 'drop'){
+		$('#drop_reason').show();
+	}else{
+		$('#drop_reason').hide();
+	}
+});
+
+$('.status').on('ifChecked', function(event){
+  if($(this).val() == 'drop'){
+	  $('#drop_reason').show();
+  }else{
+	  $('#drop_reason').hide();
+  }
+});
+
+
+

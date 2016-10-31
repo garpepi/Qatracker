@@ -116,6 +116,9 @@
 			$this->form_validation->set_rules('plan_start_doc_date', 'Plan Doc Start Date', 'required');
 			$this->form_validation->set_rules('plan_end_doc_date', 'Plan Doc Start Date', 'required');
 			$this->form_validation->set_rules('status', 'Status', 'required');
+			if($this->input->post('status') == 'drop'){
+				$this->form_validation->set_rules('drop_reason', 'Drop Reason', 'required');
+			}
 			
 			$projects_data = array(
 						'desc' => $data['desc'],
@@ -126,6 +129,7 @@
 						'plan_end_date' => $data['plan_end_date'],
 						'plan_start_doc_date' => $data['plan_start_doc_date'],
 						'plan_end_doc_date' => $data['plan_end_doc_date'],
+						'drop_reason' => (!empty($data['drop_reason'])? $data['drop_reason'] : NULL),
 						'status' => $data['status']
 						);
 						
@@ -175,6 +179,9 @@
 					$this->form_validation->set_rules('plan_start_doc_date', 'Plan Doc Start Date', 'required');
 					$this->form_validation->set_rules('plan_end_doc_date', 'Plan Doc Start Date', 'required');
 					$this->form_validation->set_rules('status', 'Status', 'required');
+					if($this->input->post('status') == 'drop'){
+						$this->form_validation->set_rules('drop_reason', 'Drop Reason', 'required');
+					}
 					
 					$projects_data = array(
 							'id' => $id,
@@ -186,19 +193,19 @@
 							'plan_end_date' => $data['plan_end_date'],
 							'plan_start_doc_date' => $data['plan_start_doc_date'],
 							'plan_end_doc_date' => $data['plan_end_doc_date'],
+							'drop_reason' => (!empty($data['drop_reason'])? $data['drop_reason'] : NULL),
 							'status' => $data['status']
 						);
 
 					if($this->form_validation->run()){
 						try { 
 							  if(!$this->projects_model->edit_manageprojects($projects_data)) {
-								throw new Exception('Error on Save Edit Project');
+								  
+							//	throw new Exception('Error on Save Edit Project');
 							  }
 						} catch (Exception $e) {
-							print_r($projects_data);
 						  var_dump($e->getMessage());
-						  $this->db->last_query();
-						  exit();
+						  print_r($this->db->last_query());
 						}
 						
 						try { 
@@ -232,7 +239,7 @@
 						}else{							
 							$this->session->set_flashdata('form_msg', 'Data You Change to Already Exist');
 						}
-					//	redirect('/manageprojects/edit/'.$id);
+						redirect('/manageprojects/edit/'.$id);
 					}
 				}else{
 					$this->front_stuff();
@@ -257,9 +264,10 @@
 			return $this->projects_model->get_manageprojects();
 		}
 		
-		public function drop($id = 0){
-			if($id != 0){
-				$data = array('id' => $id, 'status' => 'drop');
+		public function drop($id = 0, $reason = ''){
+			if($id != 0 || $reason != ''){
+				
+				$data = array('id' => $id, 'status' => 'drop', 'drop_reason' => $reason);
 				$this->projects_model->update_manageprojects($data);				
 			}
 			redirect('/manageprojects');

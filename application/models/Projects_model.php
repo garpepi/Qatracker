@@ -51,7 +51,6 @@ class Projects_model extends CI_Model {
 			$data['user_m'] = $this->session->userdata('logged_in_data')['id'];
 			$this->db->where('id', $id);
 			return $this->db->update('projects', $data); 
-//            return $this->db->affected_rows();
         }else{
             return false;
         }

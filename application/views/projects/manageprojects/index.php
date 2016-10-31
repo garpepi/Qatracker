@@ -185,27 +185,34 @@
 				<div class="col-md-6 col-sm-6 col-xs-12">
 				  <div class="radio">
 					<label>
-					  <input type="radio" class="flat" name="status" checked value='active'> Active
+					  <input type="radio" class="flat status" name="status" <?php echo (!empty($contents['form']['status']) ? ($contents['form']['status'] == 'active' ? 'checked' : '' ): 'checked');?> value='active'> Active
 					</label>
 					<label>
-					  <input type="radio" class="flat" name="status" value='drop' onclick="return confirm('are you sure?')"> Drop
+					  <input type="radio" class="flat status" name="status" value='drop' <?php echo (!empty($contents['form']['status']) ? ($contents['form']['status'] == 'drop' ? 'checked' : '' ): '');?>> Drop
 					</label>
 				  </div>
+				</div>
+			  </div>
+			  <div class="form-group" id="drop_reason">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Drop Reason <span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input type="text"  name='drop_reason' <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo $contents['form']['drop_reason']; ?>' <?php endif; ?> class="form-control col-md-7 col-xs-12">
 				</div>
 			  </div>
 			  <div class="ln_solid"></div>
 			  <div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 				  <?php if($this->uri->segment(2) != 'view') : ?>
-					  <button type="submit" class="btn btn-primary">Cancel</button>
+					  <a href="/manageprojects" class="btn btn-primary">Back</a>
 					  <button type="submit" class="btn btn-success">Submit</button>
-				  <?php else:?>
-					  <button class="btn btn-primary" onclick="self.close()">Close</button>
 				  <?php endif;?>
 				</div>
 			  </div>
-
 			</form>
+			<?php if($this->uri->segment(2) == 'view') : ?>
+				<button class="btn btn-primary" onclick="self.close()">Close</button>
+			<?php endif;?>
 		  </div>
 		</div>
 	  </div>
@@ -245,7 +252,8 @@
 						  <td>
 								<a href="/manageprojects/view/<?php echo $active_data['id'] ; ?>" target='_blank'>View</a>
 								<a href="/manageprojects/edit/<?php echo $active_data['id'] ; ?>">Edit</a>  
-								<a href="/manageprojects/drop/<?php echo $active_data['id'] ; ?>" onclick="return confirm('are you sure?')"> Drop</a>
+								<!--<a href="/manageprojects/drop/<?php echo $active_data['id'] ; ?>" onclick="return confirm('are you sure?')"> Drop</a>-->
+								<a href="#drop" class='drop_proj' data-url= '/manageprojects/drop/' data-id="<?php echo $active_data['id'] ; ?>"> Drop</a>
 						  </td>
 						</tr>
 					<?php
@@ -276,6 +284,7 @@
 				  <th>Applications Impact </th>
 				  <th>TRF </th>
 				  <th>Testers </th>
+				  <th>Drop Reason </th>
 				  <th><span class="nobr">Action</span>
 				</tr>
 			  </thead>
@@ -288,6 +297,7 @@
 						  <td><?php foreach ($drop_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
 						  <td><?php if(empty($drop_data['TRF'])): echo 'UPCOMING TRF'; else: echo $drop_data['TRF']; endif;  ?></td>
 						  <td><?php foreach ($drop_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
+						  <td><?php echo $drop_data['drop_reason'];  ?></td>
 						  <td>
 								<a href="/manageprojects/view/<?php echo $drop_data['id'] ; ?>" target='_blank'>View</a>
 						  </td>
