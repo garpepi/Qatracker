@@ -85,7 +85,9 @@
 			}
 			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
-			
+			// Write log generate to file
+			write_file('./genreports/file.log', 'Fetch : '.print_r($fetch, true));
+			write_file('./genreports/file.log', 'Where : '.print_r($where, true));
 			foreach($fetch as $key=> $value)
 			{
 				// set data
