@@ -78,16 +78,16 @@
 			
 			if(date('j') == 1){
 				$where += array('daily_reports.created_date > ' => date('Y-m',strtotime('-1 month')).'-01 00:00:00');
-				$where += array('daily_reports.created_date < ' => date('Y-m-d HH:mm:dd')); 
+				$where += array('daily_reports.created_date < ' => date('Y-m-d H:i:s')); 
 			}else{
 				$where += array('daily_reports.created_date > ' => date('Y-m').'-01 00:00:00');
-				$where += array('daily_reports.created_date < ' => date('Y-m-d HH:mm:dd')); 
+				$where += array('daily_reports.created_date < ' => date('Y-m-d H:i:s')); 
 			}
 			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
 			// Write log generate to file
-			write_file('./genreports/file.log', 'Fetch : '.print_r($fetch, true));
-			write_file('./genreports/file.log', 'Where : '.print_r($where, true));
+			write_file('./genreports/file.log', 'Fetch : '.print_r($fetch, true)."\n", "a+");
+			write_file('./genreports/file.log', 'Where : '.print_r($where, true)."\n", "a+");
 			foreach($fetch as $key=> $value)
 			{
 				// set data
@@ -182,9 +182,9 @@
 			$this->config->load('qa_tracker_config');
 			$date = '';
 			if(date('j') == 1){
-				$date = date('Y-m',strtotime('-1 month')).'-01 00:00:00 - '.date('Y-m-d h:m:s');
+				$date = date('Y-m',strtotime('-1 month')).'-01 00:00:00 - '.date('Y-m-d H:i:s');
 			}else{
-				$date = date('Y-m').'-01 00:00:00'.' - '.date('Y-m-d h:m:s');
+				$date = date('Y-m').'-01 00:00:00'.' - '.date('Y-m-d H:i:s');
 			}
 			
 			return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $this->config->item('email_destinations'), array(), 'Qa Tracker Report '.date('d M Y'), "This Email Conatining Report Qa Tracker from \n ".$date ."\n\n Regards,\n\n QA Tracker - App", './genreports/Summary Report QA '.date('d M Y').'.xls');
