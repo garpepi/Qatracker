@@ -27,6 +27,7 @@
 				$this->usr_desc['user_id'] = $this->session->userdata('logged_in_data')['id'];
 				
 				// check admin or regular or guess
+				/*
 				if($this->is_admin($this->usr_desc['user_id'])){
 					$this->data['usr_type'] = 'admin';
 					$this->usr_desc['status'] = 'admin'; // for sidebar
@@ -34,7 +35,7 @@
 					$this->data['usr_type'] = NULL;
 					$this->usr_desc['status'] = NULL; // for sidebar
 				}
-				
+				*/
 				// check page allowed
 				if(!$this->page_access()){
 					redirect('/welcome', 'refresh');
@@ -77,9 +78,25 @@
 		
 		/* Page management*/
 		private function page_access(){
-			 $admin_list = array('home','manageuser','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads','manageprojects','reports','resetpassword');
-			 $tester_list = array('home','manageuser','dailyreports');
-			 $guess_list = array('home','manageuser');
+			$this->load->model('access_model');
+			$access_list_db = $this->access_model->get_access(array('users_id' => $this->usr_desc['user_id'],'status !=' => 'deleted'));
+			
+			foreach($access_list_db as $value){
+			 $access_list[]=$value['class_name'];
+			}
+			$this->usr_desc['page_access']= $access_list;
+			if(in_array($this->uri->segment(1),$access_list)){
+				return 1;
+			}else{
+				write_file('./logs/access.log', date('Y-m-d H:i:s').' user '.$this->usr_desc['user_id'].' from ip '.$this->input->ip_address().' failed to access class '.$this->uri->segment(1)."\n", "a+");
+				return 0;
+			} 
+			 
+			 /*
+			 $this->fancy_print($access_list);
+			 $admin_list = array('home','manageuser','manageself','manageapplications','manageenvironment','managetypeofchanges','manageprogres','managephases','manageteamleads','manageprojects','reports','resetpassword');
+			 $tester_list = array('home','manageuser','manageself','dailyreports');
+			 $guess_list = array('home','manageuser','manageself');
 			 $flag_admin = 0;
 			 $flag_tester = 0;
 
@@ -97,7 +114,8 @@
 				 return 1;
 			 }else{
 				 return 0;
-			 }
+			 }*/
+			 
 			 // write to log "USER <ID> <USER> NOT ALLOW TO ENTER PAGE <PAGE>"
 		}
 		

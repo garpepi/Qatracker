@@ -20,7 +20,7 @@
 			<?php 
 				echo $this->session->flashdata('form_msg');
 			?>
-			<form autocomplete="false" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action='/manageuser/changepas' method='post' >
+			<form autocomplete="false" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action='/manageself/changepas' method='post' >
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name </label>
 				<div class="col-md-6 col-sm-6 col-xs-12">

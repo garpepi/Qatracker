@@ -45,48 +45,6 @@
 						);
 		}
 		
-        public function index() {
-			$this->front_stuff();
-            $this->contents = 'user/info'; // its your view name, change for as per requirement.
-			
-			
-			// Form Data
-			$this->data['contents'] = array(
-							'users' => $this->users_model->get_users(array('id' => $this->usr_desc['user_id']))
-							);
-			
-            $this->layout();
-        }
-		public function changepas(){
-			if ($this->input->server('REQUEST_METHOD') != 'POST'){
-				redirect('/login');
-				exit();
-			}
-			
-			$this->form_validation->set_rules('password', 'Password', 'required',
-                        array('required' => 'You must provide a %s.')
-                );
-			$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');			
-			if ($this->form_validation->run() == FALSE)
-			{
-					$this->session->set_flashdata('form_msg', validation_errors());
-			}
-			else
-			{
-				try { 
-					  if(!$this->users_model->change_password($this->session->userdata('logged_in_data')['id'],  $this->input->post('password'))) {
-						throw new Exception('Error on change password');
-					  }
-				} catch (Exception $e) {
-				  //alert the user.
-				  var_dump($e->getMessage());exit();
-				}
-				$this->session->set_flashdata('form_msg', 'Success Change Password!');
-			}
-			redirect('/manageuser');
-			
-		}
-		
 		public function resetpassword($param){
 				try {
 				//$this->fancy_print($this->session->userdata('logged_in_data'));

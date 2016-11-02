@@ -23,15 +23,19 @@
 	<!-- sidebar menu -->
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
-		<?php if(!empty($status)) :?>
 		<h3>Admin</h3>
 		<ul class="nav side-menu">
   		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
+		  
+		  <?php if(in_array('manageuser',$page_access)) :?>
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>manageuser/userlist">Manage User</a></li>
 			</ul>
 		  </li>
+		  <?php endif;?>
+		  
+		  <?php if(in_array('manageprojects',$page_access)) :?>
 		  <li><a><i class="fa fa-tasks"></i> Projects <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>manageprojects">Manage Projects</a></li>
@@ -39,31 +43,42 @@
 			  <li><a href="<?php echo base_url();?>assigntesters">Assign Testers</a></li>-->
 			</ul>
 		  </li>
+		  <?php endif;?>
+		  
+		<?php $masters = array('manageteamleads','manageapplications','managetypeofchanges','manageenvironment','manageprogres','managephases'); 
+				$flag_master = 0;
+				foreach($masters as $master){
+					if(in_array($master,$page_access)) {
+						$flag_master = 1;
+						break;
+					}
+				}
+		if($flag_master) :?>
 		  <li><a><i class="fa fa-tasks"></i> Masters <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
-			  <li><a href="<?php echo base_url();?>manageteamleads">Manage Team Leads</a></li>
-			  <li><a href="<?php echo base_url();?>manageapplications">Manage Applications</a></li>
-			  <li><a href="<?php echo base_url();?>managetypeofchanges">Type Of Changes</a></li>
-			  <li><a href="<?php echo base_url();?>manageenvironment">Manage Environment</a></li>
-			  <li><a href="<?php echo base_url();?>manageprogres">Manage Progres</a></li>
-			  <li><a href="<?php echo base_url();?>managephases">Manage Phases</a></li> 
+			  <?php if(in_array('manageteamleads',$page_access)) :?><li><a href="<?php echo base_url();?>manageteamleads">Manage Team Leads</a></li><?php endif;?>
+			  <?php if(in_array('manageapplications',$page_access)) :?><li><a href="<?php echo base_url();?>manageapplications">Manage Applications</a></li><?php endif;?>
+			 <?php if(in_array('managetypeofchanges',$page_access)) :?> <li><a href="<?php echo base_url();?>managetypeofchanges">Type Of Changes</a></li><?php endif;?>
+			 <?php if(in_array('manageenvironment',$page_access)) :?> <li><a href="<?php echo base_url();?>manageenvironment">Manage Environment</a></li><?php endif;?>
+			  <?php if(in_array('manageprogres',$page_access)) :?><li><a href="<?php echo base_url();?>manageprogres">Manage Progres</a></li><?php endif;?>
+			  <?php if(in_array('managephases',$page_access)) :?><li><a href="<?php echo base_url();?>managephases">Manage Phases</a></li> <?php endif;?>
 			</ul>
 		  </li>
+		<?php endif;?>
+		
+		<?php if(in_array('reports',$page_access)) :?>
 		  <li><a href="<?php echo base_url();?>reports/manualreports"><i class="fa fa-download"></i> Generate Reports </a>
-		</ul>
-		<?php else:?>
-		<h3>Tester</h3>
-		<ul class="nav side-menu">
-		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
-		  </li>
+		<?php endif;?>
+		
+		<?php if(in_array('dailyreports',$page_access)) :?>
 		  <li><a><i class="fa fa-file-o"></i> Daily Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>dailyreports">List Daily Reports</a></li>
 			  <li><a href="<?php echo base_url();?>dailyreports/add">Add Daily Report</a></li>
 			</ul>
 		  </li>
-		</ul>
 		<?php endif;?>
+		</ul>
 	  </div>
 	  <!--
 	  <div class="menu_section">

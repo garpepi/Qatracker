@@ -76,10 +76,57 @@ class Users_model extends CI_Model {
 	public function insert_users($data = array())
     {
 		if(!empty($data)){
-			$this->db->insert('users',$data);
+			$this->db->trans_begin();
+				try{
+					$this->db->insert('users',$data);
+					$user_id = $this->db->insert_id();
+					$this->db->insert('access_menu_priviledge', array('users_id' => $user_id, 'class_menu_id' => 1, 'status' => 'persistence'));// class home
+					$this->db->insert('access_menu_priviledge', array('users_id' => $user_id, 'class_menu_id' => 13, 'status' => 'persistence'));//class manageself
+					if($data['type'] == 1){
+						$access_right = array(
+											array('users_id' => $user_id, 'class_menu_id' => 1, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 2, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 3, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 4, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 5, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 6, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 7, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 8, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 9, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 10, 'status' => 'active'),
+											array('users_id' => $user_id, 'class_menu_id' => 11, 'status' => 'active')
+										);
+						$this->db->insert_batch('access_menu_priviledge', $access_right);
+					}elseif($data['type'] == 2){
+						$access_right = array(
+							array('users_id' => $user_id, 'class_menu_id' => 12, 'status' => 'active')
+						);
+						$this->db->insert_batch('access_menu_priviledge', $access_right);
+					}elseif($data['type'] == 3){
+						$access_right = array(
+							array('users_id' => $user_id, 'class_menu_id' => 14, 'status' => 'active')
+						);
+						$this->db->insert_batch('access_menu_priviledge', $access_right);
+					}
+					
+				}catch (Exception $e){
+					$this->db->trans_rollback();
+					throw new Exception ('Error on insert');
+				}			
+				
+			if ($this->db->trans_status() === FALSE)
+			{
+					$this->db->trans_rollback();
+					throw new Exception ('Error on insert');
+			}
+			else
+			{
+					$this->db->trans_commit();
+			}
+			return true; 
+			
 		}else{
 			return false;
 		}
-		return true;
     }
 }
