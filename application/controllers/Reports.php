@@ -74,8 +74,8 @@
 				}
 			}
 			if(!$this->input->post('alldate')){
-				$where += array('daily_reports.created_date > ' => db_date_format(substr($this->input->post('daterange'),0,10)));
-				$where += array('daily_reports.created_date < ' => db_date_format(substr($this->input->post('daterange'),-10)));
+				$where += array('daily_reports.created_date >= ' => db_date_format(substr($this->input->post('daterange'),0,10)));
+				$where += array('daily_reports.created_date <= ' => db_date_format(substr($this->input->post('daterange'),-10)));
 			}
 			
 			

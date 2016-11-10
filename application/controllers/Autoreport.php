@@ -77,11 +77,11 @@
 			$where = array();
 			
 			if(date('j') == 1){
-				$where += array('daily_reports.created_date > ' => date('Y-m',strtotime('-1 month')).'-01 00:00:00');
-				$where += array('daily_reports.created_date < ' => date('Y-m-d H:i:s')); 
+				$where += array('daily_reports.created_date >= ' => date('Y-m',strtotime('-1 month')).'-01 00:00:00');
+				$where += array('daily_reports.created_date < ' => date('Y-m-d 00:00:00')); 
 			}else{
-				$where += array('daily_reports.created_date > ' => date('Y-m').'-01 00:00:00');
-				$where += array('daily_reports.created_date < ' => date('Y-m-d H:i:s')); 
+				$where += array('daily_reports.created_date >= ' => date('Y-m').'-01 00:00:00');
+				$where += array('daily_reports.created_date < ' => date('Y-m-d 00:00:00')); 
 			}
 			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
