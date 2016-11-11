@@ -112,7 +112,7 @@
 						$value['environment'],
 						$value['tester_name'],
 						$value['team_lead'],
-						$value['project']['TRF'],
+						($value['project']['TRF'] != '' ? $value['project']['TRF'] : 'UPCOMING TRF'),
 						$value['project']['TOC'],
 						$application_list,
 						$value['project']['sum_TRF'],

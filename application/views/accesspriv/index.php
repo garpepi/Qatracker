@@ -83,6 +83,100 @@
 		  </div>
 		</div>
 	  </div>
+	  <div class="col-md-6 col-sm-6 col-xs-12">
+		<div class="x_panel">
+		  <div class="x_title">
+			<h2><i class="fa fa-bars"></i> Default List <small></small></h2>
+			<ul class="nav navbar-right panel_toolbox">
+			  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+			  </li>
+			  <li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+				<ul class="dropdown-menu" role="menu">
+				  <li><a href="#">Settings 1</a>
+				  </li>
+				  <li><a href="#">Settings 2</a>
+				  </li>
+				</ul>
+			  </li>
+			  <li><a class="close-link"><i class="fa fa-close"></i></a>
+			  </li>
+			</ul>
+			<div class="clearfix"></div>
+		  </div>
+		  <div class="x_content">
+
+			<div class="col-xs-3">
+			  <!-- required for floating -->
+			  <!-- Nav tabs -->
+			  <ul class="nav nav-tabs tabs-left">
+				<li class="active"><a href="#home" data-toggle="tab">Admin</a>
+				</li>
+				<li><a href="#profile" data-toggle="tab">Tester</a>
+				</li>
+				<li><a href="#messages" data-toggle="tab">Super Admin</a>
+				</li>
+			  </ul>
+			</div>
+
+			<div class="col-xs-9">
+			  <!-- Tab panes -->
+			  <div class="tab-content">
+				<div class="tab-pane active" id="home">
+				  <p class="lead">Admin List</p>
+				  <li>
+					<ul>Manage User</ul>
+				  </li>
+				  <li>
+					<ul>Manage Application</ul>
+				  </li>
+				  <li>
+					<ul>Manage Environment</ul>
+				  </li>
+				  <li>
+					<ul>Manage Progress</ul>
+				  </li>
+				  <li>
+					<ul>Manage Project</ul>
+				  </li>
+				  <li>
+					<ul>Manage Phase</ul>
+				  </li>
+				  <li>
+					<ul>Manage Team Leads</ul>
+				  </li>
+				  <li>
+					<ul>Type of Changes</ul>
+				  </li>
+				  <li>
+					<ul>Reports</ul>
+				  </li>
+				  <li>
+					<ul>Reset Password (must be joined with Manage user)</ul>
+				  </li>
+				</div>
+				<div class="tab-pane" id="profile">
+				<p class="lead">Tester List</p>
+				  <li>
+					<ul>Daily Reports</ul>
+				  </li>
+				</div>
+				<div class="tab-pane" id="messages">
+				<p class="lead">Super Admin List</p>
+				  <li>
+					<ul>Access Priviledge</ul>
+				  </li>
+				</div>
+
+			</div>
+
+			<div class="clearfix"></div>
+
+		  </div>
+		</div>
+	  </div>
+  </div>
+	  
 	  <?php endif; ?>
 	  
 	  <?php if ($this->uri->segment(2) != 'edit'): ?>

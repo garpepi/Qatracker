@@ -23,7 +23,7 @@
 	<!-- sidebar menu -->
 	<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 	  <div class="menu_section">
-		<h3>Admin</h3>
+		<h3>~~~</h3>
 		<ul class="nav side-menu">
   		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
 		  
@@ -68,6 +68,9 @@
 		
 		<?php if(in_array('reports',$page_access)) :?>
 		  <li><a href="<?php echo base_url();?>reports/manualreports"><i class="fa fa-download"></i> Generate Reports </a>
+		<?php endif;?>
+		<?php if(in_array('accesspriv',$page_access)) :?>
+		  <li><a href="<?php echo base_url();?>accesspriv/"><i class="fa fa-key"></i> Priviledge Access </a>
 		<?php endif;?>
 		
 		<?php if(in_array('dailyreports',$page_access)) :?>
