@@ -49,7 +49,6 @@ class Application_impact_model extends CI_Model {
 		}else{
 			$now_data = array();
 			$fetch_now_data = $this->get_application_impact(array('project_id' => $project_id,'application_impact.status' => 'active'));
-			
 			foreach($fetch_now_data as $tmp_now_data){
 				array_push($now_data, $tmp_now_data['application_id']);
 			}
@@ -57,8 +56,8 @@ class Application_impact_model extends CI_Model {
 			if(($now_data != $data) && !empty($data)){
 				$this->update_application_impact($project_id);
 				$this->add_application_impact($project_id, $data);				
-				return true;
 			}
+			return true;
 		}
 		return false;			
     }

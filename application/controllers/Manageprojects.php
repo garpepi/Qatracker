@@ -205,12 +205,12 @@
 							  }
 						} catch (Exception $e) {
 						  var_dump($e->getMessage());
-						  print_r($this->db->last_query());
+						  //print_r($this->db->last_query());
 						}
 						
 						try { 
 							$_editapp = $this->application_impact_model->edit_application_impact($id,$data['applications'],$data['status']);
-							print_r($_editapp);
+							
 							  if(!$_editapp) {
 								throw new Exception('Error on Save Edit APP');
 							  }
@@ -219,7 +219,7 @@
 						}
 						try { 
 							$_testerproj = $this->tester_on_projects_model->edit_tester_on_projects($id,$data['testers'],$data['status']);
-							print_r($_testerproj);
+							//print_r($_testerproj);
 							 if(!$_testerproj) {
 								throw new Exception('Error on Save Edit Tester on Project');
 							  }
