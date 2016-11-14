@@ -55,7 +55,7 @@ class Users_model extends CI_Model {
 	
 	public function update_users($data = array())
     {
-		if($this->session->userdata('logged_in_data')['id'] && $this->get_users(array('id' => $this->session->userdata('logged_in_data')['id'] ))[0]['type'] == 1){
+		if($this->session->userdata('logged_in_data')['id']){
 			$id = $data['id'];
 			unset($data['id']);
 			
@@ -97,7 +97,7 @@ class Users_model extends CI_Model {
 											array('users_id' => $user_id, 'class_menu_id' => 11, 'status' => 'active')
 										);
 						$this->db->insert_batch('access_menu_priviledge', $access_right);
-					}elseif($data['type'] == 2){
+					}elseif($data['type'] == 0){
 						$access_right = array(
 							array('users_id' => $user_id, 'class_menu_id' => 12, 'status' => 'active')
 						);
