@@ -8,35 +8,35 @@ var handleDataTableButtons = function() {
             extend: "copy",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "csv",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "excel",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "pdfHtml5",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "print",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         ],
@@ -51,35 +51,35 @@ var handleDataTableButtons = function() {
             extend: "copy",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "csv",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "excel",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "pdfHtml5",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         {
             extend: "print",
             className: "btn-sm",
             exportOptions: {
-                columns: [ 1,2,3,4 ]
+                columns: [ 0,1,2,3 ]
                 }
         },
         ],

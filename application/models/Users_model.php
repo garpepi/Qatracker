@@ -68,8 +68,17 @@ class Users_model extends CI_Model {
 	
 	public function update_users_api($emp_id,$data = array())
     {	
-		$this->db->where('emp_id',$emp_id);
-		return $this->db->update('users',$data);
+		$existing = array();
+		if(isset($data['email'])){
+			$existing = $this->get_users(array('email' => $data['email'], 'emp_id !=' => $emp_id));
+		}
+		if(empty($existing))
+		{
+			$this->db->where('emp_id',$emp_id);
+			return $this->db->update('users',$data);			
+		}else{
+			return false;
+		}
 		
     }
 	
