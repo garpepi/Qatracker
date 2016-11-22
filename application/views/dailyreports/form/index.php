@@ -193,14 +193,14 @@
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12" for="project-desc">Downtimes <span class="required">*</span>
 				</label>
-				<div class="col-md-1 col-sm-1 col-xs-1">
+				<div class="col-md-2 col-sm-2 col-xs-4">
 				Days  <input placeholder='Day' name='downtimes_day' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value= '<?php echo $contents['form']['downtimes_cut']['day']; ?>' disabled <?php else :?> value=0<?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
-				<div class="col-md-2 col-sm-2 col-xs-2">
+				<div class="col-md-2 col-sm-2 col-xs-4">
 				Hour
 				 <input placeholder='Hour' name='downtimes_hour' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['downtimes_cut']['hour']; ?>' disabled <?php else :?> value=0<?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
-				<div class="col-md-2 col-sm-2 col-xs-2">
+				<div class="col-md-2 col-sm-2 col-xs-4">
 				Minute
 				 <input placeholder='Minute' name='downtimes_minute' min='0' type="number" id="total_test_case_executed" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo $contents['form']['downtimes_cut']['minute']; ?>' disabled <?php else :?> value=0<?php endif; ?> required="required" class="form-control col-md-1 col-xs-1">
 				</div>
@@ -250,10 +250,16 @@
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Actual End Test <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <div class="radio">
+					<input type='hidden' name="actual_end_date" value=0 >
+				<?php if(!empty($contents['project']['actual_end_date'])) :?>
+					<input disabled type="text" id="actual_end_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
+				<?php else:?>
+				<input disabled type="text" id="actual_end_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
+				  <div class="radio" id='actual_end_date_radio'>
 					<label>
 					  <input type="radio" class="flat" name="actual_end_date" 
 					  <?php 
+					  
 						if($this->uri->segment(2) == 'view'){
 							if(empty($contents['project']['actual_end_date'])){
 								echo 'checked';
@@ -263,11 +269,13 @@
 						}else{
 							echo 'checked';
 						}
+						
 					  ?> value='0'> Not done
 					</label>
 					<label>
 					  <input type="radio" class="flat" name="actual_end_date" 
 					  <?php 
+					  
 						if($this->uri->segment(2) == 'view'){
 							if(!empty($contents['project']['actual_end_date'])){
 								echo 'checked';
@@ -277,18 +285,26 @@
 						}else{
 							echo '';
 						}
+						
 					  ?> value='1'> Done
 					</label>
 				  </div>
+				  <?php endif;?>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Actual End Doc Test <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <div class="radio">
+					<input type='hidden' name="actual_end_doc_date" value=0 >
+				<?php if(!empty($contents['project']['actual_end_doc_date'])) :?>
+					<input disabled type="text" id="actual_end_doc_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_doc_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
+				<?php else:?>
+				  <input disabled type="text" id="actual_end_doc_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_doc_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
+				  <div class="radio" id='actual_end_doc_date_radio'>
 					<label>
 					  <input type="radio" class="flat" name="actual_end_doc_date" 
 					  <?php 
+					  
 						if($this->uri->segment(2) == 'view'){
 							if(empty($contents['project']['actual_end_doc_date'])){
 								echo 'checked';
@@ -298,11 +314,13 @@
 						}else{
 							echo 'checked';
 						}
+						
 					  ?> value='0'> Not done
 					</label>
 					<label>
 					  <input type="radio" class="flat" name="actual_end_doc_date" 
 					  <?php 
+					  
 						if($this->uri->segment(2) == 'view'){
 							if(!empty($contents['project']['actual_end_doc_date'])){
 								echo 'checked';
@@ -315,6 +333,7 @@
 					  ?> value='1'> Done
 					</label>
 				  </div>
+				  <?php endif;?>
 				</div>
 			  </div>
 			  <div class="ln_solid"></div>

@@ -143,6 +143,8 @@ $(document).ready(function() {
 	  allowClear: true
 	});
 	//<!-- /Select2 -->
+	$('#actual_end_doc_date').hide();
+	$('#actual_end_date').hide();
 	
 	// Project
 	function select_project(id){
@@ -158,7 +160,6 @@ $(document).ready(function() {
 			{
 				var json = JSON.stringify(data);
 				var obj = JSON.parse(json);
-
 				$("#project-desc").val(obj.project_desc);
 				$("#TRF").val(obj.TRF);
 				$("#trf-sum").val(obj.sum_TRF);
@@ -178,6 +179,26 @@ $(document).ready(function() {
 					$("#actual_start_doc_date").val(obj.actual_start_doc_date);		
 					$("#actual_start_doc_date").data('daterangepicker').remove();					
 					$("#actual_start_doc_date").prop('readonly', true);
+				}
+				if(obj.actual_end_doc_date != false){
+					//show
+					$('#actual_end_doc_date').show();
+					$('#actual_end_doc_date').val(obj.actual_end_doc_date);
+					$('#actual_end_doc_date_radio').hide();
+				}else{
+					$('#actual_end_doc_date_radio').show();
+					$('#actual_end_doc_date').val('');
+					$('#actual_end_doc_date').hide();
+				}
+				if(obj.actual_end_date != false){
+					//show 
+					$('#actual_end_date').show();
+					$('#actual_end_date').val(obj.actual_end_date);
+					$('#actual_end_date_radio').hide();
+				}else{
+					$('#actual_end_date_radio').show();
+					$('#actual_end_date').val('');
+					$('#actual_end_date').hide();
 				}
 
 			}

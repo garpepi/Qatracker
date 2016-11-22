@@ -272,4 +272,40 @@
 			}
 			redirect('/manageprojects');
 		}
+		
+		public function done($id = 0){
+			$nempty =$this->projects_model->get_manageprojects(array('projects.id' => $id));
+			
+			if($id != 0 && !empty($nempty)){
+				$check_end = 0;
+				$check_doc = 0;
+				$end_test_db = $nempty[0]['actual_end_date'];
+				$end_doc_db = $nempty[0]['actual_end_doc_date'];
+				if(!empty($nempty[0]['actual_end_date'])){
+						$check_end = 1;
+					}
+				if(!empty($nempty[0]['actual_end_doc_date'])){
+						$check_doc = 1;
+					}
+				if($check_end == 1 && $check_doc == 1){
+					$data = array('id' => $id, 'status' => 'finish');
+					$this->projects_model->update_manageprojects($data);
+					$this->session->set_flashdata('form_msg', 'Success Close Project');
+				}else{
+					$this->session->set_flashdata('form_msg', 'End Doc and end Date must be filled');
+				}
+							
+			}
+			redirect('/manageprojects');
+		}
+		
+		public function undone($id = 0){
+			if($id != 0 || $reason != ''){
+				
+				$data = array('id' => $id, 'status' => 'active', 'actual_end_date' => NULL);
+				$this->projects_model->update_manageprojects($data);
+				$this->session->set_flashdata('form_msg', 'Success Open Project');
+			}
+			redirect('/manageprojects');
+		}
     }

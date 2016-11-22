@@ -22,9 +22,15 @@
 		  <div class="x_content">
 			<br />
 		<?php 
-			echo $this->session->flashdata('form_msg');
-		//	print_r($contents['form']);
-		?>
+		  if($this->session->flashdata('form_msg')):?>
+			<div class="alert <?php if(strcasecmp(substr($this->session->flashdata('form_msg'),0,7),'success') == 0): echo 'alert-success'; else: echo 'alert-danger'; endif; ?> alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">*</span>
+				</button>
+				<?php echo $this->session->flashdata('form_msg'); ?>
+			</div>
+			<?php
+		  endif;			 
+		  ?>
 			<form <?php if($this->uri->segment(2) != 'view') : ?> action='/manageprojects/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <?php
 				if($this->uri->segment(2)) :
@@ -250,10 +256,11 @@
 						  <td><?php if(empty($active_data['TRF'])): echo 'UPCOMING TRF'; else: echo $active_data['TRF']; endif;  ?></td>
 						  <td><?php foreach ($active_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
 						  <td>
-								<a href="/manageprojects/view/<?php echo $active_data['id'] ; ?>" target='_blank'>View</a>
-								<a href="/manageprojects/edit/<?php echo $active_data['id'] ; ?>">Edit</a>  
+								<a href="/manageprojects/view/<?php echo $active_data['id'] ; ?>" target='_blank'><span class='fa fa-eye'></span></a>
+								<a href="/manageprojects/edit/<?php echo $active_data['id'] ; ?>"><span class='fa fa-edit'></span></a>  
 								<!--<a href="/manageprojects/drop/<?php echo $active_data['id'] ; ?>" onclick="return confirm('are you sure?')"> Drop</a>-->
-								<a href="#drop" class='drop_proj' data-url= '/manageprojects/drop/' data-id="<?php echo $active_data['id'] ; ?>"> Drop</a>
+								<a href="#drop" class='drop_proj' data-url= '/manageprojects/drop/' data-id="<?php echo $active_data['id'] ; ?>"> <span class='fa fa-trash'></span></a>
+								<a href="/manageprojects/done/<?php echo $active_data['id'] ; ?>" class='confirmation' data-url= '/manageprojects/done/' data-id="<?php echo $active_data['id'] ; ?>"> <span class='fa fa-thumbs-o-up'></span></a>
 						  </td>
 						</tr>
 					<?php
@@ -299,7 +306,7 @@
 						  <td><?php foreach ($drop_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
 						  <td><?php echo $drop_data['drop_reason'];  ?></td>
 						  <td>
-								<a href="/manageprojects/view/<?php echo $drop_data['id'] ; ?>" target='_blank'>View</a>
+								<a href="/manageprojects/view/<?php echo $drop_data['id'] ; ?>" target='_blank'><span class='fa fa-eye'></span></a>
 						  </td>
 						  </td>
 						</tr>
@@ -344,7 +351,8 @@
 						  <td><?php if(empty($finish_data['TRF'])): echo 'UPCOMING TRF'; else: echo $finish_data['TRF']; endif;  ?></td>
 						  <td><?php foreach ($finish_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
 						  <td>
-								<a href="/manageprojects/view/<?php echo $finish_data['id'] ; ?>" target='_blank'>View</a>
+								<a href="/manageprojects/view/<?php echo $finish_data['id'] ; ?>" target='_blank'><span class='fa fa-eye'></span></a>
+								<a href="/manageprojects/undone/<?php echo $finish_data['id'] ; ?>" class='confirmation' data-url= '/manageprojects/undone/' data-id="<?php echo $active_data['id'] ; ?>"> <span class='fa fa-thumbs-o-down'></span></a>
 						  </td>
 						</tr>
 					<?php

@@ -76,7 +76,7 @@ class Projects_model extends CI_Model {
 				}
 			}
 			if($check_end == 1 && $check_doc == 1){
-				$data['status'] = 'finish';
+				//$data['status'] = 'finish';
 			}
 			
 			//end check
