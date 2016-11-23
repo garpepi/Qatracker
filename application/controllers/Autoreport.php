@@ -187,7 +187,7 @@
 				$date = date('Y-m').'-01 00:00:00'.' - '.date('Y-m-d H:i:s');
 			}
 			
-			return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $this->config->item('email_destinations'), array(), 'Qa Tracker Report '.date('d M Y'), "This Email Conatining Report Qa Tracker from \n ".$date ."\n\n Regards,\n\n QA Tracker - App", './genreports/Summary Report QA '.date('d M Y').'.xls');
+			return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $this->config->item('email_destinations'), array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team BM, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');
 		
 		}
 
