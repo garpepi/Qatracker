@@ -108,7 +108,7 @@
 				$m = $value['downtimes'] - ($d * 1440) - ($h * 60);
 				
 				$temp = array(
-						$value['created_date'],
+						date('Y-m-d',$value['created_date']),
 						$value['environment'],
 						$value['tester_name'],
 						$value['team_lead'],
