@@ -57,3 +57,59 @@ function submited() {
 $(".select2_multiple").select2({
   allowClear: true
 });
+
+$( "#admin_parent" ).click(function() {  
+	if($('#admin_parent').is(':checked')){
+		$('.admin_child').iCheck('check'); 	
+	}else{
+		$('.admin_child').iCheck('uncheck');
+	}
+});
+$('.admin_child').on('ifChecked', function(event){ 
+	if ($('.admin_child:checked').length != $('.admin_child').length) {
+      $( "#admin_parent" ).prop( "checked", false );
+    }else{
+		$( "#admin_parent" ).prop( "checked", true );
+	}
+});
+$('.admin_child').on('ifUnchecked', function () { 
+	$( "#admin_parent" ).prop( "checked", false );
+});
+
+$( "#superadmin_parent" ).click(function() {  
+	if($('#superadmin_parent').is(':checked')){
+		$('.superadmin_child').iCheck('check'); 	
+	}else{
+		$('.superadmin_child').iCheck('uncheck');
+	}
+
+});
+$('.superadmin_child').on('ifChecked', function(event){ 
+	if ($('.superadmin_child:checked').length != $('.superadmin_child').length) {
+      $( "#superadmin_parent" ).prop( "checked", false );
+    }else{
+		$( "#superadmin_parent" ).prop( "checked", true );
+	}
+});
+$('.superadmin_child').on('ifUnchecked', function () { 
+	$( "#superadmin_parent" ).prop( "checked", false );
+});
+
+$( "#tester_parent" ).click(function() {  
+	if($('#tester_parent').is(':checked')){
+		$('.tester_child').iCheck('check'); 	
+	}else{
+		$('.tester_child').iCheck('uncheck');
+	}
+
+});
+$('.tester_child').on('ifChecked', function(event){ 
+	if ($('.tester_child:checked').length != $('.tester_child').length) {
+      $( "#tester_parent" ).prop( "checked", false );
+    }else{
+		$( "#tester_parent" ).prop( "checked", true );
+	}
+});
+$('.tester_child').on('ifUnchecked', function () { 
+	$( "#tester_parent" ).prop( "checked", false );
+});

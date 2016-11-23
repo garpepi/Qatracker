@@ -41,12 +41,13 @@
 				  <input type="text" id="team-leader-name" disabled class="form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'edit') :?> value='<?php echo $contents['form']['name'];?>'  <?php endif;?> >				  
 				</div>
 			  </div>
+			  <!--
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Access Menu</label>
 				<div class="col-md-9 col-sm-9 col-xs-12">
 				  <select name='class_menu[]' class="select2_multiple form-control" multiple="multiple">
 					<option value = ''>Choose option</option>
-					<?php 
+					<?php /*
 						foreach($contents['class_access'] as $class):
 							$flag_select = 0;
 							$flag_print = 1;
@@ -67,8 +68,110 @@
 							<option <?php echo (($flag_select) ? 'selected' : '');?> value = '<?php echo $class['id'];?>'><?php echo $class['menu_name'];?> </option>
 							<?php
 						}
-						endforeach;?>
+					endforeach;
+					*/?>
 				  </select>
+				</div>
+			  </div>
+			  -->
+			  <div class="form-group">
+				<label class="col-md-3 col-sm-3 col-xs-12 control-label">Access Menu
+				</label>
+				<div class="col-md-9 col-sm-9 col-xs-12">
+					<?php 
+						$tester = array();
+						$admin = array();
+						$superadmin = array();
+						foreach($contents['class_access'] as $class):
+							$flag_select = 0;
+							$flag_print = 1;
+							foreach($contents['user_access'] as $u_access):
+								if($u_access['class_menu_id'] == $class['id']):
+									if($u_access['status'] == 'active'){
+										$flag_select = 1;
+									}
+									
+									if($u_access['status'] == 'persistence'){
+										$flag_print = 0;
+									}
+								endif;
+									
+							endforeach;
+							if($flag_print){
+								if($class['id'] == 12){
+									$tester[] = array(
+											'id' => 12,
+											'name' => $class['menu_name'],
+											'cheked' => $flag_select
+										);
+								}
+								if($class['id'] == 14){
+									$superadmin[] = array(
+											'id' => 14,
+											'name' => $class['menu_name'],
+											'cheked' => $flag_select
+										);
+								}
+								if($class['id'] != 14 && $class['id'] != 12){
+									$admin[] = array(
+											'id' => $class['id'],
+											'name' => $class['menu_name'],
+											'cheked' => $flag_select
+										);
+								}
+							
+							}
+					endforeach;?>
+					
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" id='admin_parent' > Admin Group
+						</label>
+					</div>
+					<?php
+						foreach($admin as $value):
+							?>
+							<div class="checkbox">
+								<label>
+								  <input name='class_menu[]' type="checkbox" class="flat admin_child" value= <?php echo $value['id']; ?> <?php echo ($value['cheked']==1 ? 'checked="checked"' : '' );?>> <?php echo $value['name'];?>
+								</label>
+							</div>
+							<?php
+						endforeach;
+					?>
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" id='tester_parent' > Tester Group
+						</label>
+					</div>
+					<?php
+						foreach($tester as $value):
+							?>
+							<div class="checkbox">
+								<label>
+								  <input name='class_menu[]' type="checkbox" class="flat tester_child" value= <?php echo $value['id']; ?> <?php echo ($value['cheked']==1 ? 'checked="checked"' : '' );?>> <?php echo $value['name'];?>
+								</label>
+							</div>
+							<?php
+						endforeach;
+					?>
+					<div class="checkbox">
+						<label>
+						  <input type="checkbox" id='superadmin_parent' > Superadmin Group
+						</label>
+					</div>
+					<?php
+						foreach($superadmin as $value):
+							?>
+							<div class="checkbox">
+								<label>
+								  <input name='class_menu[]' type="checkbox" class="flat superadmin_child" value= <?php echo $value['id']; ?> <?php echo ($value['cheked']==1 ? 'checked="checked"' : '' );?>> <?php echo $value['name'];?>
+								</label>
+							</div>
+							<?php
+						endforeach;
+					?>
+
 				</div>
 			  </div>
 			  <div class="ln_solid"></div>
