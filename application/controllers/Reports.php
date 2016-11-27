@@ -117,15 +117,15 @@
 						$value['test_case_per_user'],
 						$value['test_case_executed'],
 						$value['test_case_outstanding'],
-						(!empty($value['project']['plan_start_date']) ? date('Y-m-d',strtotime($value['project']['plan_start_date']) :'' )),
-						(!empty($value['project']['plan_end_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_date']) :'' )),
-						(!empty($value['project']['actual_start_date']) ? date('Y-m-d',strtotime($value['project']['actual_start_date']) :'' )),
-						(!empty($value['project']['actual_end_date']) ? date('Y-m-d',strtotime($value['project']['actual_end_date']) :'' )),
+						(!empty($value['project']['plan_start_date']) ? date('Y-m-d',strtotime($value['project']['plan_start_date']) ):'' ),
+						(!empty($value['project']['plan_end_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_date']) ):'' ),
+						(!empty($value['project']['actual_start_date']) ? date('Y-m-d',strtotime($value['project']['actual_start_date']) ):'' ),
+						(!empty($value['project']['actual_end_date']) ? date('Y-m-d',strtotime($value['project']['actual_end_date']) ):'' ),
 						$d.' Days, '.$h.' Hours, '.$m.' Minutes' ,
-						(!empty($value['project']['plan_start_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_start_doc_date']) :'' )),
-						(!empty($value['project']['plan_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_doc_date']) :'' )),
-						(!empty($value['project']['plan_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_doc_date']) :'' )),
-						(!empty($value['project']['actual_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['actual_end_doc_date']) :'' ))			
+						(!empty($value['project']['plan_start_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_start_doc_date']) ):'' ),
+						(!empty($value['project']['plan_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_doc_date']) ):'' ),
+						(!empty($value['project']['plan_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_doc_date']) ):'' ),
+						(!empty($value['project']['actual_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['actual_end_doc_date']) ):'' )			
 						);
 				
 				array_push($data,$temp);
