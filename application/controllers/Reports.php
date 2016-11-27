@@ -102,7 +102,7 @@
 				$m = $value['downtimes'] - ($d * 1440) - ($h * 60);
 				
 				$temp = array(
-						$value['created_date'],
+						date('Y-m-d',strtotime($value['created_date'])),
 						$value['environment'],
 						$value['tester_name'],
 						$value['team_lead'],
@@ -117,15 +117,15 @@
 						$value['test_case_per_user'],
 						$value['test_case_executed'],
 						$value['test_case_outstanding'],
-						$value['project']['plan_start_date'],
-						$value['project']['plan_end_date'],
-						$value['project']['actual_start_date'],
-						$value['project']['actual_end_date'],
+						date('Y-m-d',strtotime($value['project']['plan_start_date'])),
+						date('Y-m-d',strtotime($value['project']['plan_end_date'])),
+						date('Y-m-d',strtotime($value['project']['actual_start_date'])),
+						date('Y-m-d',strtotime($value['project']['actual_end_date'])),
 						$d.' Days, '.$h.' Hours, '.$m.' Minutes' ,
-						$value['project']['plan_start_doc_date'],
-						$value['project']['plan_end_doc_date'],
-						$value['project']['actual_start_doc_date'],
-						$value['project']['actual_end_doc_date']						
+						date('Y-m-d',strtotime($value['project']['plan_start_doc_date'])),
+						date('Y-m-d',strtotime($value['project']['plan_end_doc_date'])),
+						date('Y-m-d',strtotime($value['project']['actual_start_doc_date'])),
+						date('Y-m-d',strtotime($value['project']['actual_end_doc_date']))					
 						);
 				
 				array_push($data,$temp);
