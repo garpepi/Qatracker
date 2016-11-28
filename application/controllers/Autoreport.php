@@ -72,7 +72,7 @@
 			*/
 			//if cli
 			if(!is_cli()){
-				exit();
+			//	exit();
 			}
 			$where = array();
 			
@@ -177,9 +177,16 @@
 			
 			//if cli
 			if(!is_cli()){
-				exit();
+		//		exit();
 			}
 			$this->config->load('qa_tracker_config');
+			$this->load->model('autoreportemail_model');
+			$milist = $this->autoreportemail_model->get_milist(array('status' => 'active'));
+			foreach($milist as $value)
+			{
+				$email[]=$value['email'];
+			}
+
 			$date = '';
 			if(date('j') == 1){
 				$date = date('Y-m',strtotime('-1 month')).'-01 00:00:00 - '.date('Y-m-d H:i:s');
@@ -187,7 +194,7 @@
 				$date = date('Y-m').'-01 00:00:00'.' - '.date('Y-m-d H:i:s');
 			}
 			
-			return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $this->config->item('email_destinations'), array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team BM, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');
+			return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $email, array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team BM, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');
 		
 		}
 
