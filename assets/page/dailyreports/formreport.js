@@ -180,27 +180,6 @@ $(document).ready(function() {
 					$("#actual_start_doc_date").data('daterangepicker').remove();					
 					$("#actual_start_doc_date").prop('readonly', true);
 				}
-				if(obj.actual_end_doc_date != false){
-					//show
-					$('#actual_end_doc_date').show();
-					$('#actual_end_doc_date').val(obj.actual_end_doc_date);
-					$('#actual_end_doc_date_radio').hide();
-				}else{
-					$('#actual_end_doc_date_radio').show();
-					$('#actual_end_doc_date').val('');
-					$('#actual_end_doc_date').hide();
-				}
-				if(obj.actual_end_date != false){
-					//show 
-					$('#actual_end_date').show();
-					$('#actual_end_date').val(obj.actual_end_date);
-					$('#actual_end_date_radio').hide();
-				}else{
-					$('#actual_end_date_radio').show();
-					$('#actual_end_date').val('');
-					$('#actual_end_date').hide();
-				}
-
 			}
 		});
 	}

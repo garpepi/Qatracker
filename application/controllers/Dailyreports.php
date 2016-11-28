@@ -123,6 +123,7 @@
 		
         public function add() {
 			$data_project = array();
+			$data_actual_end_doc_date = array();
 			if ($this->input->server('REQUEST_METHOD') != 'POST'){
 				$this->front_stuff();
 				$this->contents = 'dailyreports/form/index'; // its your view name, change for as per requirement.
@@ -173,19 +174,21 @@
 							$data_project['actual_start_doc_date'] = date('Y-m-d',strtotime($data['actual_start_doc_date']));
 						}
 						if(!empty($data['actual_end_date'])){
-							$data_project['actual_end_date'] = date('Y-m-d');						
+							$data_project['actual_end_date'] = date('Y-m-d');	
+							$data['actual_end_date'] = $data_project['actual_end_date'];
 						}
 						if(!empty($data['actual_end_doc_date'])){
-							$data_project['actual_end_doc_date'] = date('Y-m-d');
+							$data_actual_end_doc_date['actual_end_doc_date'] = date('Y-m-d');
+							$data['actual_end_doc_date'] = $data_actual_end_doc_date['actual_end_doc_date'];
 						}
 					$data['downtimes'] = ($data['downtimes_day'] * 1440) + ($data['downtimes_hour'] * 60) + ($data['downtimes_minute'] * 1);
 					unset($data['actual_start_date']);
 					unset($data['actual_start_doc_date']);
-					unset($data['actual_end_date']);
-					unset($data['actual_end_doc_date']);
 					unset($data['downtimes_day']);
 					unset($data['downtimes_hour']);
 					unset($data['downtimes_minute']);
+					//unset($data['actual_end_date']);
+					//unset($data['actual_end_doc_date']);
 					
 					$data['test_case_outstanding'] = $data['test_case_per_user'] - $data['test_case_executed'] ;
 					$data['user_id'] = $this->session->userdata('logged_in_data')['id'];
@@ -204,14 +207,17 @@
 						if(isset($data_project['actual_end_date']) && $this->projects_model->get_manageprojects(array('projects.id' => $data['project_id'], 'projects.status' => 'active', 'projects.actual_end_date' => null))){
 							$flag = 1;				
 						}
-						if(isset($data_project['actual_end_doc_date']) && $this->projects_model->get_manageprojects(array('projects.id' => $data['project_id'], 'projects.status' => 'active', 'projects.actual_end_doc_date' => null))){
-							$flag = 1;
-						}
 						
 						if($flag){
 							// update project
 							$data_project['id'] = $data['project_id'];
 							$this->projects_model->update_manageprojects($data_project);
+						}
+						
+						//always update actual end doc date if not emty on input
+						if(isset($data_actual_end_doc_date['actual_end_doc_date']) ){
+							$data_actual_end_doc_date['id'] = $data['project_id'];
+							$this->projects_model->update_manageprojects($data_actual_end_doc_date);
 						}
 						$this->session->set_flashdata('form_msg', 'Success');
 						redirect('/dailyreports/add');

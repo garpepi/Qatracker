@@ -251,10 +251,6 @@
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Actual End Test <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<input type='hidden' name="actual_end_date" value=0 >
-				<?php if(!empty($contents['project']['actual_end_date'])) :?>
-					<input disabled type="text" id="actual_end_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
-				<?php else:?>
-				<input disabled type="text" id="actual_end_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
 				  <div class="radio" id='actual_end_date_radio'>
 					<label>
 					  <input type="radio" class="flat" name="actual_end_date" 
@@ -289,17 +285,12 @@
 					  ?> value='1'> Done
 					</label>
 				  </div>
-				  <?php endif;?>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Actual End Doc Test <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<input type='hidden' name="actual_end_doc_date" value=0 >
-				<?php if(!empty($contents['project']['actual_end_doc_date'])) :?>
-					<input disabled type="text" id="actual_end_doc_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_doc_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
-				<?php else:?>
-				  <input disabled type="text" id="actual_end_doc_date" <?php if($this->uri->segment(2) == 'view' ):	?> value='<?php echo date('m/d/Y',strtotime($contents['project']['actual_end_doc_date'])); ?>' <?php endif; ?>  class="form-control col-md-7 col-xs-12">
 				  <div class="radio" id='actual_end_doc_date_radio'>
 					<label>
 					  <input type="radio" class="flat" name="actual_end_doc_date" 
@@ -333,7 +324,6 @@
 					  ?> value='1'> Done
 					</label>
 				  </div>
-				  <?php endif;?>
 				</div>
 			  </div>
 			  <div class="ln_solid"></div>

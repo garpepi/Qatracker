@@ -82,6 +82,8 @@ CREATE TABLE IF NOT EXISTS `daily_reports` (
   `test_case_outstanding` int(11) NOT NULL,
   `downtimes` int(11) NOT NULL,
   `remarks` varchar(255) CHARACTER SET utf32 COLLATE utf32_unicode_ci DEFAULT NULL,
+  `actual_end_date` date DEFAULT NULL,
+  `actual_end_doc_date` date DEFAULT NULL,
   `user_c` bigint(20) NOT NULL,
   `user_m` bigint(20) DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
