@@ -176,10 +176,14 @@
 						if(!empty($data['actual_end_date'])){
 							$data_project['actual_end_date'] = date('Y-m-d');	
 							$data['actual_end_date'] = $data_project['actual_end_date'];
+						}else{
+							$data['actual_end_date'] = NULL;
 						}
 						if(!empty($data['actual_end_doc_date'])){
 							$data_actual_end_doc_date['actual_end_doc_date'] = date('Y-m-d');
 							$data['actual_end_doc_date'] = $data_actual_end_doc_date['actual_end_doc_date'];
+						}else{
+							$data['actual_end_doc_date'] = NULL;
 						}
 					$data['downtimes'] = ($data['downtimes_day'] * 1440) + ($data['downtimes_hour'] * 60) + ($data['downtimes_minute'] * 1);
 					unset($data['actual_start_date']);
