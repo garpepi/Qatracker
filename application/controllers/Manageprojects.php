@@ -266,7 +266,8 @@
 		
 		public function drop($id = 0, $reason = ''){
 			if($id != 0 || $reason != ''){
-				
+				$reason = trim($reason); 
+				$reason = str_replace(" ", " ", $reason);
 				$data = array('id' => $id, 'status' => 'drop', 'drop_reason' => $reason);
 				$this->projects_model->update_manageprojects($data);				
 			}

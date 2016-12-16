@@ -159,7 +159,7 @@
 			  <div class="form-group">
 				  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Remark (255 max) :</label>
 				  <div class="col-md-6 col-sm-6 col-xs-12">
-						<textarea <?php echo ($this->uri->segment(2) == 'view') ? 'disabled' : '' ; ?>  id="message" class="form-control" name="remarks"  data-parsley-maxlength="255" data-parsley-maxlength-message="Max 255 caracters long info description" data-parsley-validation-threshold="50" <?php if($this->uri->segment(2) == 'view' ):?> <?php echo $contents['form']['remarks']; ?>  <?php endif; ?> ></textarea>
+						<textarea <?php echo ($this->uri->segment(2) == 'view') ? 'disabled' : '' ; ?>  id="message" class="form-control" name="remarks"  data-parsley-maxlength="20000" data-parsley-maxlength-message="Max 20000 caracters long info description" data-parsley-validation-threshold="50" <?php if($this->uri->segment(2) == 'view' ):?> <?php echo $contents['form']['remarks']; ?>  <?php endif; ?> ></textarea>
 				   </div>
 			  </div>
 			  <div class="form-group">
