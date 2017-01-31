@@ -62,6 +62,17 @@
 		
 		public function monthlyrank(){
 			$this->front_stuff();
+			$this->data = array(
+							'title' => 'Reports',
+							'box_title_1' => 'Generate Test Script Performance Report',
+							'sub_box_title_1' => 'Generate Test Script Performance report',
+							'box_title_2' => 'Projects List',
+							'sub_box_title_2' => 'List of projects',
+							'box_title_3' => 'Finished Projects List',
+							'sub_box_title_3' => 'List of Finished projects',
+							'box_title_4' => 'Droped Projects List',
+							'sub_box_title_4' => 'List of Droped projects'
+						);
 			$this->contents = 'reports/monthlyrank'; // its your view name, change for as per requirement.
 			
 			// Contents

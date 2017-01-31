@@ -15,7 +15,7 @@ class Api_model extends CI_Model {
 			$status_code = null;
 			$content_type = null;
 
-			$uri = 'http://hrmadidata.garpepi.com/Api/count_employee_workhours';
+			$uri = $this->config->item('hrm').'/Api/count_employee_workhours';
 			$client = new GuzzleHttp\Client();
 			$res = $client->post($uri, [
 				'form_params' => [
