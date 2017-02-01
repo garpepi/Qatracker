@@ -103,8 +103,7 @@
 					$where += array('daily_reports.user_id' => $value);
 				}
 			}
-			echo db_date_format(substr($this->input->post('daterange'),0,10));
-			exit();
+
 			if(!$this->input->post('alldate')){
 				$where += array('daily_reports.created_date >= ' => db_date_format(substr($this->input->post('daterange'),0,10)));
 				$where += array('daily_reports.created_date <= ' => db_date_format(substr($this->input->post('daterange'),-10)));
@@ -224,7 +223,7 @@
 			$month = '';
 			$start = '';
 			$end= '';
-
+			
 			foreach($fetch as $key=> $value)
 			{	
 				if($month != date('Y-m',strtotime($value['created_date'])) )
