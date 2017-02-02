@@ -167,6 +167,7 @@
 		// performance tesst script
 		private function time_per_month($data){
 			$return = array('total' => 0, 'data' => array());
+			$test = array();
 			if(empty($data))
 			{
 				return $return;
@@ -297,9 +298,57 @@
 			// end range
 			
 			// end formating data
-			$this->generate_range_performence_report($this->input->post('daterange'),$export_data); // to excel
+			if($this->input->post('type') != 'download'){
+				$this->preview_performance($this->input->post('daterange'),$export_data);
+			}else{
+				$this->generate_range_performence_report($this->input->post('daterange'),$export_data); // to excel
+			}
+			
 		}
 		
+		private function preview_performance($date_range,$export_data)
+		{
+			echo 'aaaaaaaa';
+			$this->front_stuff();
+			$this->page_js  = array(
+							'vendors/iCheck/icheck.min.js',
+							'vendors/datatables.net/js/jquery.dataTables.min.js',
+							'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js',
+							'vendors/datatables.net-buttons/js/dataTables.buttons.min.js',
+							'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js',
+							'vendors/datatables.net-buttons/js/buttons.flash.min.js',
+							'vendors/datatables.net-buttons/js/buttons.html5.min.js',
+							'vendors/datatables.net-buttons/js/buttons.print.min.js',
+							'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js',
+							'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js',
+							'vendors/datatables.net-responsive/js/dataTables.responsive.min.js',
+							'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js',
+							'vendors/datatables.net-scroller/js/dataTables.scroller.min.js',
+							'vendors/jszip/dist/jszip.min.js',
+							'vendors/pdfmake/build/pdfmake.min.js',
+							'vendors/pdfmake/build/vfs_fonts.js',
+							'page/reports/preview.js'
+						);
+			$this->data = array(
+							'title' => 'Test Script Performance Report',
+							'box_title_1' => 'Test Script Performance Report '.$date_range,
+							'sub_box_title_1' => 'Generate Test Script Performance report',
+							'box_title_2' => 'Projects List',
+							'sub_box_title_2' => 'List of projects',
+							'box_title_3' => 'Finished Projects List',
+							'sub_box_title_3' => 'List of Finished projects',
+							'box_title_4' => 'Droped Projects List',
+							'sub_box_title_4' => 'List of Droped projects'
+						);
+			$this->contents = 'reports/previewperformance'; // its your view name, change for as per requirement.
+			
+			// Contents
+			$this->data['contents'] = array(
+							'data' => $export_data
+			);
+			//$this->fancy_print($this->data['contents']);
+			$this->layout();
+		}
 		private function generate_range_performence_report($date_range,$data_gen){
 			$header[] = array(
 						'Employee Id',

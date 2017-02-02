@@ -69,6 +69,19 @@
 						  <input type="text" style="width: 200px" name="daterange" id="daterange" class="form-control" required disabled>
 						</div>
 					</div>
+				  <div class="form-group">
+					<label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+					  <div class="btn-group" >
+						<label class="btn btn-default" >
+						  <input type="radio" name="type" value="preview" checked> &nbsp; Preview &nbsp;
+						</label>
+						<label class="btn btn-primary" >
+						  <input type="radio" name="type" value="excel"> Download
+						</label>
+					  </div>
+					</div>
+				  </div>
 				
 			</div>
 
