@@ -231,3 +231,13 @@ $(document).ready(function() {
 	});
 
 });
+
+$( "#phase" ).change(function() {
+  if($( "#phase" ).val() == 4)
+  {
+	$('#total_test_case_executed').attr('min', 1);
+  }
+  else{
+	$('#total_test_case_executed').attr('min', 0);
+  }
+});

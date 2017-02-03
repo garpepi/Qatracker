@@ -144,7 +144,7 @@
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Phase <span class="required">*</span></label>
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				  <select class="form-control" name='phase_id' <?php echo ($this->uri->segment(2) == 'view') ? 'disabled' : '' ; ?> required="required">
+				  <select id = 'phase' class="form-control" name='phase_id' <?php echo ($this->uri->segment(2) == 'view') ? 'disabled' : '' ; ?> required="required">
 					<option value=''>Choose option</option>
 					<?php
 					foreach ($contents['phase'] as $phase):

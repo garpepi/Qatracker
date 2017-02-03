@@ -157,13 +157,18 @@
 				$this->form_validation->set_rules('phase_id', 'Phase', 'required');
 				$this->form_validation->set_rules('total_test_case', 'Total Tase case', 'required|min_length[0]');
 				$this->form_validation->set_rules('test_case_per_user', 'Total Tase case assign', 'required|min_length[0]');
-				$this->form_validation->set_rules('test_case_executed', 'Total Tase case executed', 'required|min_length[0]');
 				$this->form_validation->set_rules('downtimes_day', 'Day', 'required|min_length[0]');
 				$this->form_validation->set_rules('downtimes_hour', 'Hour', 'required|min_length[0]');
 				$this->form_validation->set_rules('downtimes_minute', 'Minute', 'required|min_length[0]');
 				$this->form_validation->set_rules('actual_end_date', 'Actual End Date', 'required');
 				$this->form_validation->set_rules('actual_end_doc_date', 'Actual Doc End Date', 'required');
-				
+				if($this->input->post('phase_id') == 4)
+				{
+					$this->form_validation->set_rules('test_case_executed', 'Total Tase case executed', 'required|min_length[1]');
+				}else{
+					$this->form_validation->set_rules('test_case_executed', 'Total Tase case executed', 'required|min_length[0]');
+				}
+					
 				if($this->form_validation->run()){
 					
 					$data = $this->input->post();
