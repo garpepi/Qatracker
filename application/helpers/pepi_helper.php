@@ -59,6 +59,25 @@ if ( ! function_exists('db_date_format'))
         return false;
     }
 }
+if ( ! function_exists('db_date_format_custom_time'))
+{
+    function db_date_format_custom_time($unix_ts = 0, $time='')
+    {
+        if ($unix_ts > 0 && !empty($time)) {
+            $CI =& get_instance();
+			
+            $site_date_format = $CI->config->item('db_date_format');
+            if (!empty($site_date_format)) {
+                $date_format = $site_date_format;
+            } else {
+                $date_format = 'Y-m-d '.$time;
+            }
+            $date = date($date_format,strtotime($unix_ts));
+            return $date;
+        }
+        return false;
+    }
+}
 
 if ( ! function_exists('return_json'))
 {

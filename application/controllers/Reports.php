@@ -186,7 +186,7 @@
 						$return['total'] += 7*60;
 						$return['data'][$value->date] = 7*60;
 					}
-					
+
 				}
 			}
 			return $return;
@@ -214,10 +214,10 @@
 			}
 			if(!$this->input->post('alldate')){
 				$where += array('daily_reports.created_date >= ' => db_date_format(substr($this->input->post('daterange'),0,10)));
-				$where += array('daily_reports.created_date <= ' => db_date_format(substr($this->input->post('daterange'),-10)));
+				$where += array('daily_reports.created_date <= ' => db_date_format_custom_time(substr($this->input->post('daterange'),-10),'23:59:59'));
 			}
 			$where += array('daily_reports.phase_id ' => 4); // Test Execution Phase
-			
+
 			$fetch = $this->daily_reports_model->get_reports($where,'daily_reports.created_date asc'); // bisa di potong
 			$data = array();
 			$tmp = array();
@@ -298,7 +298,7 @@
 			// end range
 			
 			// end formating data
-			if($this->input->post('type') != 'download'){
+			if($this->input->post('type') != 'excel'){
 				$this->preview_performance($this->input->post('daterange'),$export_data);
 			}else{
 				$this->generate_range_performence_report($this->input->post('daterange'),$export_data); // to excel
@@ -308,7 +308,6 @@
 		
 		private function preview_performance($date_range,$export_data)
 		{
-			echo 'aaaaaaaa';
 			$this->front_stuff();
 			$this->page_js  = array(
 							'vendors/iCheck/icheck.min.js',
