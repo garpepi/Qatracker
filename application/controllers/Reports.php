@@ -296,7 +296,7 @@
 				array_push($export_data,$temp);
 			}
 			// end range
-			
+
 			// end formating data
 			if($this->input->post('type') != 'excel'){
 				$this->preview_performance($this->input->post('daterange'),$export_data);
