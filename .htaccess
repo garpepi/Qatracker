@@ -2,7 +2,11 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L] 
+RewriteRule ^(.*)$ index.php/$1 [L]
+RewriteRule .* - [E=noconntimeout:1]
+RewriteRule .* - [E=noabort:1]
 </IfModule>
 
-php_value max_execution_time 600
+<IfModule litespeed>
+RewriteRule .* - [E=noabort:1]
+</IfModule>
