@@ -149,8 +149,9 @@ $(document).ready(function() {
 //<!-- Select2 -->
       $(document).ready(function() {
         $(".select2_multiple").select2({
-          maximumSelectionLength: 10,
-          placeholder: "With Max Selection limit 10",
+      //    maximumSelectionLength: 10,
+      //    placeholder: "With Max Selection limit 10",
+      //    placeholder: "With Max Selection limit 10",
           allowClear: true
         });
 

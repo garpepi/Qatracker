@@ -118,8 +118,8 @@ $(document).ready(function() {
 	  allowClear: true
 	});
 	$(".select2_multiple_tester").select2({
-	  maximumSelectionLength: 10,
-	  placeholder: "With Max Selection limit 10",
+	 // maximumSelectionLength: 10,
+	 // placeholder: "With Max Selection limit 10",
 	  allowClear: true
 	});
 });

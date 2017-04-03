@@ -249,12 +249,24 @@
 			  <tbody>
 			  <?php
 				foreach($contents['table_active'] as $active_data){
+					$appname = '';
+					$testname = '';
+					foreach ($active_data['application_impact'] as $app_name): $appname=$app_name['name'].', '.$appname; endforeach;
+					foreach ($active_data['tester_on_projects'] as $tester_name): $testname=$tester_name['name'].', '.$testname; endforeach;
+					if(strlen ($appname) > 26)
+					{
+						$appname = substr($appname,0,25).'.... (click view for more detail)';
+					}
+					if(strlen ($testname) > 26)
+					{
+						$testname = substr($testname,0,25).'.... (click view for more detail)';
+					}
 					?>
 						<tr>
 						  <td><?php echo $active_data['id'];?></td>
-						  <td><?php foreach ($active_data['application_impact'] as $app_name): echo $app_name['name'].', '; endforeach;?> </td>
+						  <td><?php echo $appname; ?> </td>
 						  <td><?php if(empty($active_data['TRF'])): echo 'UPCOMING TRF'; else: echo $active_data['TRF']; endif;  ?></td>
-						  <td><?php foreach ($active_data['tester_on_projects'] as $tester_name): echo $tester_name['name'].', '; endforeach;?> </td>
+						  <td><?php echo $testname; ?> </td>
 						  <td>
 								<a href="/manageprojects/view/<?php echo $active_data['id'] ; ?>" target='_blank'><span class='fa fa-eye'></span></a>
 								<a href="/manageprojects/edit/<?php echo $active_data['id'] ; ?>"><span class='fa fa-edit'></span></a>  
