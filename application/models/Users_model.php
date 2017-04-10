@@ -120,14 +120,15 @@ class Users_model extends CI_Model {
 					
 				}catch (Exception $e){
 					$this->db->trans_rollback();
-//					throw new Exception ('Error on insert');
+					error_log('Error on insert users on insert_users method. Catch Exception trans_rollback.');
+					throw new Exception ('Error on insert');
 				}			
 				
 			if ($this->db->trans_status() === FALSE)
 			{
 					$this->db->trans_rollback();
+					error_log('Error on insert users on insert_users method. trans_status FALSE.');
 					throw new Exception ('Error on insert');
-					return false;
 			}
 			else
 			{
@@ -136,6 +137,7 @@ class Users_model extends CI_Model {
 			return true; 
 			
 		}else{
+			error_log('Error on insert users on insert_users method. $data is empty.');
 			return false;
 		}
     }

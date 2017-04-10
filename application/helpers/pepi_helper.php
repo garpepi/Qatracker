@@ -99,3 +99,12 @@ if ( ! function_exists('is_ajax'))
         return false;
     }
 }
+
+if ( ! function_exists('error_log'))
+{
+    function error_log($msg= '')
+    {
+		write_file('./errorapp.log', date('Y-m-d H:m:s').' '.session_id().' Message : '.print_r($msg, true)."\n", "a+");
+		return true;
+    }
+}
