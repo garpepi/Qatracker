@@ -70,7 +70,6 @@
 		  <li><a><i class="fa fa-file-o"></i> Download Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>reports/manualreports"><i class="fa fa-download"></i> Generate Reports </a>
-			  <li><a href="<?php echo base_url();?>reports/monthlyrank"><i class="fa fa-download"></i> Test Script Performance Reports </a>
 			</ul>
 		  </li>
 		<?php endif;?>
