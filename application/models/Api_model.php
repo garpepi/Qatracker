@@ -46,4 +46,34 @@ class Api_model extends CI_Model {
 			return $return;
 		}
    }
+   
+   public function get_holiday_list(){
+	   try{
+			$php_required = '5.5';
+			$this->load->helper('url');
+
+			$result = null;
+			$status_code = null;
+			$content_type = null;
+
+			$uri = $this->config->item('hrm').'/Api/holidays?X-API-KEY=iminlove';
+			$client = new GuzzleHttp\Client();
+
+			$res = $client->request('GET', $uri, [
+				'auth' => ['sysQA', '5081d27aec3340b7ab2c52635c69ff130af1a27a', 'digest'],
+			]);
+			
+			$return['status_code'] = $res->getStatusCode();
+			$return['data'] = json_decode((string) $res->getBody());
+			
+			return $return;
+		}catch(GuzzleHttp\Exception\ClientException $e){
+			
+			$response = $e->getResponse();
+			$responseBodyAsString = $response->getBody()->getContents();
+			$return['status_code'] = $response->getStatusCode();
+			$return['msg'] = $responseBodyAsString;
+			return $return;
+		}
+   }
 }

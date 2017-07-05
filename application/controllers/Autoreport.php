@@ -194,8 +194,37 @@
 				$date = date('Y-m').'-01 00:00:00'.' - '.date('Y-m-d H:i:s');
 			}
 			
-			return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $email, array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team BM, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');
+			$this->load->model('api_model');
+			
+			$holiday_date = array();
+			foreach($this->api_model->get_holiday_list()['data'] as $holiday)
+			{
+				$holiday_date[] = $holiday->date;
+			}
+			
+			if(in_array(date('Y-m-d'), $holiday_date))
+			{
+				return 'Today is holiday';
+			}else{
+				return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $email, array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team BM, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');				
+			}
 		
+		}
+		
+		public function test()
+		{
+			$this->load->model('api_model');
+			
+			$holiday_date = array();
+			foreach($this->api_model->get_holiday_list()['data'] as $holiday)
+			{
+				$holiday_date[] = $holiday->date;
+			}
+
+			if (in_array(date('Y-m-d'), $holiday_date)) {
+				echo "Got Irix";
+			}
+			
 		}
 
     }
