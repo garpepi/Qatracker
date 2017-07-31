@@ -3,7 +3,7 @@
 		public function __construct() {
 		   parent::__construct();
 		   $this->load->model('projects_model');	
-			$this->load->model('daily_reports_model');	
+			$this->load->model('daily_reports_model');
 		}
 		
 		private function generate_report($data_gen, $date){
@@ -74,7 +74,7 @@
 			if(!is_cli()){
 				exit();
 			}
-			$where = array();
+			$where = array();			
 			
 			if(date('j') == 1){
 				$where += array('daily_reports.created_date >= ' => date('Y-m',strtotime('-1 month')).'-01 00:00:00');
@@ -82,7 +82,7 @@
 			}else{
 				$where += array('daily_reports.created_date >= ' => date('Y-m').'-01 00:00:00');
 				$where += array('daily_reports.created_date < ' => date('Y-m-d 00:00:00')); 
-			}
+			}				
 			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
 			// Write log generate to file
@@ -180,11 +180,12 @@
 				exit();
 			}
 			$this->config->load('qa_tracker_config');
-			$this->load->model('autoreportemail_model');
-			$milist = $this->autoreportemail_model->get_milist(array('status' => 'active'));
+			$this->load->model('api_model');
+			$milist = $this->api_model->get_milist()['data'];
+			
 			foreach($milist as $value)
 			{
-				$email[]=$value['email'];
+				$email[]=$value->email;
 			}
 
 			$date = '';
@@ -214,16 +215,12 @@
 		public function test()
 		{
 			$this->load->model('api_model');
-			
-			$holiday_date = array();
-			foreach($this->api_model->get_holiday_list()['data'] as $holiday)
+			echo '<pre>';
+			$milist = array();
+			foreach($this->api_model->get_milist()['data'] as $milists)
 			{
-				$holiday_date[] = $holiday->date;
-			}
-
-			if (in_array(date('Y-m-d'), $holiday_date)) {
-				echo "Got Irix";
-			}
+				$milist[] = $milists->email;
+			}			
 			
 		}
 
