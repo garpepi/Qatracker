@@ -118,7 +118,7 @@
 						$value['project']['sum_TRF'],
 						$value['progress'],
 						$value['phase'],
-						$value['remarks'],
+						ltrim($value['remarks'],'='),
 						$value['total_test_case'],
 						$value['test_case_per_user'],
 						$value['test_case_executed'],
