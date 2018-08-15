@@ -76,10 +76,11 @@
 		<?php if(in_array('accesspriv',$page_access)) :?>
 		  <li><a href="<?php echo base_url();?>accesspriv/"><i class="fa fa-key"></i> Priviledge Access </a>
 		<?php endif;?>
+		<!--
 		<?php if(in_array('emailreport',$page_access)) :?>
 		  <li><a href="<?php echo base_url();?>emailreport/"><i class="fa fa-envelope"></i> Email Auto Report List </a>
 		<?php endif;?>
-		
+		-->
 		<?php if(in_array('dailyreports',$page_access)) :?>
 		  <li><a><i class="fa fa-file-o"></i> Daily Reports <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
