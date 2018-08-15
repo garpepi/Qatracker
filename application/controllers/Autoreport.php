@@ -182,7 +182,10 @@
 			$this->config->load('qa_tracker_config');
 			$this->load->model('api_model');
 			$milist = $this->api_model->get_milist()['data'];
-
+			
+			// Write log generate to file
+			write_file('./genreports/milist.log', 'Fetch : '.print_r($milist, true)."\n", "a+");
+			
 			foreach($milist as $value)
 			{
 				$email[]=$value->email;
