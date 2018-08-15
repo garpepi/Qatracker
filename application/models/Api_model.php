@@ -91,7 +91,7 @@ class Api_model extends CI_Model {
 			$client = new GuzzleHttp\Client();
 
 			$res = $client->request('GET', $uri, [
-				'client' => $this->config->item('client'),
+				'client' => 'bi',
 				'auth' => ['sysQA', '5081d27aec3340b7ab2c52635c69ff130af1a27a', 'digest'],
 			]);
 			
