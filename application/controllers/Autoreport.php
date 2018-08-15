@@ -184,19 +184,18 @@
 			$return_api = $this->api_model->get_milist();
 			
 			// Write log generate to file
-			write_file('./genreports/milist.log', 'Return API GET MILIST: '.print_r($return_api, true)."\n", "a+");
-			$milist = $return_api['data'];
-			write_file('./genreports/milist.log', 'Fetch GET MILIST : '.print_r($milist, true)."\n", "a+");
+			write_file('./genreports/milist.log', date('Y-m-d H:i:s').'Return API GET MILIST: '.print_r($return_api, true)."\n", "a+");
 			
 			if(empty($milist) || $milist == NULL){
 				$return_api = $this->api_model->get_milist_postmethod();
-				write_file('./genreports/milist.log', 'Return API POST METHOD MILIST: '.print_r($return_api, true)."\n", "a+");
+				write_file('./genreports/milist.log', date('Y-m-d H:i:s').'Return API POST METHOD MILIST: '.print_r($return_api, true)."\n", "a+");
 				$milist = $return_api['data'];
-				write_file('./genreports/milist.log', 'Fetch POST METHOD MILIST : '.print_r($milist, true)."\n", "a+");
+			}else{
+				$milist = $return_api['data'];
 			}
 			
 			if(empty($milist) || $milist == NULL){
-				write_file('./genreports/milist.log', 'FAILED TO GET MILIST DATA'."\n", "a+");
+				write_file('./genreports/milist.log', date('Y-m-d H:i:s').'FAILED TO GET MILIST DATA'."\n", "a+");
 				exit();
 			}
 			
