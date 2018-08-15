@@ -81,7 +81,8 @@ class Api_model extends CI_Model {
 	   try{
 			$php_required = '5.5';
 			$this->load->helper('url');
-
+			$this->config->load('qa_tracker_config');
+			
 			$result = null;
 			$status_code = null;
 			$content_type = null;
@@ -90,7 +91,7 @@ class Api_model extends CI_Model {
 			$client = new GuzzleHttp\Client();
 
 			$res = $client->request('GET', $uri, [
-				'client' => 'mandiri',
+				'client' => $this->config->load('client'),
 				'auth' => ['sysQA', '5081d27aec3340b7ab2c52635c69ff130af1a27a', 'digest'],
 			]);
 			
