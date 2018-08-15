@@ -181,9 +181,11 @@
 			}
 			$this->config->load('qa_tracker_config');
 			$this->load->model('api_model');
-			$milist = $this->api_model->get_milist()['data'];
+			$return_api = $this->api_model->get_milist();
 			
 			// Write log generate to file
+			write_file('./genreports/milist.log', 'Return API : '.print_r($return_api, true)."\n", "a+");
+			$milist = $return_api['data'];
 			write_file('./genreports/milist.log', 'Fetch : '.print_r($milist, true)."\n", "a+");
 			
 			foreach($milist as $value)
