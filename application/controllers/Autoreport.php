@@ -140,7 +140,85 @@
 			$this->generate_report($data,date('d M Y'));
 
 		}
+		
+		public function autogeneratebyreq($from,$to){
+			/*
+			$from & to = 17-08-1991
+			
+			*/
+			//validate if not 6 a clock
+			/*
+			if(date('H') != 6){
+				exit();	
+			}
+			*/
+			//if cli
+			if(!is_cli()){
+				exit();
+			}
+			$where = array();
+			
+			$where += array('daily_reports.created_date >= ' => date('Y-m-d',strtotime($from)).' 00:00:00');
+			$where += array('daily_reports.created_date < ' => date('Y-m-d',strtotime($to)).' 00:00:00');
+			
+			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
+			$data = array();
+			// Write log generate to file
+			write_file('./genreports/file.log', 'Fetch : '.print_r($fetch, true)."\n", "a+");
+			write_file('./genreports/file.log', 'Where : '.print_r($where, true)."\n", "a+");
+			foreach($fetch as $key=> $value)
+			{
+				// set data
+				$temp = array(); // initialize
+				$application_list = '';// initialize
+				foreach($value['project']['application_impact'] as $keys => $app_data){
+					if(empty($application_list) || isset($app_data['project']['application_impact'][$keys+1]) ){
+						$application_list .= $app_data['name'].',';
+					}else{
+						$application_list .= $app_data['name'];
+					}
+				}
 
+				// Time Convert
+				//
+				$d = floor ($value['downtimes'] / 1440);
+				$h = floor (($value['downtimes'] - $d * 1440) / 60);
+				$m = $value['downtimes'] - ($d * 1440) - ($h * 60);
+
+				$temp = array(
+						date('Y-m-d',strtotime($value['created_date'])),
+						$value['environment'],
+						$value['tester_name'],
+						$value['team_lead'],
+						($value['project']['TRF'] != '' ? $value['project']['TRF'] : 'UPCOMING TRF'),
+						$value['project']['TOC'],
+						$application_list,
+						$value['project']['sum_TRF'],
+						$value['progress'],
+						$value['phase'],
+						ltrim($value['remarks'],'='),
+						$value['total_test_case'],
+						$value['test_case_per_user'],
+						$value['test_case_executed'],
+						$value['test_case_outstanding'],
+						(!empty($value['project']['plan_start_date']) ? date('Y-m-d',strtotime($value['project']['plan_start_date']) ):'' ),
+						(!empty($value['project']['plan_end_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_date']) ):'' ),
+						(!empty($value['project']['actual_start_date']) ? date('Y-m-d',strtotime($value['project']['actual_start_date']) ):'' ),
+						(!empty($value['actual_end_date']) ? date('Y-m-d',strtotime($value['actual_end_date']) ):'' ),
+						$d.' Days, '.$h.' Hours, '.$m.' Minutes' ,
+						(!empty($value['project']['plan_start_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_start_doc_date']) ):'' ),
+						(!empty($value['project']['plan_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_doc_date']) ):'' ),
+						(!empty($value['project']['plan_end_doc_date']) ? date('Y-m-d',strtotime($value['project']['plan_end_doc_date']) ):'' ),
+						(!empty($value['actual_end_doc_date']) ? date('Y-m-d',strtotime($value['actual_end_doc_date']) ):'' )
+						);
+
+				array_push($data,$temp);
+			}
+
+			$this->generate_report($data,date('d M Y',strtotime($to)));
+
+		}
+		
 		private function sending_email($from_email, $from_name, $to, $cc= array(), $subject, $message, $attachment = ''){
 			$this->load->library('email');
 		//$this->email->initialize($config);
