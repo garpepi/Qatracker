@@ -86,8 +86,8 @@
 			$fetch = $this->daily_reports_model->get_reports($where,'tester_name asc, daily_reports.created_date asc');
 			$data = array();
 			// Write log generate to file
-			write_file('./genreports/file.log', 'Fetch : '.print_r($fetch, true)."\n", "a+");
-			write_file('./genreports/file.log', 'Where : '.print_r($where, true)."\n", "a+");
+			//write_file('./genreports/file.log', 'Fetch : '.print_r($fetch, true)."\n", "a+");
+			//write_file('./genreports/file.log', 'Where : '.print_r($where, true)."\n", "a+");
 			foreach($fetch as $key=> $value)
 			{
 				// set data
@@ -138,7 +138,7 @@
 			}
 
 			$this->generate_report($data,date('d M Y'));
-			write_file('./genreports/generate-file.log', 'File was generated: Summary Report QA '.date('d M Y').'.xls'."\n", "a+");
+			write_file('./genreports/generate-file.log', date('d-m-y H:m:s').'File was generated: Summary Report QA '.date('d M Y').'.xls'."\n", "a+");
 
 		}
 		

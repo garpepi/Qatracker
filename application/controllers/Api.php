@@ -83,6 +83,10 @@ class Api extends REST_Controller {
 		}
 	}
 	
+	public function hb_get(){
+		$this->set_response('Dug..', REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
+	}
+	
     public function users_get()
     {
         // Users from a data store e.g. database
