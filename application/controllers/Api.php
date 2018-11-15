@@ -31,13 +31,15 @@ class Api extends REST_Controller {
     }
 	
 	public function dailyreport_post(){
+		api_log("Incoming to dailyreport");
 		$emp_id = $this->post('id');
 		$period = $this->post('period').'-01';
 		$start = date('Y-m-d', strtotime($period));
 		$end = date('Y-m-t', strtotime($period));
 		//$this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id, 'daily_reports.created_date > ' => $start, 'daily_reports.created_date < ' => $end ));
 		//$this->set_response($this->db->last_query(), REST_Controller::HTTP_CREATED);
-		$this->set_response($this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id, 'daily_reports.created_date >= ' => $start, 'daily_reports.created_date <= ' => $end.' 23:59:59' )), REST_Controller::HTTP_CREATED);
+		api_log("Transmite to recipient");
+		$this->set_response($this->daily_reports_model->get_reports(array('users.emp_id' => $emp_id, 'daily_reports.created_date >= ' => $start, 'daily_reports.created_date <= ' => $end.' 23:59:59' )), REST_Controller::HTTP_OK);
 	}
 	
 	public function addingusers_post()
@@ -60,11 +62,16 @@ class Api extends REST_Controller {
 	
 	public function updateusers_post()
     {
+		api_log("Initiate API","updateusers_post");
 		$message = ['status_msg' => 'User Updated'];
-        $this->load->model('users_model');	
-		if($this->users_model->update_users_api($this->post('emp_id'), $this->post('data'))){
-			$this->set_response($message, REST_Controller::HTTP_OK); // CREATED (200) being the HTTP response code			
+        $this->load->model('users_model');
+		$update_status = $this->users_model->update_users_api($this->post('emp_id'), $this->post('data'));
+		api_log("Status Update ",$update_status);
+		if($update_status){
+			api_log("FINISH WITH SUCCESS ","updateusers_post");			
+			$this->set_response($message, REST_Controller::HTTP_OK); // CREATED (200) being the HTTP response code
 		}else{
+			api_log("FAILED ","updateusers_post");		
 			$this->response(NULL, REST_Controller::HTTP_BAD_REQUEST);
 		}
     }
@@ -84,6 +91,9 @@ class Api extends REST_Controller {
 	}
 	
 	public function hb_get(){
+		$hash = $this->get('hashrandom');		
+		api_log($hash."Incoming to heartbeat");
+		api_log($hash."Transmit response to heartbeat");
 		$this->set_response('Dug..', REST_Controller::HTTP_OK); // OK (200) being the HTTP response code
 	}
 	
