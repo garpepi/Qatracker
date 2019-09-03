@@ -239,8 +239,10 @@
 			}
 
 			if($this->email->send()){
+				write_file('./genreports/sendEmail.log', date('Y-m-d H:i:s').'Sending OK'."\n", "a+");
 				return 'Sending Ok';
 			}else{
+				write_file('./genreports/sendEmail.log', date('Y-m-d H:i:s').'Failed To Send Email'."\n", "a+");
 				return 'Sending Not Ok';
 			}
 
