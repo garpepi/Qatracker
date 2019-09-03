@@ -258,16 +258,16 @@
 			}
 			$this->config->load('qa_tracker_config');
 			$this->load->model('api_model');
-			$return_api = $this->api_model->get_milist();
+			//$return_api = $this->api_model->get_milist();
 			
 			// Write log generate to file
-			write_file('./genreports/milist.log', date('Y-m-d H:i:s').'Return API GET MILIST: '.print_r($return_api, true)."\n", "a+");
+			//write_file('./genreports/milist.log', date('Y-m-d H:i:s').'Return API GET MILIST: '.print_r($return_api, true)."\n", "a+");
 			
-			if(empty($milist) || $milist == NULL){
-				$return_api = $this->api_model->get_milist_postmethod();
-				write_file('./genreports/milist.log', date('Y-m-d H:i:s').'Return API POST METHOD MILIST: '.print_r($return_api, true)."\n", "a+");
-				$milist = $return_api['data'];
-			}else{
+			$milist = array();
+			$return_api = $this->api_model->get_milist_postmethod();		
+			write_file('./genreports/milist.log', date('Y-m-d H:i:s').'Return API POST METHOD MILIST: '.print_r($return_api, true)."\n", "a+");
+			
+			if($return_api["status_code"] == 200){
 				$milist = $return_api['data'];
 			}
 			
@@ -300,13 +300,12 @@
 			{
 				return 'Today is holiday';
 			}else{
-        if(!$this->isWeekend(date('Y-m-d')))
-        {
-          return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $email, array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');
-        }else{
-          return 'Today is weekend';
-        }
-
+				if(!$this->isWeekend(date('Y-m-d')))
+				{
+				  return $this->sending_email( $this->config->item('email_sender'), 'Qatracker App', $email, array(), 'Qa Tracker Report '.date('d M Y'), "Dear Team, \n\n Berikut ini kami sampaikan daily report dari Team Adidata (terlampir). \n\n Thanks & Regards, \n Helpdesk@Adidata.co.id \n\n\n\n Qatracker App - by Garpepi", './genreports/Summary Report QA '.date('d M Y').'.xls');
+				}else{
+				  return 'Today is weekend';
+				}
 			}
 
 		}
