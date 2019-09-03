@@ -89,7 +89,10 @@ class Api_model extends CI_Model {
 
 			$uri = $this->config->item('hrm').'/Api/milist?X-API-KEY=iminlove';
 			$client = new GuzzleHttp\Client();
-
+			
+			//LOGGING
+			write_file('./apilogs/milist.log', date('Y-m-d H:i:s').'Request API GET MILIST: '.'{uri:'.$uri.',client:'.$this->config->item('client').'}'."\n", "a+");
+			
 			$res = $client->request('GET', $uri, [
 				'form_params' => ['client' => $this->config->item('client')],
 				'auth' => ['sysQA', '5081d27aec3340b7ab2c52635c69ff130af1a27a', 'digest'],
