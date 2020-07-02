@@ -31,3 +31,4 @@ genreports/*
 application/config/qa_tracker_config.php
 application/config/email.php
 composer.lock
+log.txt
