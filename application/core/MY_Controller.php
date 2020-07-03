@@ -85,7 +85,7 @@
 			 $access_list[]=$value['class_name'];
 			}
 			$this->usr_desc['page_access']= $access_list;
-			if(in_array($this->uri->segment(1),$access_list)){
+			if(in_array($this->uri->segment(1),$access_list) || $this->uri->segment(1) == 'employeegate'){
 				return 1;
 			}else{
 				write_file('./logs/access.log', date('Y-m-d H:i:s').' user '.$this->usr_desc['user_id'].' from ip '.$this->input->ip_address().' failed to access class '.$this->uri->segment(1)."\n", "a+");

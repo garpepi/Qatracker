@@ -27,10 +27,11 @@
 		<ul class="nav side-menu">
   		  <li><a href="<?php echo base_url();?>home"><i class="fa fa-dashboard"></i> Dashboards </a>
 		  
-		  <?php if(in_array('manageuser',$page_access)) :?>
+		  <?php if(in_array('assignsubordinate ',$page_access) ||  in_array('manageuser',$page_access)) :?>
 		  <li><a><i class="fa fa-users"></i> User <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
 			  <li><a href="<?php echo base_url();?>manageuser/userlist">Manage User</a></li>
+			  <?php if(in_array('assignsubordinate',$page_access)) :?><li><a href="<?php echo base_url();?>assignsubordinate">Assign Leader and Subordinate</a></li><?php endif;?>
 			</ul>
 		  </li>
 		  <?php endif;?>
@@ -53,6 +54,7 @@
 						break;
 					}
 				}
+	
 		if($flag_master) :?>
 		  <li><a><i class="fa fa-tasks"></i> Masters <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">

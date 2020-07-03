@@ -62,6 +62,43 @@ ALTER TABLE `user_hirearki`
 INSERT INTO `class_menu` (`id`, `class_name`, `menu_name`) VALUES
 (17, 'employeegateleader', 'As leader'),
 (18, 'assignsubordinate', 'Subordinate Assignment');
+
+--
+-- Table structure for table `bucket_overtime`
+--
+
+CREATE TABLE `bucket_overtime` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `start_in` datetime NOT NULL,
+  `end_out` datetime NOT NULL,
+  `reason` varchar(500) NOT NULL,
+  `acc_stat` enum('queue','accept','reject','delete') NOT NULL DEFAULT 'queue',
+  `acc_id` bigint(20) DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bucket_overtime`
+--
+ALTER TABLE `bucket_overtime`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bucket_overtime`
+--
+ALTER TABLE `bucket_overtime`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
