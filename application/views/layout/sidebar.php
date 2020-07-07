@@ -94,6 +94,7 @@
 		
 		<li><a><i class="fa fa-tasks"></i> Employee Gate <span class="fa fa-chevron-down"></span></a>
 			<ul class="nav child_menu">
+			<?php if(in_array('employeegateleader',$page_access)) :?><li><a href="<?php echo base_url();?>employeegateleader">Overtime Approval</a></li><?php endif;?>
 			  <li><a href="<?php echo base_url();?>employeegate/overtime">Overtime</a></li>
 			</ul>
 		</li>

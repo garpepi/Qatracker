@@ -81,6 +81,12 @@
 		}
 		
 		public function accept($id = 0){
+			// check subordinates
+			$data = $this->employeegateleader_model->get_subordinate(array('id' => $id))[0];
+			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
+				redirect('/home');
+			}
+			
 			if($id != 0){
 				$data = array('id' => $id, 'status' => 'active');
 				$this->employeegateleader_model->approval_overtime($id,true);				
@@ -90,6 +96,12 @@
 		}
 		
 		public function reject($id = 0){
+			// check subordinates
+			$data = $this->employeegateleader_model->get_subordinate(array('id' => $id))[0];
+			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
+				redirect('/home');
+			}
+			
 			if($id != 0){
 				$data = array('id' => $id, 'status' => 'active');
 				$this->employeegateleader_model->approval_overtime($id,false);				
