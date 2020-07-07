@@ -57,7 +57,6 @@
 			  <div class="form-group">
 				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
 				  <?php if($this->uri->segment(2) != 'view') : ?>
-					  <a href="/manageprojects" class="btn btn-primary">Back</a>
 					  <button type="submit" class="btn btn-success">Submit</button>
 				  <?php endif;?>
 				</div>
@@ -69,6 +68,53 @@
 		  </div>
 		</div>
 	  </div>
+	  
+	  <div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="x_panel">
+		  <div class="x_title">
+			<h2><?php echo $box_title_5; ?> <small><?php echo $sub_box_title_5; ?></small></h2>
+			<ul class="nav navbar-right panel_toolbox">
+			  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+			  </li>
+			</ul>
+			<div class="clearfix"></div>
+		  </div>
+		  <div class="x_content">
+			<br />
+		<?php 
+		  if($this->session->flashdata('form_msg')):?>
+			<div class="alert <?php if(strcasecmp(substr($this->session->flashdata('form_msg'),0,7),'success') == 0): echo 'alert-success'; else: echo 'alert-danger'; endif; ?> alert-dismissible fade in" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">*</span>
+				</button>
+				<?php echo $this->session->flashdata('form_msg'); ?>
+			</div>
+			<?php
+		  endif;			 
+		  ?>
+			<form autocomplete="off" <?php if($this->uri->segment(2) != 'view') : ?> action='/employeegate/print/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			  <div class="form-group">
+				<label class="control-label col-md-3 col-sm-3 col-xs-12">Period <span class="required">*</span>
+				</label>
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				  <input id="period_date" class="date-picker form-control col-md-7 col-xs-12" <?php if($this->uri->segment(2) == 'view' || $this->uri->segment(2) == 'edit'):	?> value='<?php echo date('m/d/Y',strtotime($contents['form']['period_date'])); ?>' <?php endif; ?> required="required" type="text" name='period_date'>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+				  <?php if($this->uri->segment(2) != 'view') : ?>
+					  <button type="submit" class="btn btn-success">Print</button>
+				  <?php endif;?>
+				</div>
+			  </div>
+			</form>
+			<?php if($this->uri->segment(2) == 'view') : ?>
+				<button class="btn btn-primary" onclick="self.close()">Close</button>
+			<?php endif;?>
+		  </div>
+		</div>
+	  </div>
+	  
+	  
 	  
 
 	  <div class="col-md-12 col-sm-12 col-xs-12">

@@ -42,7 +42,32 @@
 							'page/contents/employeegate.js',
 						);
 		}
-		
+		public function print(){
+			if (!$this->input->server('REQUEST_METHOD') == 'POST'){
+				redirect('/employeegate/overtime');
+			}
+			$data = $this->input->post();
+			$this->form_validation->set_rules('period_date', 'Period', 'required');
+			
+			if($this->form_validation->run()){
+				$fetch = $this->overtime_bucket_model->get_overtime(array('user_id' => $this->session->userdata('logged_in_data')['id'],'acc_stat ' => 'accept','start_in >=' => $data['period_date'].'-01 00:00:00', 'start_in <=' => $data['period_date'].'-01 23:59:59'));
+				$data = array(
+					'table' => $fetch,
+					'period' => date('F Y'),
+					'leader_name' => $this->userhirearki_model->get_user_hirearki(array('user_id' => $this->session->userdata('logged_in_data')['id']))[0]['leader_name'],
+					'user_name' => $this->userhirearki_model->get_user_hirearki(array('user_id' => $this->session->userdata('logged_in_data')['id']))[0]['user_name']
+					
+				);
+				//$this->fancy_print($this->db->last_query());
+				$this->load->view('print/overtime', $data);
+
+			}else{
+				$this->session->set_flashdata('form_msg', validation_errors());
+				redirect('/employeegate/overtime');
+			}
+			
+			
+		}
         public function Overtime($id = '') {
 			
 			if ($this->input->server('REQUEST_METHOD') == 'POST'){
@@ -86,7 +111,9 @@
 							'box_title_3' => 'Overtime Submission Accept Status',
 							'sub_box_title_3' => '',
 							'box_title_4' => 'Overtime Submission Reject Status',
-							'sub_box_title_4' => ''
+							'sub_box_title_4' => '',
+							'box_title_5' => 'Print Overtime Report',
+							'sub_box_title_5' => ''
 						);
 			
             $this->contents = 'employeegate/overtime/index'; // its your view name, change for as per requirement.

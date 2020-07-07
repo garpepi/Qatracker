@@ -79,7 +79,7 @@ $(document).ready(function() {
 	  format: 'MM/DD/YYYY HH:mm:ss',
 	  maxDate: new Date()
 	}, function(start, end, label) {
-	  console.log(start.toISOString(), end.toISOString(), label);
+	 // console.log(start.toISOString(), end.toISOString(), label);
 	});
 	
 	$('#plan_end_date').daterangepicker({
@@ -91,7 +91,16 @@ $(document).ready(function() {
 	  maxDate: new Date()
 	  
 	}, function(start, end, label) {
-	  console.log(start.toISOString(), end.toISOString(), label);
+	  //console.log(start.toISOString(), end.toISOString(), label);
+	});
+	
+	$('#period_date').daterangepicker({
+	  singleDatePicker: true,
+	  format: 'YYYY-MM',
+	  maxDate: new Date(),
+	  showDropdowns: true
+	}, function(start, end, label) {
+	  //console.log(start.toISOString(), end.toISOString(), label);
 	});
 	
 });

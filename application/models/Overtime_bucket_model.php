@@ -11,9 +11,6 @@ class Overtime_bucket_model extends CI_Model {
     {   
         $this->db->select('*');
         $this->db->where($where);
-		if(!empty($or)){
-			
-		}
         $query = $this->db->get('bucket_overtime');
         return $query->result_array();
     }
