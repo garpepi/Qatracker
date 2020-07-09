@@ -50,7 +50,7 @@ class Userhirearki_model extends CI_Model {
 			$this->db->update_batch('user_hirearki', $dataupdate, 'id');
 		}
 		if(!empty($datainsert)){
-			$this->db->update_batch('user_hirearki', $dataupdate, 'id');
+			$this->db->insert_batch('user_hirearki', $datainsert, 'id');
 		}
 		return 1;
     }
