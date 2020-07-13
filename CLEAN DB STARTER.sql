@@ -400,6 +400,47 @@ INSERT INTO `users` (`id`, `email`, `password`, `name`, `emp_id`, `type`, `statu
 -- Indexes for dumped tables
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bucket_overtime`
+--
+
+CREATE TABLE `bucket_overtime` (
+  `id` bigint(20) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `start_in` datetime NOT NULL,
+  `end_out` datetime NOT NULL,
+  `reason` varchar(500) NOT NULL,
+  `acc_stat` enum('queue','accept','reject','delete') NOT NULL DEFAULT 'queue',
+  `acc_id` bigint(20) DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_hirearki`
+--
+
+CREATE TABLE `user_hirearki` (
+  `id` bigint(20) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `leader_id` int(11) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf32 COLLATE=utf32_unicode_ci;
+
+--
+-- Indexes for table `user_hirearki`
+--
+ALTER TABLE `user_hirearki`
+  ADD PRIMARY KEY (`id`);
+--
+-- Indexes for table `bucket_overtime`
+--
+ALTER TABLE `bucket_overtime`
+  ADD PRIMARY KEY (`id`);
+
 --
 -- Indexes for table `access_menu_priviledge`
 --
@@ -511,13 +552,13 @@ ALTER TABLE `access_menu_priviledge`
 -- AUTO_INCREMENT for table `application`
 --
 ALTER TABLE `application`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `application_impact`
 --
 ALTER TABLE `application_impact`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=566;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `autoreport_email`
@@ -535,7 +576,7 @@ ALTER TABLE `class_menu`
 -- AUTO_INCREMENT for table `daily_reports`
 --
 ALTER TABLE `daily_reports`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11674;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `environment`
@@ -565,7 +606,7 @@ ALTER TABLE `phases`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=510;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `team_leads`
@@ -577,14 +618,24 @@ ALTER TABLE `team_leads`
 -- AUTO_INCREMENT for table `tester_on_projects`
 --
 ALTER TABLE `tester_on_projects`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1777;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `typeofchanges`
 --
 ALTER TABLE `typeofchanges`
   MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
+--
+-- AUTO_INCREMENT for table `bucket_overtime`
+--
+ALTER TABLE `bucket_overtime`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+--
+-- AUTO_INCREMENT for table `user_hirearki`
+--
+ALTER TABLE `user_hirearki`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+COMMIT;
 --
 -- AUTO_INCREMENT for table `users`
 --
