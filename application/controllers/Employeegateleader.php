@@ -106,7 +106,7 @@
 						'desc_status' => 'Approved by '.$data['leader_name']
 					);
 					$api = $this->api_model->post_raw_overtime($struk_dat);
-					$this->fancy_print($api);
+					//$this->fancy_print($api);
 				}
 			}
 			$overtime_data = $this->session->set_flashdata('form_msg', 'Success Approve Overtime Submission!');

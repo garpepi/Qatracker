@@ -50,7 +50,10 @@
 			$this->form_validation->set_rules('period_date', 'Period', 'required');
 			
 			if($this->form_validation->run()){
-				$fetch = $this->overtime_bucket_model->get_overtime(array('user_id' => $this->session->userdata('logged_in_data')['id'],'acc_stat ' => 'accept','start_in >=' => $data['period_date'].'-01 00:00:00', 'start_in <=' => $data['period_date'].'-01 23:59:59'));
+				$end_time = strtotime($data['period_date'].'-01');
+				$end_time_final = date("Y-m-d", strtotime("+1 month", $end_time));
+				$fetch = $this->overtime_bucket_model->get_overtime(array('user_id' => $this->session->userdata('logged_in_data')['id'],'acc_stat ' => 'accept','start_in >=' => $data['period_date'].'-01 00:00:00', 'start_in <=' => $end_time_final.' 23:59:59'));
+
 				$data = array(
 					'table' => $fetch,
 					'period' => date('F Y'),
