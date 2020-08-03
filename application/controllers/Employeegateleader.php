@@ -88,9 +88,9 @@
 			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
 				redirect('/home');
 			}
-
+			
 			if($id != 0){
-				$check = $this->employeegateleader_model->approval_overtime($id,true);
+				$check = $this->employeegateleader_model->approval_overtime($id,$data['leader_id'],true);
 				//$check = true;
 				if(!empty($check)){
 					$struk_dat = array(
@@ -115,14 +115,14 @@
 		
 		public function reject($id = 0){
 			// check subordinates
-			$data = $this->employeegateleader_model->get_subordinate(array('id' => $id))[0];
+			$data = $this->employeegateleader_model->get_subordinate(array('ov.id' => $id,'ov.acc_stat' => 'queue'))[0];
 			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
 				redirect('/home');
 			}
-			
+
 			if($id != 0){
-				$data = array('id' => $id, 'status' => 'active');
-				$this->employeegateleader_model->approval_overtime($id,false);				
+				//$data = array('id' => $id, 'status' => 'active');
+				$this->employeegateleader_model->approval_overtime($id,$data['leader_id'],false);				
 			}
 			$this->session->set_flashdata('form_msg', 'Success Reject Overtime Submission!');
 			redirect('/employeegateleader');
