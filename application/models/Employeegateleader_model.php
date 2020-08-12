@@ -37,11 +37,16 @@ class Employeegateleader_model extends CI_Model {
 		}
     }
     
-    public function approval_overtime($id,$leader_id,$isApprove)
+    public function approval_overtime($id,$leader_id,$isApprove, $reasons = "")
     {
 		//echo $leader_id;exit();
         $this->db->where('id',$id);
-        $this->db->update('bucket_overtime',array('acc_stat' => ($isApprove ? 'accept' : 'reject'),'acc_id' => $leader_id));
+        if($isApprove)
+        {
+          $this->db->update('bucket_overtime',array('acc_stat' => ($isApprove ? 'accept' : 'reject'),'acc_id' => $leader_id));          
+        }else{
+          $this->db->update('bucket_overtime',array('acc_stat' => ($isApprove ? 'accept' : 'reject'),'acc_id' => $leader_id,'rej_reason' => $reasons));
+        }
         if( $this->db->affected_rows() > 0)
         {
             return $this->db->affected_rows();
