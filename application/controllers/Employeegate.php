@@ -72,6 +72,35 @@
 			
 			
 		}
+    public function leavesprint(){
+			if (!$this->input->server('REQUEST_METHOD') == 'POST'){
+				redirect('/employeegate/leaves');
+			}
+			$data = $this->input->post();
+			$this->form_validation->set_rules('period_date', 'Period', 'required');
+			
+			if($this->form_validation->run()){
+				$end_time = strtotime($data['period_date'].'-01');
+				$end_time_final = date("Y-m-d", strtotime("+1 month", $end_time));
+				$fetch = $this->leaves_bucket_model->get_leaves(array('user_id' => $this->session->userdata('logged_in_data')['id'],'acc_stat ' => 'accept','start_in >=' => $data['period_date'].'-01 00:00:00', 'start_in <=' => $end_time_final.' 23:59:59'));
+				//$this->fancy_print( $this->userhirearki_model->get_leader(array('uh.status'=> 'active','user_id' => $this->session->userdata('logged_in_data')['id'])) );
+				$data = array(
+					'table' => $fetch,
+					'period' => date('F Y'),
+					'leader_name' => $this->userhirearki_model->get_leader(array('uh.status'=> 'active','uh.user_id' => $this->session->userdata('logged_in_data')['id']))[0]['name'],
+					'user_name' => $this->userhirearki_model->get_user_hirearki(array('user_id' => $this->session->userdata('logged_in_data')['id']))[0]['user_name']
+					
+				);
+				//$this->fancy_print($this->db->last_query());
+				$this->load->view('print/leaves', $data);
+
+			}else{
+				$this->session->set_flashdata('form_msg', validation_errors());
+				redirect('/employeegate/leaves');
+			}
+			
+			
+		}
     public function Leaves($id = '') {
 			
 			if ($this->input->server('REQUEST_METHOD') == 'POST'){

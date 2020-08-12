@@ -18,7 +18,11 @@
 							'box_title_2' => 'Overtime Queue',
 							'sub_box_title_2' => 'List of Overtime Queue',
 							'box_title_3' => 'Overtime Approval',
-							'sub_box_title_3' => 'List of Overtime Approval'
+							'sub_box_title_3' => 'List of Overtime Approval',
+              'box_title_4' => 'Leaves Queue',
+							'sub_box_title_4' => 'List of Leaves Queue',
+              'box_title_5' => 'Leaves Approval',
+							'sub_box_title_5' => 'List of Leaves Approval',
 						);
 			$this->page_css  = array(
 							'vendors/iCheck/skins/flat/green.css',
@@ -77,6 +81,7 @@
 			// Form Data
 			$this->data['contents'] = array(
 							'table_queue' => $this->employeegateleader_model->get_subordinate(array('uh.leader_id' => $this->session->userdata('logged_in_data')['id'],'ov.acc_stat' => 'queue')),
+              'table_leavesqueue' => $this->employeegateleader_model->get_leavessubordinate(array('uh.leader_id' => $this->session->userdata('logged_in_data')['id'],'ov.acc_stat' => 'queue')),
 							'table_status' => $this->employeegateleader_model->get_subordinate(array('uh.leader_id' => $this->session->userdata('logged_in_data')['id'],'ov.acc_stat = \'accept\' or ov.acc_stat = ' => 'reject')),
 							);
 			

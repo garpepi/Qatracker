@@ -91,7 +91,7 @@
 			<?php
 		  endif;			 
 		  ?>
-			<form autocomplete="off" <?php if($this->uri->segment(2) != 'view') : ?> action='/employeegate/print/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+			<form autocomplete="off" <?php if($this->uri->segment(2) != 'view') : ?> action='/employeegate/leavesprint/<?php if($this->uri->segment(2) != 'edit') :?>add <?php else:?>edit/<?php echo $contents['form']['id'];?> <?php endif;?>' method='post' <?php endif;?> id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 			  <div class="form-group">
 				<label class="control-label col-md-3 col-sm-3 col-xs-12">Period <span class="required">*</span>
 				</label>

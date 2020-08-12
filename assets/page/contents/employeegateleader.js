@@ -120,3 +120,7 @@ function leavesrejects(id){
   var reasons = prompt("Please enter the reasons", "");
   window.location.href = "/employeegateleader/leavesreject/"+id+"/"+reasons;
 }
+
+$('.collapsed').css('height', 'auto');
+$('.collapsed').find('.x_content').css('display', 'none');
+$('.collapsed').find('i').toggleClass('fa-chevron-up fa-chevron-down');
