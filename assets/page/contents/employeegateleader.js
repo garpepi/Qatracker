@@ -110,3 +110,8 @@ var table = $('#datatable-fixed-header').DataTable({
 
 TableManageButtons.init();
 });
+
+function rejects(id){
+  var reasons = prompt("Please enter the reasons", "");
+  window.location.href = "/employeegateleader/reject/"+id+"/"+reasons;
+}
