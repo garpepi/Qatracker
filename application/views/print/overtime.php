@@ -18,6 +18,9 @@
   </head>
   <body>
 	<div class="container">
+		<div class="row">
+			<img src="http://adidata.co.id/images/logo.png" >
+		</div>
 		<div class="row justify-content-md-center" align="center">
 			<h1>Overtime Report <?php echo $period;?></h1>
 			<h2><?php echo $user_name;?></h2>
