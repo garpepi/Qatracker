@@ -64,7 +64,7 @@
 					<td><?php echo $value['end_out'];?></td>
 					<td><?php echo $value['reason'];?></td>
 					<td><?php echo $value['created_date'];?></td>
-					<td><a href="<?php echo base_url().'employeegateleader/accept/'.$value['id'];?>" onclick="return confirm('are you sure?')">Accept </a>
+					<td><a href="<?php echo base_url().'employeegateleader/leavesaccept/'.$value['id'];?>" onclick="return confirm('are you sure?')">Accept </a>
 					| <a href="#" onclick="rejects(<?php echo $value['id'];?>)">Reject</a>
 					</td>
 				</tr>

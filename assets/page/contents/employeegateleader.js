@@ -115,3 +115,8 @@ function rejects(id){
   var reasons = prompt("Please enter the reasons", "");
   window.location.href = "/employeegateleader/reject/"+id+"/"+reasons;
 }
+
+function leavesrejects(id){
+  var reasons = prompt("Please enter the reasons", "");
+  window.location.href = "/employeegateleader/leavesreject/"+id+"/"+reasons;
+}

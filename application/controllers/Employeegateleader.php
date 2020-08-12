@@ -5,7 +5,8 @@
 			$this->load->model('users_model');	
 			$this->load->model('employeegateleader_model');	
 			$this->load->model('api_model');	
-			$this->load->model('overtime_bucket_model');				
+			$this->load->model('overtime_bucket_model');	
+      $this->load->model('leaves_bucket_model');				
 			
 		}
 		
@@ -114,6 +115,57 @@
 		}
 		
 		public function reject($id = 0, $reasons= ""){
+			// check subordinates
+			$data = $this->employeegateleader_model->get_subordinate(array('ov.id' => $id,'ov.acc_stat' => 'queue'))[0];
+			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
+				redirect('/home');
+			}
+  
+      if($reasons == "")
+      {
+        $this->session->set_flashdata('form_msg', 'Please fill the Reject Reasons!!');
+        redirect('/employeegateleader');
+      }
+			if($id != 0){
+				//$data = array('id' => $id, 'status' => 'active');
+				$this->employeegateleader_model->approval_overtime($id,$data['leader_id'],false,$reasons);	
+			}
+			$this->session->set_flashdata('form_msg', 'Success Reject Overtime Submission!');
+			redirect('/employeegateleader');
+		}
+    
+    public function leavesaccept($id = 0){
+			// check subordinates
+			$data = $this->employeegateleader_model->get_subordinate(array('ov.id' => $id,'ov.acc_stat' => 'queue'))[0];
+			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
+				redirect('/home');
+			}
+			
+			if($id != 0){
+				$check = $this->employeegateleader_model->approval_overtime($id,$data['leader_id'],true);
+				//$check = true;
+				if(!empty($check)){
+					$struk_dat = array(
+						'no' => 0,
+						'date' => date('Y-m-d',strtotime($data['start_in'])),
+						'emp_id' => $data['subemp_id'],
+						'name' => $data['subname'],
+						'reason' => $data['reason'],
+						'start_in' => $data['start_in'],
+						'end_out' => $data['end_out'],
+						'user_c' => $data['leader_empid'],
+						'upload_status' => 'queue',
+						'desc_status' => 'Approved by '.$data['leader_name']
+					);
+					$api = $this->api_model->post_raw_overtime($struk_dat);
+					//$this->fancy_print($api);
+				}
+			}
+			$overtime_data = $this->session->set_flashdata('form_msg', 'Success Approve Overtime Submission!');
+			redirect('/employeegateleader');
+		}
+		
+		public function leavesreject($id = 0, $reasons= ""){
 			// check subordinates
 			$data = $this->employeegateleader_model->get_subordinate(array('ov.id' => $id,'ov.acc_stat' => 'queue'))[0];
 			if(empty($data) && $data['leader_id'] != $this->session->userdata('logged_in_data')['id']){
