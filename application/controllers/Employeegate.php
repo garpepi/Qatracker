@@ -54,11 +54,11 @@
 				$end_time = strtotime($data['period_date'].'-01');
 				$end_time_final = date("Y-m-d", strtotime("+1 month", $end_time));
 				$fetch = $this->overtime_bucket_model->get_overtime(array('user_id' => $this->session->userdata('logged_in_data')['id'],'acc_stat ' => 'accept','start_in >=' => $data['period_date'].'-01 00:00:00', 'start_in <=' => $end_time_final.' 23:59:59'));
-
+				//$this->fancy_print( $this->userhirearki_model->get_leader(array('uh.status'=> 'active','user_id' => $this->session->userdata('logged_in_data')['id'])) );
 				$data = array(
 					'table' => $fetch,
 					'period' => date('F Y'),
-					'leader_name' => $this->userhirearki_model->get_user_hirearki(array('user_id' => $this->session->userdata('logged_in_data')['id']))[0]['leader_name'],
+					'leader_name' => $this->userhirearki_model->get_leader(array('uh.status'=> 'active','uh.user_id' => $this->session->userdata('logged_in_data')['id']))[0]['name'],
 					'user_name' => $this->userhirearki_model->get_user_hirearki(array('user_id' => $this->session->userdata('logged_in_data')['id']))[0]['user_name']
 					
 				);
@@ -220,6 +220,9 @@
     }
 		
 		public function index($leader_id = '') {
+			if($leader_id == ''){
+				redirect('/assignsubordinate');
+			}
 			if ($this->input->server('REQUEST_METHOD') == 'POST'){
 				redirect('/assignsubordinate/index/'.$this->input->post('leader'));
 			}
@@ -268,6 +271,12 @@
 			}
 			redirect('/assignsubordinate');
 		}
+		
+		public function overtimedrop ($id){
+			$this->overtime_bucket_model->drop_overtime($this->session->userdata('logged_in_data')['id'],$id);
+			redirect('/employeegate/overtime');
+		}
+		
 		
 		public function revoke($id = 0){
 			if($id != 0){

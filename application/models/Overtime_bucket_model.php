@@ -33,6 +33,20 @@ class Overtime_bucket_model extends CI_Model {
 			return 0;
 		}
     }
+	
+	public function drop_overtime($user_id, $id)
+    {
+        // construct access menu priviledge
+		$check = $this->get_overtime(array('id' => $id,'user_id' => $user_id, 'acc_stat' => 'queue'));
+
+		if(!empty($check)){
+			$this->db->set('acc_stat', 'delete');
+			$this->db->where('id', $id);
+			return $this->db->update('bucket_overtime');
+		}else{
+			return 0;
+		}
+    }
     
     public function remove_access($id)
     {
