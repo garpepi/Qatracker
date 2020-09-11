@@ -96,7 +96,7 @@
 			<ul class="nav child_menu">
 			<?php if(in_array('employeegateleader',$page_access)) :?><li><a href="<?php echo base_url();?>employeegateleader">Approval</a></li><?php endif;?>
 			  <li><a href="<?php echo base_url();?>employeegate/overtime">Overtime</a></li>
-        <li><a href="<?php echo base_url();?>employeegate/leaves">Leaves</a></li>
+				<!-- <li><a href="<?php echo base_url();?>employeegate/leaves">Leaves</a></li> -->
 			</ul>
 		</li>
 		</ul>

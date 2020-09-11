@@ -43,8 +43,10 @@ var handleDataTableButtons = function() {
         responsive: true
     });
     }
+	
     if ($("#table2").length) {
-    $("#table2").DataTable({
+    console.log($("#table2").length);
+	$("#table2").DataTable({
         dom: "Bfrtip",
         buttons: [
         {
