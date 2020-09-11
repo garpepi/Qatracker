@@ -111,10 +111,16 @@ var table = $('#datatable-fixed-header').DataTable({
 TableManageButtons.init();
 });
 
-function rejects(id){
-  var reasons = prompt("Please enter the reasons", "");
-  window.location.href = "/employeegateleader/reject/"+id+"/"+reasons;
-}
+var rejectid = 0;
+$('#reject').on('show.bs.modal', function (e) {
+    rejectid = $(e.relatedTarget).attr('data-id');
+});
+ 
+$("#reject-confirm").click(function () {
+	var reasons = $("#reason-overtime").val();
+	console.log(reasons);
+	window.location.href = "/employeegateleader/reject/"+rejectid+"/"+reasons;
+});
 
 function leavesrejects(id){
   var reasons = prompt("Please enter the reasons", "");

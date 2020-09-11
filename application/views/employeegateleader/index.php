@@ -65,7 +65,7 @@
 					<td><?php echo $value['reason'];?></td>
 					<td><?php echo $value['created_date'];?></td>
 					<td><a href="<?php echo base_url().'employeegateleader/accept/'.$value['id'];?>" onclick="return confirm('are you sure?')">Accept </a>
-					| <a href="#" onclick="rejects(<?php echo $value['id'];?>)">Reject</a>
+					| <a href="#" data-id=<?php echo $value['id'];?> data-toggle="modal" data-target="#reject">Reject</a>
 					</td>
 				</tr>
 			  <?php endforeach;?>
@@ -189,5 +189,28 @@
 	  
 	</div>
   </div>
+  <!-- Modal -->
+	<div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="reject" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="reject"></h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<div class="form-group">
+				<label for="reason">Reasons</label>
+				<input id="reason-overtime" type="text" class="form-control" placeholder="Reasons" required>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" id="reject-confirm">Save changes</button>
+		  </div>
+		</div>
+	  </div>
+	</div>
 </div>
 <!-- /page content -->
